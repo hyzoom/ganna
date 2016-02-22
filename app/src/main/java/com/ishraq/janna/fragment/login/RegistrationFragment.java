@@ -10,6 +10,12 @@ import android.widget.EditText;
 
 import com.ishraq.janna.R;
 import com.ishraq.janna.activity.LoginActivity;
+import com.ishraq.janna.webservice.CommonRequest;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by Ahmed on 2/18/2016.
@@ -41,4 +47,26 @@ public class RegistrationFragment extends CommonFragment implements View.OnClick
     public void onClick(View v) {
 
     }
+
+
+    public class RegisterUserRequest implements CommonRequest {
+
+        @Override
+        public void execute() {
+//            categoryWebService.getCategories().enqueue(new RequestCallback<List<Category>>(this) {
+//                @Override
+//                public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+//                    if (response.body().size() > 0) {
+//                        loadMore = false;
+//                        categories = response.body();
+//                        adapter = new CategoryAdapter(getMainActivity(), categories, loadMore);
+//                        recyclerView.setAdapter(adapter);
+//                        getMainActivity().stopLoadingAnimator();
+//                        getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+//                    }
+//                }
+//            });
+        }
+    }
+
 }

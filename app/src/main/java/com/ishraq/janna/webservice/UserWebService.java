@@ -22,6 +22,9 @@ public interface UserWebService {
     Call<User> logInUser(@Path("fb_access_token") String fbAccessToken);
 
 
+    @GET("JsonInsertUsers.aspx?username={name}&userPass={pass}&phone={phone}&email={email}&address={address}&userType={type}&mobile={mobile}")
+    Call<User> registerUser(@Path("fb_access_token") String fbAccessToken);
+
 //    @GET("user/logout")
 //    Call<Result> logoutUser();
 
