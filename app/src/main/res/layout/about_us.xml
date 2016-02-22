@@ -1,12 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Button
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="right"
+        android:text="مستشفى جنة التخصصي"
+        android:textColor="@android:color/black" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/img2" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="الرؤية:"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="أن نكون أكبر و أكثر منشأة طبية في مجال التعامل مع تأخر الحمل واطفال الانابيب"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="الرسالة:"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="توفير خدمات الرعاية الصحية فريدة للمجتمع من خلال تطوير التكنولوجيا الطبية في مجال تأخر الحمل واطفال الانابيب ورعاية المبتسرين، وتنمية الثقافة العامة ذات الصلة والتواصل مع الأسرة"
+                android:textColor="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/img1" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="مستشفى جنة التخصصى مهمتها توفير خبراء الرعاية الصحية للعناية بالمرضى من خلال قيمنا الأساسية للجودة وتقديم خدمة عملاء أفضل من خلال الابتكار والالتزام والعمل الجماعي.\n
+
+ مستشفى جنة التخصصى نتبع رؤية لنتميز و لنبقى دائماً في الطليعة كمستشفى رائد لتقديم أعلى معايير الجودة في الرعاية الصحية لمرضانا.\n
+
+يتألف قسم أمراض النساء والولادة من أطباء متمرسين في تقديم العناية الممتازة والشاملة لجميع المرضى.\n
+
+يقدم الأطباء العناية والاستشارات إلى النساء بشكل مباشر في مجموعة كبيرة من الخدمات وبالاخص فى مجال تأخر الحمل وعلاج العقم.\n
+
+شعارنا - حلمك يتحقق معنا – يبين مدى التزامنا وحرصنا ان نجعل حلم الازواج حقيقة في أجواء بالغة الخصوصية في وحدة المساعدة على الحمل .\n
+
+كما تضم مستشفى جنة التخصصى غرفاً لعمليات الولادة وهى مجهزة بكل المعدات الطبية إضافة إلى وجود أجهزة لمراقبة الجنين داخل الرحم وتخطيط القلب للجنين ووسائل إنعاش لحالة الأطفال."
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text=""
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text=""
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>
