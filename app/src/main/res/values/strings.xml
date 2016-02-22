@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Janna</string>
+
+    <!-- toolbar titles-->
+    <string name="login_activity">تسجيل الدخول</string>
+
+
+    <!-- login fragment-->
+    <string name="name_hint">الاسم</string>
+    <string name="password_hint">كلمة المرور</string>
+    <string name="login_button">تسجيل الدخول</string>
+    <string name="new_user_button">مستخدم جديد</string>
+    <string name="name_empty">من فضلك ادخل الاسم</string>
+    <string name="password_empty">قم بإدخال كلمة المرور</string>
 </resources>
