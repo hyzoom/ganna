@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ishraq.janna">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.NETWORK" />
+
+
     <application
         android:name=".JannaApp"
         android:allowBackup="true"

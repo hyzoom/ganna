@@ -7,9 +7,19 @@
 
     <!-- login fragment-->
     <string name="name_hint">الاسم</string>
+    <string name="first_name_hint">الاسم الأول</string>
+    <string name="last_name_hint">الاسم الثاني</string>
+    <string name="address_hint">العنوان</string>
+    <string name="phone_hint">الهاتف</string>
+    <string name="mobile_hint">المحمول</string>
+    <string name="email_hint">البريد الالكتروني</string>
     <string name="password_hint">كلمة المرور</string>
+    <string name="re_password_hint">أعد كتابة كلمة المرور</string>
     <string name="login_button">تسجيل الدخول</string>
     <string name="new_user_button">مستخدم جديد</string>
     <string name="name_empty">من فضلك ادخل الاسم</string>
     <string name="password_empty">قم بإدخال كلمة المرور</string>
+    <string name="radio_doctor">دكتور</string>
+    <string name="radio_patient">مريض</string>
+
 </resources>
