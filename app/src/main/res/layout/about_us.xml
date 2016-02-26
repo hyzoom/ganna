@@ -9,9 +9,11 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="center"
+        android:layout_margin="5dip"
         android:text="مستشفى جنة التخصصي"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,14 +36,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:layout_margin="5dip"
                 android:text="الرؤية:"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:layout_margin="5dip"
                 android:text="أن نكون أكبر و أكثر منشأة طبية في مجال التعامل مع تأخر الحمل واطفال الانابيب"
                 android:textColor="@android:color/black" />
 
@@ -50,14 +56,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:layout_margin="5dip"
                 android:text="الرسالة:"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:layout_margin="5dip"
                 android:text="توفير خدمات الرعاية الصحية فريدة للمجتمع من خلال تطوير التكنولوجيا الطبية في مجال تأخر الحمل واطفال الانابيب ورعاية المبتسرين، وتنمية الثقافة العامة ذات الصلة والتواصل مع الأسرة"
                 android:textColor="@android:color/black" />
 
@@ -66,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="5dip"
                 android:src="@drawable/img1" />
 
             <TextView
@@ -73,6 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:layout_margin="5dip"
                 android:text="مستشفى جنة التخصصى مهمتها توفير خبراء الرعاية الصحية للعناية بالمرضى من خلال قيمنا الأساسية للجودة وتقديم خدمة عملاء أفضل من خلال الابتكار والالتزام والعمل الجماعي.\n
 
  مستشفى جنة التخصصى نتبع رؤية لنتميز و لنبقى دائماً في الطليعة كمستشفى رائد لتقديم أعلى معايير الجودة في الرعاية الصحية لمرضانا.\n
