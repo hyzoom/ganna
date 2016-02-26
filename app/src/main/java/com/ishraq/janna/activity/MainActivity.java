@@ -19,10 +19,8 @@ import com.ishraq.janna.fragment.AboutUs;
 import com.ishraq.janna.fragment.Events;
 import com.ishraq.janna.fragment.Reservation;
 import com.ishraq.janna.service.CommonService;
+import com.ishraq.janna.service.ServiceHandler;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -137,36 +135,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void addUser(String userName, String userPass, String userType, String mobile, String email) {
-//        shaheed.esy.es/create_subject_from_user.php?title=test&content=test&image_url=test
-        String randomUserURL = "http://ganah.zagel1.com/pages/JsonData/JsonInsertUsers.aspx";
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("userName", userName));
-        params.add(new BasicNameValuePair("userPass", userPass));
-        params.add(new BasicNameValuePair("userType", userType));
-        params.add(new BasicNameValuePair("mobile", mobile));
-        params.add(new BasicNameValuePair("email", email));
+        ServiceHandler sh = new ServiceHandler();
+        String logInURL = "http://ganah.zagel1.com/Pages/JsonData/JsonInsertUsers.aspx?userName=oojhhj&userPass=112233";
+        // Making a request to url and getting response
+        // //Ash101932/Ash2744740
+        String jsonStr = sh.makeServiceCall(logInURL, ServiceHandler.GET);
 
-        JSONObject json = CommonService.makeHttpRequest(randomUserURL, "POST", params);
-        Log.e("hazemjson", json + "");
-        if (json != null) {
+        Log.e("Response: ", "> " + jsonStr);
+        if (jsonStr != null) {
             try {
-                JSONArray jsonArray = json
-                        .getJSONArray("");
+                JSONObject jsonObj = new JSONObject(jsonStr);
+                // System.out.println("jsonObj " + jsonObj);
+                // looping through All events
 
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                JSONObject c = jsonArray.getJSONObject(0);
-//
-//                    FeedItem item = new FeedItem();
-//                    item.setTitle(c.getString("title"));
-//                    item.setContent(c.getString("content"));
-//                    item.setThumbnail(c.getString("image_url"));
-//                    feedsList.add(item);
-//            }
+//                memId = jsonObj.getString(TAG_MEMBER_ID);
+//                nameEng = jsonObj.getString(TAG_NAME_ENG);
+//                nameAr = jsonObj.getString(TAG_NAME_AR);
+//                religion = jsonObj.getString(TAG_RELIGION);
+//                birthDate = jsonObj.getString(TAG_BIRTHDATE);
+//                joinEBA = jsonObj.getString(TAG_JOIN_EBA);
+//                path = jsonObj.getString(TAG_PATH);
+//                mr_mrs_ar = jsonObj.getString(TAG_MR_MRS_AR);
+//                mr_mrs_eng = jsonObj.getString(TAG_MR_MRS_ENG);
+
             } catch (JSONException e) {
                 e.printStackTrace();
+                System.out.println("Exception");
             }
+        } else {
+            Log.e("ServiceHandler", "Couldn't get any data from the url");
         }
-
     }
+
 
 }
