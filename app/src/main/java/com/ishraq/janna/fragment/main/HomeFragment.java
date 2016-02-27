@@ -10,6 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import com.ishraq.janna.JannaApp;
@@ -108,4 +110,16 @@ public class HomeFragment extends MainCommonFragment {
             return null;
         }
     }
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    protected void hideTabBar() {
+        tabLayout.animate().translationY(-tabLayout.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+    }
+
+    protected void showTabBar() {
+        tabLayout.animate().translationY(tabLayout.getHeight()).setInterpolator(new DecelerateInterpolator(2));
+    }
+
 }

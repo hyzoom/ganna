@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <RelativeLayout
+        android:id="@+id/noEventsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/common_margin_padding_big">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/common_margin_padding_big"
+            android:scaleType="centerInside"
+             />
+
+        <!--android:src="@drawable/noEvents"-->
+
+
+        <TextView
+            android:id="@+id/emptyListTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="@string/empty_events_list"
+            android:textSize="@dimen/common_text_title_big"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/common_margin_padding_big"
+            android:layout_below="@+id/imageView" />
+
+    </RelativeLayout>
+
+</LinearLayout>

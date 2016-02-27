@@ -28,5 +28,14 @@
     <!-- About -->
     <string name="hospital_name">مستشفى جنة التخصصي</string>
 
+    <!--error fragment-->
+    <string name="button_retry">إعادة المحاولة</string>
+    <string name="common_error_message">حدث خطأ من فضلك اعد المحاولة</string>
+
+
+    <!-- events -->
+    <string name="empty_events_list">لاتوجد أحداث</string>
+
+
 
 </resources>
