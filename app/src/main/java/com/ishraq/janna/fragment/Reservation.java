@@ -35,7 +35,7 @@ public class Reservation extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.about_us, container, false);
+        View view = inflater.inflate(R.layout.fragment_about_us, container, false);
 
 
         return view;

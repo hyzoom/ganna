@@ -41,10 +41,10 @@ public class LoginActivity extends AppCompatActivity {
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setEnabled(false);
-//        swipeRefreshLayout.setColorSchemeResources(
-//                R.color.refresh_progress_1,
-//                R.color.refresh_progress_2,
-//                R.color.refresh_progress_3);
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.refresh_progress_1,
+                R.color.refresh_progress_2,
+                R.color.refresh_progress_3);
     }
 
     public void addFragment(Fragment fragment, boolean addToBackStack, String tag) {

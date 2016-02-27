@@ -11,23 +11,41 @@ public class User {
     @DatabaseField(id = true)
     private Integer id;
 
-    @DatabaseField
-    private String name;
+    @DatabaseField(columnName = "user_code")
+    private String userCode;
+
+    @DatabaseField(columnName = "user_name")
+    private String useName;
+
+    @DatabaseField(columnName = "user_type")
+    private String userType;
+
+    @DatabaseField(columnName = "job_dest")
+    private String jobDest;
 
     @DatabaseField
-    private String password;
-
-    @DatabaseField
-    private String work;
-
-    @DatabaseField
-    private String phone;
-
-    @DatabaseField
-    private boolean doctor;
+    private String email;
 
     @DatabaseField
     private String address;
+
+    @DatabaseField
+    private String mobile;
+
+    @DatabaseField(columnName = "phone")
+    private String telPhone;
+
+    @DatabaseField
+    private String img;
+
+    @DatabaseField(columnName = "not_active")
+    private String notActive;
+
+    @DatabaseField
+    private String notes;
+
+    @DatabaseField(columnName = "is_manager")
+    private boolean isManager;
 
 
     ////////////////////////////////////////////////////////////
@@ -40,44 +58,44 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUseName() {
+        return useName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUseName(String useName) {
+        this.useName = useName;
     }
 
-    public String getWork() {
-        return work;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setWork(String work) {
-        this.work = work;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getJobDest() {
+        return jobDest;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setJobDest(String jobDest) {
+        this.jobDest = jobDest;
     }
 
-    public boolean isDoctor() {
-        return doctor;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDoctor(boolean doctor) {
-        this.doctor = doctor;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -86,5 +104,53 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getTelPhone() {
+        return telPhone;
+    }
+
+    public void setTelPhone(String telPhone) {
+        this.telPhone = telPhone;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getNotActive() {
+        return notActive;
+    }
+
+    public void setNotActive(String notActive) {
+        this.notActive = notActive;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public boolean isManager() {
+        return isManager;
+    }
+
+    public void setIsManager(boolean isManager) {
+        this.isManager = isManager;
     }
 }

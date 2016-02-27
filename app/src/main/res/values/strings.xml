@@ -19,7 +19,7 @@
     <string name="new_user_button">مستخدم جديد</string>
     <string name="name_empty">من فضلك ادخل الاسم</string>
     <string name="password_empty">قم بإدخال كلمة المرور</string>
-    <string name="radio_doctor">دكتور</string>
+    <string name="radio_doctor">طبيب</string>
     <string name="radio_patient">مريض</string>
 
 </resources>

@@ -1,7 +1,9 @@
 package com.ishraq.janna.fragment.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,11 @@ import android.widget.Toast;
 
 import com.ishraq.janna.R;
 import com.ishraq.janna.activity.LoginActivity;
+import com.ishraq.janna.activity.MainActivity;
+import com.ishraq.janna.model.Settings;
 import com.ishraq.janna.model.User;
+import com.ishraq.janna.service.SettingsService;
+import com.ishraq.janna.service.UserService;
 import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.UserWebService;
 
@@ -27,18 +33,21 @@ import retrofit2.Response;
  */
 public class RegistrationFragment extends CommonFragment implements View.OnClickListener{
 
+    private SettingsService settingsService;
+    private UserService userService;
     private UserWebService userWebService;
 
     private Button registerButton;
     private EditText nameEditText, firstNameEditText, secondNameEditText, addressEditText,
             phoneEditText, mobileEditText, emailEditText, passwordEditText, rePasswordEditText;
 
-    private RadioGroup radioType;
     private RadioButton radioDoctor, radioPatient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        settingsService = new SettingsService(getActivity());
+        userService = new UserService(getActivity());
         userWebService = getWebService(UserWebService.class);
     }
 
@@ -58,8 +67,6 @@ public class RegistrationFragment extends CommonFragment implements View.OnClick
         passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
         rePasswordEditText = (EditText) view.findViewById(R.id.rePasswordEditText);
 
-
-        radioType = (RadioGroup) view.findViewById(R.id.radioType);
         radioDoctor = (RadioButton) view.findViewById(R.id.radioDoctor);
         radioPatient = (RadioButton) view.findViewById(R.id.radioPatient);
 
@@ -73,6 +80,7 @@ public class RegistrationFragment extends CommonFragment implements View.OnClick
     public void onClick(View v) {
         if (v.getId() == R.id.registerButton) {
             if (validateUser()) {
+                getMainActivity().startLoadingAnimator();
                 RegisterUserRequest request = new RegisterUserRequest();
                 request.execute();
             }
@@ -121,20 +129,37 @@ public class RegistrationFragment extends CommonFragment implements View.OnClick
         return result;
     }
 
-    public class RegisterUserRequest implements CommonRequest {
+    private class RegisterUserRequest implements CommonRequest {
 
         @Override
         public void execute() {
-            userWebService.registerUser(nameEditText.getText().toString(), passwordEditText.getText().toString(), phoneEditText.getText().toString(),
-                    emailEditText.getText().toString(), addressEditText.getText().toString(), (radioType.getCheckedRadioButtonId()+1),
-                    firstNameEditText.getText().toString(), secondNameEditText.getText().toString(), mobileEditText.getText().toString()).enqueue(new RequestCallback<User>(this) {
+            int type = 1;
+            if (radioDoctor.isChecked()) {
+                type = 2;
+            }
+            userWebService.registerUser(nameEditText.getText().toString(),
+                    passwordEditText.getText().toString(),
+                    type,
+                    mobileEditText.getText().toString(),
+                    emailEditText.getText().toString()).enqueue(new RequestCallback<List<User>>(this) {
                 @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
+                public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                    // Save user
+                    User usr = response.body().get(0);
+                    userService.saveUser(usr);
+
+                    // Set user login
+                    Settings settings = settingsService.getSettings();
+                    settings.setLoggedInUser(usr);
+                    settingsService.updateSettings(settings);
+
+                    // Go to main activity
+                    Intent i = new Intent(getActivity(), MainActivity.class);
+                    startActivity(i);
                 }
 
                 @Override
-                public void onFailure(Call<User> call, Throwable t) {
+                public void onFailure(Call<List<User>> call, Throwable t) {
                     super.onFailure(call, t);
                     Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
                 }
