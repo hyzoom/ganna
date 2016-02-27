@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/error_image_size"
+        android:padding="@dimen/common_margin_padding_medium">
+
+        <!--<ImageView
+            android:id="@+id/errorLogoImageView"
+            android:layout_width="@dimen/error_image_size"
+            android:layout_height="@dimen/error_image_size"
+            android:src="@drawable/error_logo"
+            android:layout_centerHorizontal="true"/>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/common_margin_padding_medium"
+            android:layout_marginTop="@dimen/common_margin_padding_medium"
+            android:orientation="vertical">
+<!--android:layout_below="@+id/errorLogoImageView"-->
+
+            <TextView
+                android:id="@+id/errorMessageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:alpha="0.87"
+                android:textSize="@dimen/common_text_small"
+                android:layout_gravity="center_horizontal"
+                android:padding="@dimen/common_margin_padding_medium"/>
+
+
+            <Button
+                android:id="@+id/retryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/section_label"
+                android:text="@string/button_retry"
+                android:layout_marginTop="@dimen/common_margin_padding_medium"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@android:color/black"
+                android:alpha="0.87"/>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

@@ -1,7 +1,12 @@
 package com.ishraq.janna.fragment.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
 
 import com.ishraq.janna.activity.MainActivity;
 import com.ishraq.janna.fragment.CommonFragment;
@@ -39,8 +44,19 @@ public class MainCommonFragment extends CommonFragment {
 
         @Override
         public void onFailure(Call<T> call, Throwable t) {
-//            ((MainActivity)getActivity()).showConnectionError(CommonFragment.this, request, t, getView());
+            ((MainActivity)getActivity()).showConnectionError(MainCommonFragment.this, request, t, getView());
         }
+    }
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    protected void hideToolbar() {
+        mToolbar.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+    }
+
+    protected void showToolbar() {
+        mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
     }
 
 }

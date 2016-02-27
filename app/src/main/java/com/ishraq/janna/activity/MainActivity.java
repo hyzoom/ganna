@@ -7,11 +7,17 @@ import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
 import com.ishraq.janna.fragment.main.HomeFragment;
+import com.ishraq.janna.fragment.main.MainCommonFragment;
+import com.ishraq.janna.webservice.CommonRequest;
 
 public class MainActivity extends AppCompatActivity {
     private ContentLoadingProgressBar progressBar;
@@ -44,6 +50,29 @@ public class MainActivity extends AppCompatActivity {
             transaction.addToBackStack(null);
         }
         transaction.commit();
+    }
+
+    public void showConnectionError(MainCommonFragment fragment, final CommonRequest request, Throwable error, final View mainView) {
+        Log.e(JannaApp.LOG_TAG, "error " + error.getLocalizedMessage());
+        stopLoadingAnimator();
+
+        final View errorView = LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.fragment_connection_error, null, false);
+        final ViewGroup wrapperView  = (ViewGroup) findViewById(R.id.wrapper);
+
+        wrapperView.removeAllViews();
+        wrapperView.addView(errorView);
+        errorView.findViewById(R.id.retryButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startLoadingAnimator();
+                wrapperView.removeAllViews();
+                wrapperView.addView(mainView);
+                request.execute();
+            }
+        });
+
+        TextView errorMessageTextView = (TextView)errorView.findViewById(R.id.errorMessageTextView);
+        errorMessageTextView.setText(R.string.common_error_message);
     }
 
     public void stopLoadingAnimator() {
