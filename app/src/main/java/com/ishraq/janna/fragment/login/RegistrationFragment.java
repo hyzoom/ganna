@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.ishraq.janna.R;
 import com.ishraq.janna.activity.LoginActivity;
 import com.ishraq.janna.activity.MainActivity;
+import com.ishraq.janna.fragment.CommonFragment;
 import com.ishraq.janna.model.Settings;
 import com.ishraq.janna.model.User;
 import com.ishraq.janna.service.SettingsService;
@@ -31,7 +32,7 @@ import retrofit2.Response;
 /**
  * Created by Ahmed on 2/18/2016.
  */
-public class RegistrationFragment extends CommonFragment implements View.OnClickListener{
+public class RegistrationFragment extends LoginCommonFragment implements View.OnClickListener{
 
     private SettingsService settingsService;
     private UserService userService;
