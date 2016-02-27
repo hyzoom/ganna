@@ -17,8 +17,11 @@
     <string name="re_password_hint">أعد كتابة كلمة المرور</string>
     <string name="login_button">تسجيل الدخول</string>
     <string name="new_user_button">مستخدم جديد</string>
+
     <string name="name_empty">من فضلك ادخل الاسم</string>
+    <string name="mobile_empty">من فضلك ادخل  رقم التليفون</string>
     <string name="password_empty">قم بإدخال كلمة المرور</string>
+
     <string name="radio_doctor">طبيب</string>
     <string name="radio_patient">مريض</string>
 

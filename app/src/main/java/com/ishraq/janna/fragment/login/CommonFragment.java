@@ -39,12 +39,12 @@ public class CommonFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mToolbar = getMainActivity().getToolbar();
+        mToolbar = getLoginActivity().getToolbar();
     }
 
     //////////////////////////////////////////////////////////////////////////////////
 
-    protected LoginActivity getMainActivity() {
+    protected LoginActivity getLoginActivity() {
         return (LoginActivity) getActivity();
     }
 

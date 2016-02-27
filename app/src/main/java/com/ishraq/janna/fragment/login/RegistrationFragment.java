@@ -80,7 +80,7 @@ public class RegistrationFragment extends CommonFragment implements View.OnClick
     public void onClick(View v) {
         if (v.getId() == R.id.registerButton) {
             if (validateUser()) {
-                getMainActivity().startLoadingAnimator();
+                getLoginActivity().startLoadingAnimator();
                 RegisterUserRequest request = new RegisterUserRequest();
                 request.execute();
             }
@@ -138,8 +138,7 @@ public class RegistrationFragment extends CommonFragment implements View.OnClick
                 type = 2;
             }
             userWebService.registerUser(nameEditText.getText().toString(),
-                    passwordEditText.getText().toString(),
-                    type,
+                    passwordEditText.getText().toString(), type,
                     mobileEditText.getText().toString(),
                     emailEditText.getText().toString()).enqueue(new RequestCallback<List<User>>(this) {
                 @Override
@@ -161,6 +160,7 @@ public class RegistrationFragment extends CommonFragment implements View.OnClick
                 @Override
                 public void onFailure(Call<List<User>> call, Throwable t) {
                     super.onFailure(call, t);
+                    getLoginActivity().stopLoadingAnimator();
                     Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
                 }
             });

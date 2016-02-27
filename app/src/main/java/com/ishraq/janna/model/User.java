@@ -153,4 +153,37 @@ public class User {
     public void setIsManager(boolean isManager) {
         this.isManager = isManager;
     }
+
+
+
+    /////////////////////////////////////////////////// Exist user //////////////////////////////
+    public class ExistUser {
+        private Integer existUser;
+        private Integer userId;
+        private String message;
+
+        public Integer getExistUser() {
+            return existUser;
+        }
+
+        public void setExistUser(Integer existUser) {
+            this.existUser = existUser;
+        }
+
+        public Integer getUserId() {
+            return userId;
+        }
+
+        public void setUserId(Integer userId) {
+            this.userId = userId;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+    }
 }
