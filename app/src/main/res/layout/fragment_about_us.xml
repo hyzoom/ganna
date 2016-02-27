@@ -5,13 +5,16 @@
     android:orientation="vertical"
     android:rotationY="180">
 
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"/>
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="5dip"
-        android:text="مستشفى جنة التخصصي"
+        android:layout_margin="@dimen/common_margin_padding_medium"
+        android:text="@string/hospital_name"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 

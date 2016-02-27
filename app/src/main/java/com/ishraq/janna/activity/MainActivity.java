@@ -11,9 +11,9 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import com.ishraq.janna.R;
-import com.ishraq.janna.fragment.AboutUs;
-import com.ishraq.janna.fragment.Events;
-import com.ishraq.janna.fragment.Reservation;
+import com.ishraq.janna.fragment.main.AboutUs;
+import com.ishraq.janna.fragment.main.Events;
+import com.ishraq.janna.fragment.main.Reservation;
 import com.ishraq.janna.model.Settings;
 import com.ishraq.janna.service.SettingsService;
 

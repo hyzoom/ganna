@@ -25,4 +25,8 @@
     <string name="radio_doctor">طبيب</string>
     <string name="radio_patient">مريض</string>
 
+    <!-- About -->
+    <string name="hospital_name">مستشفى جنة التخصصي</string>
+
+
 </resources>

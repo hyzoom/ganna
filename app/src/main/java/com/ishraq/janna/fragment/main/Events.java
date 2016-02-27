@@ -1,4 +1,4 @@
-package com.ishraq.janna.fragment;
+package com.ishraq.janna.fragment.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

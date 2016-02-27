@@ -22,7 +22,7 @@ public class SplashActivity extends Activity {
     private CommonService commonService;
 
     // Splash screen timer
-    private static int SPLASH_TIME_OUT = 100;
+    private static int SPLASH_TIME_OUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
