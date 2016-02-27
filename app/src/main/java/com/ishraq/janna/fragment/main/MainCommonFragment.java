@@ -1,10 +1,8 @@
 package com.ishraq.janna.fragment.main;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 
-import com.ishraq.janna.activity.LoginActivity;
 import com.ishraq.janna.activity.MainActivity;
 import com.ishraq.janna.fragment.CommonFragment;
 import com.ishraq.janna.webservice.CommonRequest;
@@ -16,15 +14,16 @@ import retrofit2.Callback;
  * Created by Ahmed on 2/27/2016.
  */
 public class MainCommonFragment extends CommonFragment {
-    protected SwipeRefreshLayout swipeRefreshLayout;
-    protected Toolbar mToolbar;
 
+    protected Toolbar mToolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        mToolbar = getMainActivity().getToolbar();
+        getMainActivity().startLoadingAnimator();
+
+        mToolbar = getMainActivity().getToolbar();
     }
 
     protected MainActivity getMainActivity() {

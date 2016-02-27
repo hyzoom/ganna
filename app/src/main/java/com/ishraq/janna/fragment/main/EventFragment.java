@@ -11,9 +11,9 @@ import com.ishraq.janna.R;
 /**
  * Created by hp on 20/02/2016.
  */
-public class Events extends Fragment {
+public class EventFragment extends Fragment {
 
-    public Events() {
+    public EventFragment() {
         // Required empty public constructor
     }
 
