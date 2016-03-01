@@ -3,6 +3,7 @@ package com.ishraq.janna.fragment.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,13 +110,20 @@ public class LoginFragment extends LoginCommonFragment implements View.OnClickLi
                 @Override
                 public void onResponse(Call<List<User.ExistUser>> call, Response<List<User.ExistUser>> response) {
                     User.ExistUser result = response.body().get(0);
-                    if (result.getExistUser() == 1) {
+                    if (result.getErrorMessage().trim().equals("Exist User")) {
                         // Exist => get user data
-                        GetUserRequest request = new GetUserRequest(result.getUserId());
+                        GetUserRequest request = new GetUserRequest(result.getId());
                         request.execute();
                     } else {
                         // Not exist
+                        Toast.makeText(getLoginActivity(), result.getErrorMessage(), Toast.LENGTH_SHORT).show();
                     }
+                }
+
+                @Override
+                public void onFailure(Call<List<User.ExistUser>> call, Throwable t) {
+                    getLoginActivity().stopLoadingAnimator();
+                    Log.w("AhmedLog", t.getMessage() + "\n" + call.request().method() + "\n" + t.getLocalizedMessage());
                 }
             });
         }

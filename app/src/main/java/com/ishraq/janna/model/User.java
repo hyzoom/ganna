@@ -11,8 +11,8 @@ public class User {
     @DatabaseField(id = true)
     private Integer id;
 
-    @DatabaseField(columnName = "user_code")
-    private String userCode;
+//    @DatabaseField(columnName = "user_code")
+//    private String userCode;
 
     @DatabaseField(columnName = "user_name")
     private String useName;
@@ -56,14 +56,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
     }
 
     public String getUseName() {
@@ -158,32 +150,32 @@ public class User {
 
     /////////////////////////////////////////////////// Exist user //////////////////////////////
     public class ExistUser {
-        private Integer existUser;
-        private Integer userId;
-        private String message;
+        private Integer userExist;
+        private Integer id;
+        private String errorMessage;
 
-        public Integer getExistUser() {
-            return existUser;
+        public Integer getUserExist() {
+            return userExist;
         }
 
-        public void setExistUser(Integer existUser) {
-            this.existUser = existUser;
+        public void setUserExist(Integer userExist) {
+            this.userExist = userExist;
         }
 
-        public Integer getUserId() {
-            return userId;
+        public Integer getId() {
+            return id;
         }
 
-        public void setUserId(Integer userId) {
-            this.userId = userId;
+        public void setId(Integer id) {
+            this.id = id;
         }
 
-        public String getMessage() {
-            return message;
+        public String getErrorMessage() {
+            return errorMessage;
         }
 
-        public void setMessage(String message) {
-            this.message = message;
+        public void setErrorMessage(String errorMessage) {
+            this.errorMessage = errorMessage;
         }
     }
 }

@@ -20,10 +20,10 @@ public interface UserWebService {
                               @Query("mobile") String mobile,
                               @Query("email") String email);
 
-    @GET("JsonInsertUsers.aspx")
-    Call<List<User>> getUser(@Query("userId") Integer userId);
+    @GET("JsonViewUsers.aspx")
+    Call<List<User>> getUser(@Query("id") Integer userId);
 
     @GET("JsonCheckUsersExistance.aspx")
-    Call<List<User.ExistUser>> loginUser(@Query("userPass") String password,
-                               @Query("mobile") String mobile);
+    Call<List<User.ExistUser>> loginUser(@Query("mobile") String mobile,
+                                         @Query("userPass") String password);
 }
