@@ -18,7 +18,7 @@ public interface UserWebService {
                               @Query("userPass") String pass,
                               @Query("userType") Integer type,
                               @Query("mobile") String mobile,
-                              @Query("email") String email);
+                              @Query("address") String address);
 
     @GET("JsonViewUsers.aspx")
     Call<List<User>> getUser(@Query("id") Integer userId);

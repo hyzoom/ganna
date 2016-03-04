@@ -3,6 +3,8 @@ package com.ishraq.janna.fragment.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,8 +41,7 @@ public class RegistrationFragment extends LoginCommonFragment implements View.On
     private UserWebService userWebService;
 
     private Button registerButton;
-    private EditText nameEditText, firstNameEditText, secondNameEditText, addressEditText,
-            phoneEditText, mobileEditText, emailEditText, passwordEditText, rePasswordEditText;
+    private EditText nameEditText, addressEditText, mobileEditText, passwordEditText, rePasswordEditText;
 
     private RadioButton radioDoctor, radioPatient;
 
@@ -59,12 +60,8 @@ public class RegistrationFragment extends LoginCommonFragment implements View.On
         View view = inflater.inflate(R.layout.fragment_regestration, container, false);
 
         nameEditText = (EditText) view.findViewById(R.id.nameEditText);
-        firstNameEditText = (EditText) view.findViewById(R.id.firstNameEditText);
-        secondNameEditText = (EditText) view.findViewById(R.id.secondNameEditText);
         addressEditText = (EditText) view.findViewById(R.id.addressEditText);
-        phoneEditText = (EditText) view.findViewById(R.id.phoneEditText);
         mobileEditText = (EditText) view.findViewById(R.id.mobileEditText);
-        emailEditText = (EditText) view.findViewById(R.id.emailEditText);
         passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
         rePasswordEditText = (EditText) view.findViewById(R.id.rePasswordEditText);
 
@@ -74,6 +71,26 @@ public class RegistrationFragment extends LoginCommonFragment implements View.On
         registerButton = (Button) view.findViewById(R.id.registerButton);
         registerButton.setOnClickListener(this);
 
+        passwordEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (passwordEditText.getText().toString().equals("")) {
+                    rePasswordEditText.setEnabled(false);
+                } else {
+                    rePasswordEditText.setEnabled(true);
+                }
+            }
+        });
         return view;
     }
 
@@ -90,41 +107,30 @@ public class RegistrationFragment extends LoginCommonFragment implements View.On
 
     private boolean validateUser() {
         boolean result = true;
-        if (nameEditText.getText() == null || nameEditText.getText().equals("")) {
-            Toast.makeText(getActivity(), "name", Toast.LENGTH_SHORT).show();
+        if (nameEditText.getText().toString() == null || nameEditText.getText().toString().equals("")) {
+            Toast.makeText(getActivity(), getString(R.string.name_empty), Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (passwordEditText.getText() == null || passwordEditText.getText().equals("")
-                || rePasswordEditText.getText() == null || rePasswordEditText.getText().equals("")) {
-            Toast.makeText(getActivity(), "pass", Toast.LENGTH_SHORT).show();
-            return false;
-        } else {
-            if (!passwordEditText.getText().toString().equals(passwordEditText.getText().toString())){
-                Toast.makeText(getActivity(), "pass not", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        }
-        if (mobileEditText.getText() == null || mobileEditText.getText().equals("")) {
-            Toast.makeText(getActivity(), "mobile", Toast.LENGTH_SHORT).show();
+        if (mobileEditText.getText().toString() == null || mobileEditText.getText().toString().equals("")) {
+            Toast.makeText(getActivity(), getString(R.string.mobile_empty), Toast.LENGTH_SHORT).show();
             return false;
         }
-
+        if (passwordEditText.getText().toString() == null || passwordEditText.getText().toString().equals("")) {
+            Toast.makeText(getActivity(), getString(R.string.password_empty), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (rePasswordEditText.getText().toString() == null || rePasswordEditText.getText().toString().equals("")) {
+            Toast.makeText(getActivity(), getString(R.string.re_password_empty), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!passwordEditText.getText().toString().toString().equals(rePasswordEditText.getText().toString().toString())){
+            Toast.makeText(getActivity(), getString(R.string.repeating_not_right), Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         ////////////////////////////////////////
-        if (firstNameEditText.getText() == null || firstNameEditText.getText().equals("")) {
-            firstNameEditText.setText("");
-        }
-        if (secondNameEditText.getText() == null || secondNameEditText.getText().equals("")) {
-            secondNameEditText.setText("");
-        }
-        if (addressEditText.getText() == null || addressEditText.getText().equals("")) {
+        if (addressEditText.getText().toString() == null || addressEditText.getText().toString().equals("")) {
             addressEditText.setText("");
-        }
-        if (phoneEditText.getText() == null || phoneEditText.getText().equals("")) {
-            phoneEditText.setText("");
-        }
-        if (emailEditText.getText() == null || emailEditText.getText().equals("")) {
-            emailEditText.setText("");
         }
 
         return result;
@@ -141,7 +147,7 @@ public class RegistrationFragment extends LoginCommonFragment implements View.On
             userWebService.registerUser(nameEditText.getText().toString(),
                     passwordEditText.getText().toString(), type,
                     mobileEditText.getText().toString(),
-                    emailEditText.getText().toString()).enqueue(new RequestCallback<List<User>>(this) {
+                    addressEditText.getText().toString()).enqueue(new RequestCallback<List<User>>(this) {
                 @Override
                 public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                     // Save user
