@@ -9,7 +9,7 @@
     <string name="name_hint">الاسم</string>
     <string name="first_name_hint">الاسم الأول</string>
     <string name="last_name_hint">الاسم الثاني</string>
-    <string name="address_hint">العنوان</string>
+    <string name="address_hint">جهة العمل</string>
     <string name="phone_hint">الهاتف</string>
     <string name="mobile_hint">المحمول</string>
     <string name="email_hint">البريد الالكتروني</string>
