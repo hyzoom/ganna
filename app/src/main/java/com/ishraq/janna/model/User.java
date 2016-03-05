@@ -11,14 +11,11 @@ public class User {
     @DatabaseField(id = true)
     private Integer id;
 
-//    @DatabaseField(columnName = "user_code")
-//    private String userCode;
-
     @DatabaseField(columnName = "user_name")
     private String useName;
 
     @DatabaseField(columnName = "user_type")
-    private String userType;
+    private Integer userType;
 
     @DatabaseField(columnName = "job_dest")
     private String jobDest;
@@ -66,11 +63,11 @@ public class User {
         this.useName = useName;
     }
 
-    public String getUserType() {
+    public Integer getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(Integer userType) {
         this.userType = userType;
     }
 

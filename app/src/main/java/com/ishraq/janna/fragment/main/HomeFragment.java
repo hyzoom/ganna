@@ -58,8 +58,7 @@ public class HomeFragment extends MainCommonFragment {
         aboutUsTab.setText("عن مستشفى جنّة");
         tabLayout.getTabAt(0).setCustomView(aboutUsTab);
 
-        if (settings.getLoggedInUser().getUserType().equals(getString(R.string.radio_doctor))
-                || Integer.parseInt(settings.getLoggedInUser().getUserType()) == 1) {
+        if (settings.getLoggedInUser().getUserType() == 1) {
             TextView eventsTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
             eventsTab.setText("الأحداث");
             tabLayout.getTabAt(1).setCustomView(eventsTab);
@@ -75,8 +74,7 @@ public class HomeFragment extends MainCommonFragment {
         adapter.addFrag(new AboutFragment());
 
         Settings settings = settingsService.getSettings();
-        if (settings.getLoggedInUser().getUserType().equals(getString(R.string.radio_doctor))
-                || Integer.parseInt(settings.getLoggedInUser().getUserType()) == 1) {
+        if (settings.getLoggedInUser().getUserType() == 1) {
             adapter.addFrag(new EventFragment());
         } else {
             adapter.addFrag(new Reservation());

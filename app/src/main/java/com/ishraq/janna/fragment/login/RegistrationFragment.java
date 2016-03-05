@@ -147,7 +147,43 @@ public class RegistrationFragment extends LoginCommonFragment implements View.On
             userWebService.registerUser(nameEditText.getText().toString(),
                     passwordEditText.getText().toString(), type,
                     mobileEditText.getText().toString(),
-                    addressEditText.getText().toString()).enqueue(new RequestCallback<List<User>>(this) {
+                    addressEditText.getText().toString()).enqueue(new RequestCallback<List<User.ExistUser>>(this) {
+                @Override
+                public void onResponse(Call<List<User.ExistUser>> call, Response<List<User.ExistUser>> response) {
+                    // Save user
+                    User.ExistUser result = response.body().get(0);
+
+                    if (result.getUserExist() == 1) {
+                        // Saved successfully
+                        GetUserRequest request = new GetUserRequest(result.getId());
+                        request.execute();
+                    } else {
+                        getLoginActivity().stopLoadingAnimator();
+                        Toast.makeText(getActivity(), result.getErrorMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<User.ExistUser>> call, Throwable t) {
+                    super.onFailure(call, t);
+                    getLoginActivity().stopLoadingAnimator();
+                    Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+
+    private class GetUserRequest implements CommonRequest {
+        private Integer userId;
+
+        public GetUserRequest(Integer userId) {
+            this.userId = userId;
+        }
+
+        @Override
+        public void execute() {
+            userWebService.getUser(userId).enqueue(new RequestCallback<List<User>>(this) {
                 @Override
                 public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                     // Save user
@@ -162,13 +198,6 @@ public class RegistrationFragment extends LoginCommonFragment implements View.On
                     // Go to main activity
                     Intent i = new Intent(getActivity(), MainActivity.class);
                     startActivity(i);
-                }
-
-                @Override
-                public void onFailure(Call<List<User>> call, Throwable t) {
-                    super.onFailure(call, t);
-                    getLoginActivity().stopLoadingAnimator();
-                    Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
                 }
             });
         }

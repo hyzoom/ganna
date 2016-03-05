@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 public interface UserWebService {
 
     @GET("JsonInsertUsers.aspx")
-    Call<List<User>> registerUser(@Query("userName") String name,
+    Call<List<User.ExistUser>> registerUser(@Query("userName") String name,
                               @Query("userPass") String pass,
                               @Query("userType") Integer type,
                               @Query("mobile") String mobile,
