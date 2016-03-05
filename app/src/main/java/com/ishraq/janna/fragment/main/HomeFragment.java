@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +58,8 @@ public class HomeFragment extends MainCommonFragment {
         aboutUsTab.setText("عن مستشفى جنّة");
         tabLayout.getTabAt(0).setCustomView(aboutUsTab);
 
-
-        if (settings.getLoggedInUser().getUserType().equals(getString(R.string.radio_doctor))) {
+        if (settings.getLoggedInUser().getUserType().equals(getString(R.string.radio_doctor))
+                || Integer.parseInt(settings.getLoggedInUser().getUserType()) == 1) {
             TextView eventsTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
             eventsTab.setText("الأحداث");
             tabLayout.getTabAt(1).setCustomView(eventsTab);
@@ -70,11 +71,12 @@ public class HomeFragment extends MainCommonFragment {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getMainActivity().getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFrag(new AboutFragment());
 
         Settings settings = settingsService.getSettings();
-        if (settings.getLoggedInUser().getUserType().equals(getString(R.string.radio_doctor))) {
+        if (settings.getLoggedInUser().getUserType().equals(getString(R.string.radio_doctor))
+                || Integer.parseInt(settings.getLoggedInUser().getUserType()) == 1) {
             adapter.addFrag(new EventFragment());
         } else {
             adapter.addFrag(new Reservation());

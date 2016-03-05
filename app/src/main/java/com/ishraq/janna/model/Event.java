@@ -1,7 +1,10 @@
 package com.ishraq.janna.model;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.Collection;
 
 /**
  * Created by Ahmed on 2/16/2016.
@@ -30,6 +33,11 @@ public class Event {
     @DatabaseField(columnName = "address")
     private String EventAddress;
 
+    @DatabaseField(columnName = "notes")
+    private String Notes;
+
+    @ForeignCollectionField(eager = true)
+    private Collection<Session> sess;
 
     ////////////////////////////////////////////// /////////////////////////////////////////////
 
@@ -87,6 +95,22 @@ public class Event {
 
     public void setEventAddress(String eventAddress) {
         EventAddress = eventAddress;
+    }
+
+    public String getNotes() {
+        return Notes;
+    }
+
+    public void setNotes(String notes) {
+        Notes = notes;
+    }
+
+    public Collection<Session> getSess() {
+        return sess;
+    }
+
+    public void setSess(Collection<Session> sess) {
+        this.sess = sess;
     }
 
 

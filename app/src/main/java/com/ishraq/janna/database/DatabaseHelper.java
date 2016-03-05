@@ -14,6 +14,7 @@ import com.ishraq.janna.model.News;
 import com.ishraq.janna.model.NewsGuest;
 import com.ishraq.janna.model.NewsImage;
 import com.ishraq.janna.model.Question;
+import com.ishraq.janna.model.Session;
 import com.ishraq.janna.model.Settings;
 import com.ishraq.janna.model.User;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -44,6 +45,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Question, Integer> questionDao = null;
     private Dao<Settings, Integer> settingsDao = null;
     private Dao<User, Integer> userDao = null;
+    private Dao<Session, Integer> sessionDao = null;
 
     // we do this so there is only one helper
     private static DatabaseHelper helper = null;
@@ -86,6 +88,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Question.class);
             TableUtils.createTable(connectionSource, Settings.class);
             TableUtils.createTable(connectionSource, User.class);
+            TableUtils.createTable(connectionSource, Session.class);
 
             initData();
         } catch (SQLException e) {
@@ -226,6 +229,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return userDao;
     }
 
+    public Dao<Session, Integer> getSessionDao() {
+        if (sessionDao == null) {
+            try {
+                sessionDao = getDao(Session.class);
+            } catch (SQLException e) {
+            }
+        }
+        return sessionDao;
+    }
+
     /**
      * Close the database connections and clear any cached DAOs.
      */
@@ -243,5 +256,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         questionDao = null;
         settingsDao = null;
         userDao = null;
+        sessionDao = null;
     }
 }

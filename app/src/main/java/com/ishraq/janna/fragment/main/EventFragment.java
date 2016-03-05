@@ -1,17 +1,14 @@
 package com.ishraq.janna.fragment.main;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ishraq.janna.R;
-import com.ishraq.janna.adapter.EventAdapter;
+import com.ishraq.janna.adapter.EventListAdapter;
 import com.ishraq.janna.listner.HidingScrollListener;
 import com.ishraq.janna.model.Event;
 import com.ishraq.janna.service.EventService;
@@ -33,7 +30,7 @@ public class EventFragment extends HomeFragment {
     private RecyclerView recyclerView;
 
     private List<Event> events;
-    private EventAdapter adapter;
+    private EventListAdapter adapter;
     private boolean loadMore = true;
 
     @Override
@@ -100,7 +97,7 @@ public class EventFragment extends HomeFragment {
                     } else {
                         loadMore = false;
                     }
-                    adapter = new EventAdapter(getMainActivity(), events, loadMore);
+                    adapter = new EventListAdapter(getMainActivity(), events, loadMore);
                     recyclerView.setAdapter(adapter);
 
                     getMainActivity().stopLoadingAnimator();
@@ -111,7 +108,7 @@ public class EventFragment extends HomeFragment {
                     loadMore = false;
                     events = eventService.getEvents();
 
-                    adapter = new EventAdapter(getMainActivity(), events, loadMore);
+                    adapter = new EventListAdapter(getMainActivity(), events, loadMore);
                     recyclerView.setAdapter(adapter);
 
                     getMainActivity().stopLoadingAnimator();

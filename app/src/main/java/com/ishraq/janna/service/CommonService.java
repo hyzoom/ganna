@@ -14,6 +14,7 @@ import com.ishraq.janna.model.News;
 import com.ishraq.janna.model.NewsGuest;
 import com.ishraq.janna.model.NewsImage;
 import com.ishraq.janna.model.Question;
+import com.ishraq.janna.model.Session;
 import com.ishraq.janna.model.Settings;
 import com.ishraq.janna.model.User;
 import com.j256.ormlite.dao.Dao;
@@ -39,6 +40,7 @@ public class CommonService {
     public Dao<Question, Integer> questionDao;
     public Dao<Settings, Integer> settingsDao;
     public Dao<User, Integer> userDao;
+    public Dao<Session, Integer> sessionDao;
 
     static InputStream is = null;
     static JSONObject jObj = null;
@@ -56,6 +58,7 @@ public class CommonService {
         questionDao = DatabaseHelper.getHelper(context).getQuestionDao();
         settingsDao = DatabaseHelper.getHelper(context).getSettingsDao();
         userDao = DatabaseHelper.getHelper(context).getUserDao();
+        sessionDao = DatabaseHelper.getHelper(context).getSessionDao();
     }
 
 

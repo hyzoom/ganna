@@ -140,9 +140,9 @@ public class RegistrationFragment extends LoginCommonFragment implements View.On
 
         @Override
         public void execute() {
-            int type = 1;
+            int type = 0;
             if (radioDoctor.isChecked()) {
-                type = 2;
+                type = 1;
             }
             userWebService.registerUser(nameEditText.getText().toString(),
                     passwordEditText.getText().toString(), type,

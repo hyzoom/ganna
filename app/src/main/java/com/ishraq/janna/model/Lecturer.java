@@ -20,6 +20,9 @@ public class Lecturer {
     @DatabaseField
     private String specialty;
 
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "session_id")
+    private Session session;
+
 
     public Integer getId() {
         return id;
@@ -51,5 +54,13 @@ public class Lecturer {
 
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
 }

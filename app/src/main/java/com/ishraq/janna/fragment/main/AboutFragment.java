@@ -27,7 +27,6 @@ public class AboutFragment extends MainCommonFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getMainActivity().stopLoadingAnimator();
         View view = inflater.inflate(R.layout.fragment_about_us, container, false);
         return view;
     }

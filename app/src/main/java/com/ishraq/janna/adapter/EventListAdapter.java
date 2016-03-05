@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by Ahmed on 2/27/2016.
  */
-public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class EventListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private List<Event> events;
@@ -33,7 +33,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final int TYPE_HEADER = 2;
     private static final int TYPE_ITEM = 1;
 
-    public EventAdapter(Context context, List<Event> events, boolean loadMore) {
+    public EventListAdapter(Context context, List<Event> events, boolean loadMore) {
         this.context = context;
         this.events = events;
         this.loadMore = loadMore;
