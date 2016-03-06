@@ -8,5 +8,8 @@
         android:id="@+id/nameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black" />
+        android:layout_margin="10dip"
+        android:text="test"
+        android:textColor="@android:color/black"
+        android:textSize="17sp" />
 </LinearLayout>

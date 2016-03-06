@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/back">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -18,20 +19,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/common_margin_padding_medium"
             android:layout_marginTop="@dimen/common_margin_padding_medium"
-            android:orientation="vertical">
-<!--android:layout_below="@+id/errorLogoImageView"-->
+            android:orientation="vertical"
+            android:padding="@dimen/common_margin_padding_medium">
+            <!--android:layout_below="@+id/errorLogoImageView"-->
 
             <TextView
                 android:id="@+id/errorMessageTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:alpha="0.87"
-                android:textSize="@dimen/common_text_small"
                 android:layout_gravity="center_horizontal"
-                android:padding="@dimen/common_margin_padding_medium"/>
+                android:alpha="0.87"
+                android:padding="@dimen/common_margin_padding_medium"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/common_text_small" />
 
 
             <Button
@@ -39,18 +40,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/section_label"
-                android:text="@string/button_retry"
-                android:layout_marginTop="@dimen/common_margin_padding_medium"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@android:color/black"
-                android:alpha="0.87"/>
+                android:layout_marginTop="@dimen/common_margin_padding_medium"
+                android:alpha="0.87"
+                android:text="@string/button_retry"
+                android:textColor="@android:color/black" />
 
         </LinearLayout>
 
 
-
     </RelativeLayout>
-
 
 
 </LinearLayout>
