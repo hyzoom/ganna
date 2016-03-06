@@ -35,10 +35,10 @@ public class EventItemViewHolder extends RecyclerView.ViewHolder {
         eventNameTextView = (TextView) parent.findViewById(R.id.eventNameTextView);
     }
 
-    public void setEventItems(int position){
+    public void setEventItems(int position) {
         final Event event = events.get(position);
 
-        eventNameTextView.setText(event.getEventNameAra());
+        eventNameTextView.setText(event.getEventNameEng());
         row.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

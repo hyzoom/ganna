@@ -17,6 +17,7 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/inputLayoutName"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content">
 
             <EditText
@@ -70,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password_hint"
+                android:inputType="textPassword"
                 android:textColor="@android:color/black"
                 android:theme="@style/EditTextTest" />
         </android.support.design.widget.TextInputLayout>
@@ -84,17 +86,21 @@
                 android:id="@+id/rePasswordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:hint="@string/re_password_hint"
+                android:inputType="textPassword"
                 android:textColor="@android:color/black"
-                android:theme="@style/EditTextTest"
-                android:enabled="false"/>
+                android:theme="@style/EditTextTest" />
         </android.support.design.widget.TextInputLayout>
 
 
         <RadioGroup
             android:id="@+id/radioType"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="10dip"
+            android:layout_weight="1"
+            android:orientation="horizontal"
             android:padding="@dimen/common_margin_padding_big">
 
             <RadioButton
@@ -114,9 +120,9 @@
 
         <Button
             android:id="@+id/registerButton"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_margin="10dip"
             android:padding="@dimen/common_margin_padding_big"
             android:text="@string/new_user_button"
             android:textColor="@android:color/black" />

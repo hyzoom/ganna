@@ -10,21 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
-import com.ishraq.janna.activity.MainActivity;
-import com.ishraq.janna.adapter.EventListAdapter;
 import com.ishraq.janna.component.ExpandableHeightListView;
 import com.ishraq.janna.listner.HidingScrollListener;
 import com.ishraq.janna.model.Event;
 import com.ishraq.janna.model.Session;
 import com.ishraq.janna.service.EventService;
-import com.ishraq.janna.viewholder.EventItemViewHolder;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
-import com.ishraq.janna.viewholder.RecyclerLoadMoreViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.EventWebService;
 
@@ -121,8 +116,6 @@ public class EventDetailsFragment extends MainCommonFragment {
     }
 
 
-
-
     ///////////////////////////////////// Item //////////////////////////////////////////////////
     class EventItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -158,8 +151,7 @@ public class EventDetailsFragment extends MainCommonFragment {
             if (!isPositionHeader(position)) {
                 ItemViewHolder holder = (ItemViewHolder) viewHolder;
                 holder.setEventItem();
-            }
-            else {
+            } else {
                 RecyclerHeaderViewHolder holder = (RecyclerHeaderViewHolder) viewHolder;
             }
         }
@@ -210,7 +202,7 @@ public class EventDetailsFragment extends MainCommonFragment {
             sessionListView.setExpanded(true);
         }
 
-        public void setEventItem(){
+        public void setEventItem() {
             nameTextView.setText(event.getEventNameAra());
             startDateTextView.setText(event.getEventStartDate());
             endDateTextView.setText(event.getEventEndDate());
@@ -261,8 +253,8 @@ public class EventDetailsFragment extends MainCommonFragment {
                 row = inflater.inflate(layoutResourceId, parent, false);
             }
 
-            TextView nameTextView = (TextView)row.findViewById(R.id.nameTextView);
-            nameTextView.setText(sessions.get(position).getEventsSessionCode()+"");
+            TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
+            nameTextView.setText(sessions.get(position).getEventsSessionNameAra() + "");
 
             return row;
         }

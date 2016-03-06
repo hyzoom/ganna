@@ -36,8 +36,7 @@
 
 
     <!-- events -->
-    <string name="empty_events_list">لاتوجد أحداث</string>
-
+    <string name="empty_events_list">لاتوجد مؤتمرات</string>
 
 
 </resources>

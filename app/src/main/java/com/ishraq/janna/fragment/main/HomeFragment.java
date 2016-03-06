@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +59,7 @@ public class HomeFragment extends MainCommonFragment {
 
         if (settings.getLoggedInUser().getUserType() == 1) {
             TextView eventsTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
-            eventsTab.setText("الأحداث");
+            eventsTab.setText("المؤتمرات");
             tabLayout.getTabAt(1).setCustomView(eventsTab);
         } else {
             TextView reservationTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
@@ -110,7 +109,6 @@ public class HomeFragment extends MainCommonFragment {
             return null;
         }
     }
-
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////

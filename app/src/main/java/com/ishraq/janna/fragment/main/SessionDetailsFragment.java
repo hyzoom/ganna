@@ -2,7 +2,6 @@ package com.ishraq.janna.fragment.main;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,19 +10,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
-import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
 import com.ishraq.janna.component.ExpandableHeightListView;
 import com.ishraq.janna.listner.HidingScrollListener;
-import com.ishraq.janna.model.Event;
-import com.ishraq.janna.model.Lecturer;
 import com.ishraq.janna.model.Session;
 import com.ishraq.janna.service.EventService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.EventWebService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -152,8 +147,7 @@ public class SessionDetailsFragment extends MainCommonFragment {
             if (!isPositionHeader(position)) {
                 ItemViewHolder holder = (ItemViewHolder) viewHolder;
                 holder.setEventItem();
-            }
-            else {
+            } else {
                 RecyclerHeaderViewHolder holder = (RecyclerHeaderViewHolder) viewHolder;
             }
         }
@@ -198,8 +192,8 @@ public class SessionDetailsFragment extends MainCommonFragment {
             lectureListView.setExpanded(true);
         }
 
-        public void setEventItem(){
-            nameTextView.setText(session.getEventsSessionCode()+"");
+        public void setEventItem() {
+            nameTextView.setText(session.getEventsSessionNameAra() + "");
 
 //            final List<Lecturer> sessions = new ArrayList<Lecturer>(session.getLect());
 //            SessionListAdapter sessionListAdapter = new SessionListAdapter(JannaApp.getContext(), R.layout.row_session, sessions);
