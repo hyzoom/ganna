@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:layout_height="wrap_content"
+    android:background="@drawable/back1"
     android:rotationY="180">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -54,7 +54,6 @@
             android:layout_marginLeft="13dip"
             android:layout_marginRight="13dip"
             android:layout_marginTop="0dip"
-            android:text="test test test test test test test"
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 
@@ -76,8 +75,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/ss"
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dip"
@@ -95,7 +93,9 @@
             android:layout_marginLeft="13dip"
             android:layout_marginRight="13dip"
             android:layout_marginTop="0dip"
-            android:padding="8dp" />
+            android:visibility="gone"
+            android:padding="8dp" />-->
+
 
         <View
             android:layout_width="fill_parent"
@@ -103,7 +103,6 @@
             android:background="#FF0000FF" />
 
         <TextView
-            android:id="@+id/sdds"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dip"
@@ -129,7 +128,6 @@
             android:background="#FF0000FF" />
 
         <TextView
-            android:id="@+id/sddfs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dip"
@@ -148,6 +146,28 @@
             android:layout_marginRight="13dip"
             android:layout_marginTop="0dip"
             android:padding="8dp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="10dip"
+            android:text="جلسات المؤتمر:"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="25sp" />
+
+        <com.ishraq.janna.component.ExpandableHeightListView
+            android:id="@+id/sessionListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dip"
+            android:layout_marginRight="13dip"
+            android:layout_marginTop="0dip"
+            android:padding="8dp" />
+
     </LinearLayout>
 
 </ScrollView>

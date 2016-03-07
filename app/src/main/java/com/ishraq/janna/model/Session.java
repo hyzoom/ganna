@@ -1,6 +1,5 @@
 package com.ishraq.janna.model;
 
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -19,14 +18,20 @@ public class Session {
     @DatabaseField(columnName = "name_ar")
     private String EventsSessionNameAra;
 
+    @DatabaseField(columnName = "name_lat")
+    private String EventsSessionNameLat;
+
     @DatabaseField(columnName = "date")
     private String EventsSessionDate;
 
     @DatabaseField(columnName = "details")
     private String EventsSessionDetails;
 
+    @DatabaseField(columnName = "information")
+    private String EventsSessionInformations;
+
     @ForeignCollectionField(eager = true)
-    private Collection<Lecturer> lect;
+    private Collection<Lecture> lect;
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "event_id")
     private Event event;
@@ -65,19 +70,35 @@ public class Session {
         EventsSessionDetails = eventsSessionDetails;
     }
 
-    public Collection<Lecturer> getLect() {
-        return lect;
-    }
-
-    public void setLect(Collection<Lecturer> lect) {
-        this.lect = lect;
-    }
-
     public Event getEvent() {
         return event;
     }
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public String getEventsSessionNameLat() {
+        return EventsSessionNameLat;
+    }
+
+    public void setEventsSessionNameLat(String eventsSessionNameLat) {
+        EventsSessionNameLat = eventsSessionNameLat;
+    }
+
+    public String getEventsSessionInformations() {
+        return EventsSessionInformations;
+    }
+
+    public void setEventsSessionInformations(String eventsSessionInformations) {
+        EventsSessionInformations = eventsSessionInformations;
+    }
+
+    public Collection<Lecture> getLect() {
+        return lect;
+    }
+
+    public void setLect(Collection<Lecture> lect) {
+        this.lect = lect;
     }
 }

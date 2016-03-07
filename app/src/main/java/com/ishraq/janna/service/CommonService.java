@@ -6,16 +6,16 @@ import android.util.Log;
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.database.DatabaseHelper;
 import com.ishraq.janna.model.Event;
-import com.ishraq.janna.model.EventGuest;
-import com.ishraq.janna.model.EventImage;
-import com.ishraq.janna.model.EventLecturer;
-import com.ishraq.janna.model.Lecturer;
-import com.ishraq.janna.model.News;
-import com.ishraq.janna.model.NewsGuest;
-import com.ishraq.janna.model.NewsImage;
+import com.ishraq.janna.model.EventSponsor;
+import com.ishraq.janna.model.Gst;
+import com.ishraq.janna.model.Instructor;
+import com.ishraq.janna.model.Lecture;
+import com.ishraq.janna.model.LectureInstructor;
 import com.ishraq.janna.model.Question;
+import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
 import com.ishraq.janna.model.Settings;
+import com.ishraq.janna.model.Sponsor;
 import com.ishraq.janna.model.User;
 import com.j256.ormlite.dao.Dao;
 
@@ -30,13 +30,15 @@ import java.util.List;
  */
 public class CommonService {
     public Dao<Event, Integer> eventDao;
-    public Dao<EventImage, Integer> eventImageDao;
-    public Dao<EventLecturer, Integer> eventLecturerDao;
-    public Dao<EventGuest, Integer> eventGuestDao;
-    public Dao<Lecturer, Integer> lecturerDao;
-    public Dao<News, Integer> newsDao;
-    public Dao<NewsImage, Integer> newsImageDao;
-    public Dao<NewsGuest, Integer> newsGuestDao;
+
+    public Dao<Rule, Integer> ruleDao;
+    public Dao<Sponsor, Integer> sponsorDao;
+    public Dao<EventSponsor, Integer> eventSponsorDao;
+    public Dao<Lecture, Integer> lectureDao;
+    public Dao<Instructor, Integer> instructorDao;
+    public Dao<LectureInstructor, Integer> lectureInstructorDao;
+    public Dao<Gst, Integer> gstDao;
+
     public Dao<Question, Integer> questionDao;
     public Dao<Settings, Integer> settingsDao;
     public Dao<User, Integer> userDao;
@@ -48,13 +50,13 @@ public class CommonService {
 
     public CommonService(Context context) {
         eventDao = DatabaseHelper.getHelper(context).getEventDao();
-        eventImageDao = DatabaseHelper.getHelper(context).getEventImageDao();
-        eventLecturerDao = DatabaseHelper.getHelper(context).getEventLecturerDao();
-        eventGuestDao = DatabaseHelper.getHelper(context).getEventGuestDao();
-        lecturerDao = DatabaseHelper.getHelper(context).getLecturerDao();
-        newsDao = DatabaseHelper.getHelper(context).getNewsDao();
-        newsImageDao = DatabaseHelper.getHelper(context).getNewsImageDao();
-        newsGuestDao = DatabaseHelper.getHelper(context).getNewsGuestDao();
+        ruleDao = DatabaseHelper.getHelper(context).getRuleDao();
+        sponsorDao = DatabaseHelper.getHelper(context).getSponsorDao();
+        eventSponsorDao = DatabaseHelper.getHelper(context).getEventSponsorDao();
+        lectureDao = DatabaseHelper.getHelper(context).getLectureDao();
+        instructorDao = DatabaseHelper.getHelper(context).getInstructorDao();
+        lectureInstructorDao = DatabaseHelper.getHelper(context).getLectureInstructorDao();
+        gstDao = DatabaseHelper.getHelper(context).getGstDao();
         questionDao = DatabaseHelper.getHelper(context).getQuestionDao();
         settingsDao = DatabaseHelper.getHelper(context).getSettingsDao();
         userDao = DatabaseHelper.getHelper(context).getUserDao();

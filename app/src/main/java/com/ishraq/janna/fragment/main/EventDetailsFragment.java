@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,10 @@ import com.ishraq.janna.R;
 import com.ishraq.janna.component.ExpandableHeightListView;
 import com.ishraq.janna.listner.HidingScrollListener;
 import com.ishraq.janna.model.Event;
+import com.ishraq.janna.model.EventSponsor;
+import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
+import com.ishraq.janna.model.Sponsor;
 import com.ishraq.janna.service.EventService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
@@ -59,6 +63,8 @@ public class EventDetailsFragment extends MainCommonFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+//        getMainActivity().g//
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -185,7 +191,7 @@ public class EventDetailsFragment extends MainCommonFragment {
         private TextView nameTextView, startDateTextView, endDateTextView,
                 structureTextView, addressTextView, notesTextView;
 
-        private ExpandableHeightListView sessionListView;
+        private ExpandableHeightListView sessionListView, rulesListView, sponsorListView;
 
         public ItemViewHolder(View parent, Event event) {
             super(parent);
@@ -200,6 +206,12 @@ public class EventDetailsFragment extends MainCommonFragment {
 
             sessionListView = (ExpandableHeightListView) parent.findViewById(R.id.sessionListView);
             sessionListView.setExpanded(true);
+
+            rulesListView = (ExpandableHeightListView) parent.findViewById(R.id.rulesListView);
+            rulesListView.setExpanded(true);
+
+            sponsorListView = (ExpandableHeightListView) parent.findViewById(R.id.sponsorListView);
+            sponsorListView.setExpanded(true);
         }
 
         public void setEventItem() {
@@ -211,7 +223,6 @@ public class EventDetailsFragment extends MainCommonFragment {
             notesTextView.setText(event.getNotes());
 
             final List<Session> sessions = new ArrayList<Session>(event.getSess());
-
             SessionListAdapter sessionListAdapter = new SessionListAdapter(JannaApp.getContext(), R.layout.row_session, sessions);
             sessionListView.setAdapter(sessionListAdapter);
 
@@ -227,6 +238,17 @@ public class EventDetailsFragment extends MainCommonFragment {
                 }
             });
 
+
+            final List<Rule> rules = new ArrayList<Rule>(event.getRules());
+
+            Log.w("AhmedLog", rules.size()+"");
+            RuleListAdapter ruleListAdapter = new RuleListAdapter(JannaApp.getContext(), R.layout.row_rule, rules);
+            rulesListView.setAdapter(ruleListAdapter);
+
+            final List<EventSponsor> sponsors = new ArrayList<EventSponsor>(event.getSponsers());
+            Log.w("AhmedLog", sponsors.size()+"");
+            SponsorListAdapter sponsorListAdapter = new SponsorListAdapter(JannaApp.getContext(), R.layout.row_sponsor, sponsors);
+            sponsorListView.setAdapter(sponsorListAdapter);
 
         }
 
@@ -255,6 +277,62 @@ public class EventDetailsFragment extends MainCommonFragment {
 
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
             nameTextView.setText(sessions.get(position).getEventsSessionNameAra() + "");
+
+            return row;
+        }
+    }
+
+    class RuleListAdapter extends ArrayAdapter<Rule> {
+        private List<Rule> rules;
+        private Context context;
+        private int layoutResourceId;
+
+
+        public RuleListAdapter(Context context, int layoutResourceId, List<Rule> rules) {
+            super(context, layoutResourceId, rules);
+            this.rules = rules;
+            this.context = context;
+            this.layoutResourceId = layoutResourceId;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View row = convertView;
+            if (row == null) {
+                LayoutInflater inflater = LayoutInflater.from(JannaApp.getContext());
+                row = inflater.inflate(layoutResourceId, parent, false);
+            }
+
+            TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
+            nameTextView.setText(rules.get(position).getRuleName() + "");
+
+            return row;
+        }
+    }
+
+    class SponsorListAdapter extends ArrayAdapter<EventSponsor> {
+        private List<EventSponsor> sponsors;
+        private Context context;
+        private int layoutResourceId;
+
+
+        public SponsorListAdapter(Context context, int layoutResourceId, List<EventSponsor> sponsors) {
+            super(context, layoutResourceId, sponsors);
+            this.sponsors = sponsors;
+            this.context = context;
+            this.layoutResourceId = layoutResourceId;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View row = convertView;
+            if (row == null) {
+                LayoutInflater inflater = LayoutInflater.from(JannaApp.getContext());
+                row = inflater.inflate(layoutResourceId, parent, false);
+            }
+
+            TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
+//            nameTextView.setText(sponsors.get(position).getSponsor().getSponserNameAra()+ "");
 
             return row;
         }

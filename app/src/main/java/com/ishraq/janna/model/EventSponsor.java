@@ -4,21 +4,21 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * Created by Ahmed on 2/16/2016.
+ * Created by Ahmed on 3/7/2016.
  */
-@DatabaseTable(tableName = "event_lecturer")
-public class EventLecturer {
+@DatabaseTable(tableName = "event_sponsor")
+public class EventSponsor {
     @DatabaseField(generatedId = true)
     private Integer id;
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "event_id")
     private Event event;
 
-    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "lecturer_id")
-    private Lecturer lecturer;
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "sponsor_id")
+    private Sponsor sponsor;
 
 
-    ////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
 
     public Integer getId() {
         return id;
@@ -36,11 +36,11 @@ public class EventLecturer {
         this.event = event;
     }
 
-    public Lecturer getLecturer() {
-        return lecturer;
+    public Sponsor getSponsor() {
+        return sponsor;
     }
 
-    public void setLecturer(Lecturer lecturer) {
-        this.lecturer = lecturer;
+    public void setSponsor(Sponsor sponsor) {
+        this.sponsor = sponsor;
     }
 }

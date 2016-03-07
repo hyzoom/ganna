@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.model.Event;
-import com.ishraq.janna.model.Lecturer;
 import com.ishraq.janna.model.Session;
 import com.j256.ormlite.dao.Dao;
 

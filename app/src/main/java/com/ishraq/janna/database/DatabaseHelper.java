@@ -6,16 +6,16 @@ import android.util.Log;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.model.Event;
-import com.ishraq.janna.model.EventGuest;
-import com.ishraq.janna.model.EventImage;
-import com.ishraq.janna.model.EventLecturer;
-import com.ishraq.janna.model.Lecturer;
-import com.ishraq.janna.model.News;
-import com.ishraq.janna.model.NewsGuest;
-import com.ishraq.janna.model.NewsImage;
+import com.ishraq.janna.model.EventSponsor;
+import com.ishraq.janna.model.Gst;
+import com.ishraq.janna.model.Instructor;
+import com.ishraq.janna.model.Lecture;
+import com.ishraq.janna.model.LectureInstructor;
 import com.ishraq.janna.model.Question;
+import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
 import com.ishraq.janna.model.Settings;
+import com.ishraq.janna.model.Sponsor;
 import com.ishraq.janna.model.User;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -35,13 +35,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private Dao<Event, Integer> eventDao = null;
-    private Dao<EventLecturer, Integer> eventLecturerDao = null;
-    private Dao<EventGuest, Integer> eventGuestDao = null;
-    private Dao<EventImage, Integer> eventImageDao = null;
-    private Dao<Lecturer, Integer> lecturerDao = null;
-    private Dao<News, Integer> newsDao = null;
-    private Dao<NewsImage, Integer> newsImageDao = null;
-    private Dao<NewsGuest, Integer> newsGuestDao = null;
+
+    private Dao<Rule, Integer> ruleDao = null;
+    private Dao<Sponsor, Integer> sponsorDao = null;
+    private Dao<EventSponsor, Integer> eventSponsorDao = null;
+    private Dao<Lecture, Integer> lectureDao = null;
+    private Dao<Instructor, Integer> instructorDao = null;
+    private Dao<LectureInstructor, Integer> lectureInstructorDao = null;
+    private Dao<Gst, Integer> gstDao = null;
+
     private Dao<Question, Integer> questionDao = null;
     private Dao<Settings, Integer> settingsDao = null;
     private Dao<User, Integer> userDao = null;
@@ -78,13 +80,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             Log.i(JannaApp.LOG_TAG, "onCreate");
             TableUtils.createTable(connectionSource, Event.class);
-            TableUtils.createTable(connectionSource, EventImage.class);
-            TableUtils.createTable(connectionSource, EventLecturer.class);
-            TableUtils.createTable(connectionSource, EventGuest.class);
-            TableUtils.createTable(connectionSource, Lecturer.class);
-            TableUtils.createTable(connectionSource, News.class);
-            TableUtils.createTable(connectionSource, NewsImage.class);
-            TableUtils.createTable(connectionSource, NewsGuest.class);
+            TableUtils.createTable(connectionSource, Rule.class);
+            TableUtils.createTable(connectionSource, Sponsor.class);
+            TableUtils.createTable(connectionSource, EventSponsor.class);
+            TableUtils.createTable(connectionSource, Lecture.class);
+            TableUtils.createTable(connectionSource, Instructor.class);
+            TableUtils.createTable(connectionSource, LectureInstructor.class);
+            TableUtils.createTable(connectionSource, Gst.class);
             TableUtils.createTable(connectionSource, Question.class);
             TableUtils.createTable(connectionSource, Settings.class);
             TableUtils.createTable(connectionSource, User.class);
@@ -129,74 +131,74 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return eventDao;
     }
 
-    public Dao<EventImage, Integer> getEventImageDao() {
-        if (eventImageDao == null) {
+    public Dao<Rule, Integer> getRuleDao() {
+        if (ruleDao == null) {
             try {
-                eventImageDao = getDao(EventImage.class);
+                ruleDao = getDao(Rule.class);
             } catch (SQLException e) {
             }
         }
-        return eventImageDao;
+        return ruleDao;
     }
 
-    public Dao<EventLecturer, Integer> getEventLecturerDao() {
-        if (eventLecturerDao == null) {
+    public Dao<Sponsor, Integer> getSponsorDao() {
+        if (sponsorDao == null) {
             try {
-                eventLecturerDao = getDao(EventLecturer.class);
+                sponsorDao = getDao(Sponsor.class);
             } catch (SQLException e) {
             }
         }
-        return eventLecturerDao;
+        return sponsorDao;
     }
 
-    public Dao<EventGuest, Integer> getEventGuestDao() {
-        if (eventGuestDao == null) {
+    public Dao<EventSponsor, Integer> getEventSponsorDao() {
+        if (eventSponsorDao == null) {
             try {
-                eventGuestDao = getDao(EventGuest.class);
+                eventSponsorDao = getDao(EventSponsor.class);
             } catch (SQLException e) {
             }
         }
-        return eventGuestDao;
+        return eventSponsorDao;
     }
 
-    public Dao<Lecturer, Integer> getLecturerDao() {
-        if (lecturerDao == null) {
+    public Dao<Lecture, Integer> getLectureDao() {
+        if (lectureDao == null) {
             try {
-                lecturerDao = getDao(Lecturer.class);
+                lectureDao = getDao(Lecture.class);
             } catch (SQLException e) {
             }
         }
-        return lecturerDao;
+        return lectureDao;
     }
 
-    public Dao<News, Integer> getNewsDao() {
-        if (newsDao == null) {
+    public Dao<Instructor, Integer> getInstructorDao() {
+        if (instructorDao == null) {
             try {
-                newsDao = getDao(News.class);
+                instructorDao = getDao(Instructor.class);
             } catch (SQLException e) {
             }
         }
-        return newsDao;
+        return instructorDao;
     }
 
-    public Dao<NewsImage, Integer> getNewsImageDao() {
-        if (newsImageDao == null) {
+    public Dao<LectureInstructor, Integer> getLectureInstructorDao() {
+        if (lectureInstructorDao == null) {
             try {
-                newsImageDao = getDao(NewsImage.class);
+                lectureInstructorDao = getDao(LectureInstructor.class);
             } catch (SQLException e) {
             }
         }
-        return newsImageDao;
+        return lectureInstructorDao;
     }
 
-    public Dao<NewsGuest, Integer> getNewsGuestDao() {
-        if (newsGuestDao == null) {
+    public Dao<Gst, Integer> getGstDao() {
+        if (gstDao == null) {
             try {
-                newsGuestDao = getDao(NewsGuest.class);
+                gstDao = getDao(Gst.class);
             } catch (SQLException e) {
             }
         }
-        return newsGuestDao;
+        return gstDao;
     }
 
     public Dao<Question, Integer> getQuestionDao() {
@@ -247,12 +249,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         super.close();
 
         eventDao = null;
-        eventImageDao = null;
-        eventLecturerDao = null;
-        lecturerDao = null;
-        newsDao = null;
-        newsImageDao = null;
-        newsGuestDao = null;
+        ruleDao = null;
+        sponsorDao = null;
+        eventSponsorDao = null;
+        lectureDao = null;
+        lectureInstructorDao = null;
+        instructorDao = null;
+        gstDao = null;
         questionDao = null;
         settingsDao = null;
         userDao = null;

@@ -33,8 +33,17 @@ public class Event {
     @DatabaseField(columnName = "address")
     private String EventAddress;
 
+    @DatabaseField(columnName = "location")
+    private String EventLocation;
+
     @DatabaseField(columnName = "notes")
     private String Notes;
+
+    @ForeignCollectionField(eager = true)
+    private Collection<Rule> Rules;
+
+    @ForeignCollectionField
+    private Collection<EventSponsor> Sponsers;
 
     @ForeignCollectionField(eager = true)
     private Collection<Session> sess;
@@ -111,6 +120,30 @@ public class Event {
 
     public void setSess(Collection<Session> sess) {
         this.sess = sess;
+    }
+
+    public String getEventLocation() {
+        return EventLocation;
+    }
+
+    public void setEventLocation(String eventLocation) {
+        EventLocation = eventLocation;
+    }
+
+    public Collection<Rule> getRules() {
+        return Rules;
+    }
+
+    public void setRules(Collection<Rule> rules) {
+        Rules = rules;
+    }
+
+    public Collection<EventSponsor> getSponsers() {
+        return Sponsers;
+    }
+
+    public void setSponsers(Collection<EventSponsor> sponsers) {
+        Sponsers = sponsers;
     }
 
 
