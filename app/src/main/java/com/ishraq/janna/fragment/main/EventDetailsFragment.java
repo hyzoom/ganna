@@ -110,12 +110,28 @@ public class EventDetailsFragment extends MainCommonFragment {
                 @Override
                 public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                     event = response.body().get(0);
+                    eventService.saveEvent(event);
+                    event = eventService.getEvent(event.getEventCode());
+
                     getMainActivity().getToolbar().setTitle(event.getEventNameAra());
 
                     adapter = new EventItemAdapter(event);
                     recyclerView.setAdapter(adapter);
 
                     getMainActivity().stopLoadingAnimator();
+                }
+
+                @Override
+                public void onFailure(Call<List<Event>> call, Throwable t) {
+                    event = eventService.getEvent(eventId);
+                    if (event.getEventSponsors().size()== 0 && event.getRules().size() == 0 && event.getSess().size() == 0){
+                        super.onFailure(call, t);
+                    } else {
+                        adapter = new EventItemAdapter(event);
+                        recyclerView.setAdapter(adapter);
+
+                        getMainActivity().stopLoadingAnimator();
+                    }
                 }
             });
         }
@@ -241,13 +257,11 @@ public class EventDetailsFragment extends MainCommonFragment {
 
             final List<Rule> rules = new ArrayList<Rule>(event.getRules());
 
-            Log.w("AhmedLog", rules.size()+"");
             RuleListAdapter ruleListAdapter = new RuleListAdapter(JannaApp.getContext(), R.layout.row_rule, rules);
             rulesListView.setAdapter(ruleListAdapter);
 
-            final List<EventSponsor> sponsors = new ArrayList<EventSponsor>(event.getSponsers());
-            Log.w("AhmedLog", sponsors.size()+"");
-            SponsorListAdapter sponsorListAdapter = new SponsorListAdapter(JannaApp.getContext(), R.layout.row_sponsor, sponsors);
+            final List<EventSponsor> eventSponsors = new ArrayList<EventSponsor>(event.getEventSponsors());
+            SponsorListAdapter sponsorListAdapter = new SponsorListAdapter(JannaApp.getContext(), R.layout.row_sponsor, eventSponsors);
             sponsorListView.setAdapter(sponsorListAdapter);
 
         }
@@ -332,7 +346,7 @@ public class EventDetailsFragment extends MainCommonFragment {
             }
 
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
-//            nameTextView.setText(sponsors.get(position).getSponsor().getSponserNameAra()+ "");
+            nameTextView.setText(sponsors.get(position).getSponsor().getSponserNameAra()+ "");
 
             return row;
         }

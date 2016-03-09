@@ -43,10 +43,12 @@ public class Event {
     private Collection<Rule> Rules;
 
     @ForeignCollectionField
-    private Collection<EventSponsor> Sponsers;
+    private Collection<EventSponsor> eventSponsors;
 
     @ForeignCollectionField(eager = true)
     private Collection<Session> sess;
+
+    private Collection<Sponsor> Sponsers;
 
     ////////////////////////////////////////////// /////////////////////////////////////////////
 
@@ -138,11 +140,19 @@ public class Event {
         Rules = rules;
     }
 
-    public Collection<EventSponsor> getSponsers() {
+    public Collection<EventSponsor> getEventSponsors() {
+        return eventSponsors;
+    }
+
+    public void setEventSponsors(Collection<EventSponsor> eventSponsors) {
+        this.eventSponsors = eventSponsors;
+    }
+
+    public Collection<Sponsor> getSponsers() {
         return Sponsers;
     }
 
-    public void setSponsers(Collection<EventSponsor> sponsers) {
+    public void setSponsers(Collection<Sponsor> sponsers) {
         Sponsers = sponsers;
     }
 
