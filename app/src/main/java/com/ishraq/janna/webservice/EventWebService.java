@@ -19,8 +19,4 @@ public interface EventWebService {
 
     @GET("JsonViewEvents.aspx")
     Call<List<Event>> getEvent(@Query("id") Integer eventId);
-
-    @GET("JsonViewSessions.aspx")
-    Call<List<Session>> getSession(@Query("id") Integer eventId,
-                                   @Query("sessionId") Integer sessionId);
 }

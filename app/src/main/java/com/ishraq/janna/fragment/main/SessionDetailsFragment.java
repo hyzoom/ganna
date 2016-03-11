@@ -24,6 +24,7 @@ import com.ishraq.janna.service.SessionService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.EventWebService;
+import com.ishraq.janna.webservice.SessionWebService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ import retrofit2.Response;
  * Created by Ahmed on 3/5/2016.
  */
 public class SessionDetailsFragment extends MainCommonFragment {
-    private EventWebService eventWebService;
+    private SessionWebService sessionWebService;
     private SessionService sessionService;
 
     private Integer eventId, sessionId;
@@ -50,7 +51,7 @@ public class SessionDetailsFragment extends MainCommonFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sessionService = new SessionService(getMainActivity());
-        eventWebService = getWebService(EventWebService.class);
+        sessionWebService = getWebService(SessionWebService.class);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -112,7 +113,7 @@ public class SessionDetailsFragment extends MainCommonFragment {
         @Override
         public void execute() {
             getMainActivity().startLoadingAnimator();
-            eventWebService.getSession(eventId, sessionId).enqueue(new RequestCallback<List<Session>>(this) {
+            sessionWebService.getSession(eventId, sessionId).enqueue(new RequestCallback<List<Session>>(this) {
                 @Override
                 public void onResponse(Call<List<Session>> call, Response<List<Session>> response) {
                     session = response.body().get(0);

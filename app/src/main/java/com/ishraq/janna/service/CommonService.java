@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.database.DatabaseHelper;
+import com.ishraq.janna.model.Booking;
+import com.ishraq.janna.model.Clinic;
 import com.ishraq.janna.model.Event;
 import com.ishraq.janna.model.EventSponsor;
 import com.ishraq.janna.model.Guest;
@@ -16,6 +18,7 @@ import com.ishraq.janna.model.Question;
 import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
 import com.ishraq.janna.model.Settings;
+import com.ishraq.janna.model.Specialization;
 import com.ishraq.janna.model.Sponsor;
 import com.ishraq.janna.model.User;
 import com.j256.ormlite.dao.Dao;
@@ -30,8 +33,8 @@ import java.util.List;
  * Created by Ahmed on 2/16/2016.
  */
 public class CommonService {
-    public Dao<Event, Integer> eventDao;
 
+    public Dao<Event, Integer> eventDao;
     public Dao<Rule, Integer> ruleDao;
     public Dao<Sponsor, Integer> sponsorDao;
     public Dao<EventSponsor, Integer> eventSponsorDao;
@@ -47,9 +50,10 @@ public class CommonService {
     public Dao<User, Integer> userDao;
     public Dao<Session, Integer> sessionDao;
 
-    static InputStream is = null;
-    static JSONObject jObj = null;
-    static String json = "";
+    public Dao<Booking, Integer> bookingDao;
+    public Dao<Clinic, Integer> clinicDao;
+    public Dao<Specialization, Integer> specializationDao;
+
 
     public CommonService(Context context) {
         eventDao = DatabaseHelper.getHelper(context).getEventDao();
@@ -65,6 +69,9 @@ public class CommonService {
         settingsDao = DatabaseHelper.getHelper(context).getSettingsDao();
         userDao = DatabaseHelper.getHelper(context).getUserDao();
         sessionDao = DatabaseHelper.getHelper(context).getSessionDao();
+        bookingDao = DatabaseHelper.getHelper(context).getBookingDao();
+        clinicDao = DatabaseHelper.getHelper(context).getClinicDao();
+        specializationDao = DatabaseHelper.getHelper(context).getSpecializationDao();
     }
 
 
