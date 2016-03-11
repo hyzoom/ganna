@@ -44,6 +44,7 @@ public class EventFragment extends HomeFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getMainActivity().getToolbar().setTitle(getResources().getString(R.string.app_name));
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);

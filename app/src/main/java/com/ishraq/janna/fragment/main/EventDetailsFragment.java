@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
@@ -63,8 +64,8 @@ public class EventDetailsFragment extends MainCommonFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-//        getMainActivity().g//
+        Toast.makeText(getMainActivity(), "دي صفحة  تفاصيل الحدث او ال event", Toast.LENGTH_LONG).show();
+        showToolbar();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -110,16 +111,9 @@ public class EventDetailsFragment extends MainCommonFragment {
                 @Override
                 public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                     event = response.body().get(0);
-
-                    Log.w("AhmedLog", event.getRules().size() + "   rules");
-
-
                     eventService.saveEvent(event);
-//                    Log.w("AhmedLog", eventService.saveEvent(event) + "   save");
 
                     event = eventService.getEvent(event.getEventCode());
-
-                    getMainActivity().getToolbar().setTitle(event.getEventNameAra());
 
                     adapter = new EventItemAdapter(event);
                     recyclerView.setAdapter(adapter);
@@ -158,6 +152,7 @@ public class EventDetailsFragment extends MainCommonFragment {
         private static final int TYPE_ITEM = 1;
 
         public EventItemAdapter(Event event) {
+            getMainActivity().getToolbar().setTitle(event.getEventNameAra());
             this.event = event;
         }
 

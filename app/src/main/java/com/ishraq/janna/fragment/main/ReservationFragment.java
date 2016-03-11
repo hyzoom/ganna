@@ -13,15 +13,9 @@ import com.ishraq.janna.service.CommonService;
 /**
  * Created by hp on 20/02/2016.
  */
-public class Reservation extends Fragment {
+public class ReservationFragment extends Fragment {
 
-    private CommonService commonService = new CommonService(getActivity());
-
-
-    private ListView listView;
-
-
-    public Reservation() {
+    public ReservationFragment() {
         // Required empty public constructor
     }
 
@@ -33,11 +27,7 @@ public class Reservation extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.fragment_about_us, container, false);
-
-
         return view;
     }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Janna</string>
+    <string name="app_name">مستشفى جنة</string>
 
     <!-- toolbar titles-->
     <string name="login_activity">تسجيل الدخول</string>
@@ -34,6 +34,12 @@
     <string name="button_retry">إعادة المحاولة</string>
     <string name="common_error_message">حدث خطأ من فضلك اعد المحاولة</string>
 
+
+    <!-- home fragment -->
+    <string name="tab_about">عن مستشفي جنة</string>
+    <string name="tab_session">المؤتمرات</string>
+    <string name="tab_booking">الحجوزات</string>
+    <string name="tab_question">أسئلة</string>
 
     <!-- events -->
     <string name="empty_events_list">لاتوجد مؤتمرات</string>
