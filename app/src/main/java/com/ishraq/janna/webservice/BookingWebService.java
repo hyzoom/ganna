@@ -16,8 +16,8 @@ import retrofit2.http.Query;
 public interface BookingWebService {
 
     //get bookings
-//    @GET("JsonViewEvents.aspx")
-//    Call<List<Booking>> getUserBookings(@Query("id") Integer userId);
+    @GET("JsonViewBooking.aspx")
+    Call<List<Booking>> getUserBookings(@Query("id") Integer userId);
 
     //get clinics
 //    @GET("JsonViewEvents.aspx")
