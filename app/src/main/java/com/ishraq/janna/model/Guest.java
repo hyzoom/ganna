@@ -6,8 +6,8 @@ import com.j256.ormlite.table.DatabaseTable;
 /**
  * Created by Ahmed on 3/7/2016.
  */
-@DatabaseTable(tableName = "gst")
-public class Gst {
+@DatabaseTable(tableName = "guest")
+public class Guest {
     @DatabaseField(id = true, columnName = "id")
     private Integer id;
 }

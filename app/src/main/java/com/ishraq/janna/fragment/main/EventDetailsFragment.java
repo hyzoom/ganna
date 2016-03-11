@@ -110,7 +110,13 @@ public class EventDetailsFragment extends MainCommonFragment {
                 @Override
                 public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                     event = response.body().get(0);
+
+                    Log.w("AhmedLog", event.getRules().size() + "   rules");
+
+
                     eventService.saveEvent(event);
+//                    Log.w("AhmedLog", eventService.saveEvent(event) + "   save");
+
                     event = eventService.getEvent(event.getEventCode());
 
                     getMainActivity().getToolbar().setTitle(event.getEventNameAra());

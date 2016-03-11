@@ -7,9 +7,10 @@ import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.database.DatabaseHelper;
 import com.ishraq.janna.model.Event;
 import com.ishraq.janna.model.EventSponsor;
-import com.ishraq.janna.model.Gst;
+import com.ishraq.janna.model.Guest;
 import com.ishraq.janna.model.Instructor;
 import com.ishraq.janna.model.Lecture;
+import com.ishraq.janna.model.LectureGuest;
 import com.ishraq.janna.model.LectureInstructor;
 import com.ishraq.janna.model.Question;
 import com.ishraq.janna.model.Rule;
@@ -37,7 +38,9 @@ public class CommonService {
     public Dao<Lecture, Integer> lectureDao;
     public Dao<Instructor, Integer> instructorDao;
     public Dao<LectureInstructor, Integer> lectureInstructorDao;
-    public Dao<Gst, Integer> gstDao;
+
+    public Dao<Guest, Integer> gstDao;
+    public Dao<LectureGuest, Integer> lectureGuestDao;
 
     public Dao<Question, Integer> questionDao;
     public Dao<Settings, Integer> settingsDao;
@@ -57,6 +60,7 @@ public class CommonService {
         instructorDao = DatabaseHelper.getHelper(context).getInstructorDao();
         lectureInstructorDao = DatabaseHelper.getHelper(context).getLectureInstructorDao();
         gstDao = DatabaseHelper.getHelper(context).getGstDao();
+        lectureGuestDao = DatabaseHelper.getHelper(context).getLectureGuestDao();
         questionDao = DatabaseHelper.getHelper(context).getQuestionDao();
         settingsDao = DatabaseHelper.getHelper(context).getSettingsDao();
         userDao = DatabaseHelper.getHelper(context).getUserDao();
