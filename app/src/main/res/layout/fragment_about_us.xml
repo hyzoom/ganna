@@ -39,7 +39,7 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="center"
                 android:layout_margin="5dip"
                 android:text="الرؤية:"
                 android:textColor="@android:color/holo_red_dark"
@@ -59,7 +59,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="center"
                 android:layout_margin="5dip"
                 android:text="الرسالة:"
                 android:textColor="@android:color/holo_red_dark"
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_margin="5dip"
+                android:layout_marginRight="8dip"
                 android:text="مستشفى جنة التخصصى مهمتها توفير خبراء الرعاية الصحية للعناية بالمرضى من خلال قيمنا الأساسية للجودة وتقديم خدمة عملاء أفضل من خلال الابتكار والالتزام والعمل الجماعي.\n
 
  مستشفى جنة التخصصى نتبع رؤية لنتميز و لنبقى دائماً في الطليعة كمستشفى رائد لتقديم أعلى معايير الجودة في الرعاية الصحية لمرضانا.\n
@@ -106,18 +106,120 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text=""
-                android:textColor="@android:color/black" />
+                android:layout_gravity="center"
+                android:layout_margin="5dip"
+                android:text="أقسام المستشفى:"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text=""
+                android:layout_margin="8dip"
+                android:text="مركز الخصوبة:"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="8dip"
+                android:text="    فحص الخصوبة الشامل للزوجين\n.
+    فحص الهرمونات.\n
+    فحص السائل المنوي للزوج.\n
+    جراحات الخصوبة.\n
+    جراحات المناظير.\n
+تلقيح صناعي , اطفال انابيب , حقن مجهري , نقل الاجنة في اليوم الخامس\n
+تثقيب جدار الجنين لمساعدة الثبات في الرحم , دراسة نوع الجنين قبل النقل الي الرحم\n
+تكبير الحيوانات المنوية لاختيار الاقوي في الحقن المجهري.\n
+دراسة جينات الاجنة للامراض الوراثية."
                 android:textColor="@android:color/black" />
 
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="8dip"
+                android:text="وحدة رعاية المبتسرين:"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="8dip"
+                android:text="وحدة مجهزة بأحدث أجهزة رعاية المبتسرين\n.
+تضم الوحدة طاقم طبي على أعلى مستوى من الكفاءة  والتدريب وتشمل جميع الأحتياطات اللازمة للعناية القصوى ومكافحة العدوى."
+                android:textColor="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dip"
+                android:src="@drawable/img3" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="8dip"
+                android:text="عيادات خارجية"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="8dip"
+                android:text="عيادات نساء وولادة\n
+عيادات أطفال\n
+وتتضمن عيادات لنخبة من أعضاء هيئة التدريس بالقصر العينى.\n
+أستقبال 24 ساعة لحالات الطوارىء\n
+معمل تحاليل\n
+وحدة أشعة\n
+معمل أجنة"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dip"
+                android:text="عنوان المستشفى:"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="8dip"
+                android:text="16 شارع الملك الظافر- محطة مدكور الجيزة – الهرم – مصر\n
+( خلف كازينو الليل )\n
+تليفون : 235856691-0020\n
+موبايل : 1120898991-0020\n\n
+الخط الساخن : 19787"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
     </ScrollView>
