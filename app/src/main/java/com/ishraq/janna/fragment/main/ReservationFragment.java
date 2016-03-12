@@ -94,7 +94,7 @@ public class ReservationFragment extends MainCommonFragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getMainActivity().addFragment(new BookingFragment(), true, null);
             }
         });
         return view;
