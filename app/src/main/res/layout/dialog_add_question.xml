@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="@dimen/common_dialog_width_min"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/common_margin_padding_big"
+    android:paddingRight="@dimen/common_margin_padding_big"
+    android:paddingBottom="@dimen/common_margin_padding_medium"
+    android:paddingTop="@dimen/common_margin_padding_medium"
+    android:background="@android:color/white">
+
+
+    <!--              Question                   -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLayoutQuestion"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/questionEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/question_hint"
+            android:textColor="@android:color/black"
+            android:theme="@style/EditTextTest" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/sendQuestionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/add_question_button"
+            android:textColor="@android:color/black"
+            android:background="@android:color/transparent"/>
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel_button"
+            android:textColor="@android:color/black"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+</LinearLayout>

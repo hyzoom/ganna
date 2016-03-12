@@ -23,15 +23,22 @@ public class Lecture {
     @DatabaseField
     private String EventsLectureDetails;
 
-    @ForeignCollectionField(eager = true)
-    private Collection<LectureInstructor> inst;
+    @ForeignCollectionField(eager = true, columnName = "lecture_instructor")
+    private Collection<LectureInstructor> lectureInstructors;
 
-//    @ForeignCollectionField(eager = true)
-//    private Collection<Gst> Gst;
+    @ForeignCollectionField(eager = true, columnName = "lecture_guest")
+    private Collection<LectureGuest> lectureGuests;
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "session_id")
     private Session session;
 
+
+    private Collection<Instructor> inst;
+
+    private Collection<Guest> Gst;
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
 
     public Integer getEventsLectureCode() {
         return EventsLectureCode;
@@ -65,12 +72,20 @@ public class Lecture {
         EventsLectureDetails = eventsLectureDetails;
     }
 
-    public Collection<LectureInstructor> getInst() {
-        return inst;
+    public Collection<LectureInstructor> getLectureInstructors() {
+        return lectureInstructors;
     }
 
-    public void setInst(Collection<LectureInstructor> inst) {
-        this.inst = inst;
+    public void setLectureInstructors(Collection<LectureInstructor> lectureInstructors) {
+        this.lectureInstructors = lectureInstructors;
+    }
+
+    public Collection<LectureGuest> getLectureGuests() {
+        return lectureGuests;
+    }
+
+    public void setLectureGuests(Collection<LectureGuest> lectureGuests) {
+        this.lectureGuests = lectureGuests;
     }
 
     public Session getSession() {
@@ -79,5 +94,21 @@ public class Lecture {
 
     public void setSession(Session session) {
         this.session = session;
+    }
+
+    public Collection<Instructor> getInst() {
+        return inst;
+    }
+
+    public void setInst(Collection<Instructor> inst) {
+        this.inst = inst;
+    }
+
+    public Collection<Guest> getGst() {
+        return Gst;
+    }
+
+    public void setGst(Collection<Guest> gst) {
+        Gst = gst;
     }
 }

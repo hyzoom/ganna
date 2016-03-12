@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Janna</string>
+    <string name="app_name">مستشفى جنة</string>
 
     <!-- toolbar titles-->
     <string name="login_activity">تسجيل الدخول</string>
@@ -35,8 +35,45 @@
     <string name="common_error_message">حدث خطأ من فضلك اعد المحاولة</string>
 
 
+    <!-- home fragment -->
+    <string name="tab_about">عن مستشفي جنة</string>
+    <string name="tab_session">المؤتمرات</string>
+    <string name="tab_booking">الحجوزات</string>
+    <string name="tab_question">أسئلة</string>
+
     <!-- events -->
     <string name="empty_events_list">لاتوجد مؤتمرات</string>
+    <string name="add_question_button">أضف سؤال</string>
+    <string name="question_hint">السؤال أو الاستفسار</string>
+    <string name="cancel_button">إلغاء الأمر</string>
+    <string name="question_empty">قم بكتابة سؤال صحيح</string>
+    <string name="question_send_successfully">تم إرسال سؤالك بنجاح وسيتتم الإجابة عليه قريبا</string>
 
+
+    <!-- Create booking -->
+    <string name="title_booking">أضف حجز</string>
+    <string name="clinic_hint">العيادة</string>
+    <string name="spectial_hint">التخصص</string>
+    <string name="notes_hint">ملاحظات</string>
+    <string name="add_booking">أضف حجز</string>
+    <string name="clinic_spinner_empty">قم باختيار عيادة</string>
+    <string name="special_spinner_empty">قم باختيار تخصص</string>
+
+
+    <string-array name="clinic_array">
+        <item>اختر العيادة</item>
+        <item>العيادة الخارجية</item>
+        <item>العيادة الداخلية</item>
+        <item>العيادة الوسطي</item>
+        <item>العيادة العادية</item>
+    </string-array>
+
+    <string-array name="special_array">
+        <item>اختر التخصص</item>
+        <item>أسنان</item>
+        <item>باطنة</item>
+        <item>وسط</item>
+        <item>كتف</item>
+    </string-array>
 
 </resources>

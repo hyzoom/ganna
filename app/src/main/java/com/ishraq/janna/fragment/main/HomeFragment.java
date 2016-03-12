@@ -39,6 +39,7 @@ public class HomeFragment extends MainCommonFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getMainActivity().getToolbar().setTitle(getResources().getString(R.string.app_name));
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -54,18 +55,22 @@ public class HomeFragment extends MainCommonFragment {
         Settings settings = settingsService.getSettings();
 
         TextView aboutUsTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
-        aboutUsTab.setText("عن مستشفى جنّة");
+        aboutUsTab.setText(getResources().getString(R.string.tab_about));
         tabLayout.getTabAt(0).setCustomView(aboutUsTab);
 
         if (settings.getLoggedInUser().getUserType() == 1) {
             TextView eventsTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
-            eventsTab.setText("المؤتمرات");
+            eventsTab.setText(getResources().getString(R.string.tab_session));
             tabLayout.getTabAt(1).setCustomView(eventsTab);
         } else {
             TextView reservationTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
-            reservationTab.setText("الحجوزات");
+            reservationTab.setText(getResources().getString(R.string.tab_booking));
             tabLayout.getTabAt(1).setCustomView(reservationTab);
         }
+
+        TextView eventsTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
+        eventsTab.setText(getResources().getString(R.string.tab_question));
+        tabLayout.getTabAt(2).setCustomView(eventsTab);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -76,8 +81,10 @@ public class HomeFragment extends MainCommonFragment {
         if (settings.getLoggedInUser().getUserType() == 1) {
             adapter.addFrag(new EventFragment());
         } else {
-            adapter.addFrag(new Reservation());
+            adapter.addFrag(new ReservationFragment());
         }
+
+        adapter.addFrag(new QuestionFragment());
         viewPager.setAdapter(adapter);
     }
 

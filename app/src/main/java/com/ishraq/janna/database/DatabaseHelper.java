@@ -5,16 +5,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.ishraq.janna.JannaApp;
+import com.ishraq.janna.model.Booking;
+import com.ishraq.janna.model.Clinic;
 import com.ishraq.janna.model.Event;
 import com.ishraq.janna.model.EventSponsor;
-import com.ishraq.janna.model.Gst;
+import com.ishraq.janna.model.Guest;
 import com.ishraq.janna.model.Instructor;
 import com.ishraq.janna.model.Lecture;
+import com.ishraq.janna.model.LectureGuest;
 import com.ishraq.janna.model.LectureInstructor;
 import com.ishraq.janna.model.Question;
 import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
 import com.ishraq.janna.model.Settings;
+import com.ishraq.janna.model.Specialization;
 import com.ishraq.janna.model.Sponsor;
 import com.ishraq.janna.model.User;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -42,12 +46,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Lecture, Integer> lectureDao = null;
     private Dao<Instructor, Integer> instructorDao = null;
     private Dao<LectureInstructor, Integer> lectureInstructorDao = null;
-    private Dao<Gst, Integer> gstDao = null;
+
+    private Dao<Guest, Integer> gstDao = null;
+    private Dao<LectureGuest, Integer> lectureGuestDao = null;
 
     private Dao<Question, Integer> questionDao = null;
     private Dao<Settings, Integer> settingsDao = null;
     private Dao<User, Integer> userDao = null;
     private Dao<Session, Integer> sessionDao = null;
+
+    private Dao<Booking, Integer> bookingDao = null;
+    private Dao<Clinic, Integer> clinicDao = null;
+    private Dao<Specialization, Integer> specializationDao = null;
 
     // we do this so there is only one helper
     private static DatabaseHelper helper = null;
@@ -86,11 +96,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Lecture.class);
             TableUtils.createTable(connectionSource, Instructor.class);
             TableUtils.createTable(connectionSource, LectureInstructor.class);
-            TableUtils.createTable(connectionSource, Gst.class);
+            TableUtils.createTable(connectionSource, Guest.class);
+            TableUtils.createTable(connectionSource, LectureGuest.class);
             TableUtils.createTable(connectionSource, Question.class);
             TableUtils.createTable(connectionSource, Settings.class);
             TableUtils.createTable(connectionSource, User.class);
             TableUtils.createTable(connectionSource, Session.class);
+            TableUtils.createTable(connectionSource, Booking.class);
+            TableUtils.createTable(connectionSource, Clinic.class);
+            TableUtils.createTable(connectionSource, Specialization.class);
 
             initData();
         } catch (SQLException e) {
@@ -191,14 +205,24 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return lectureInstructorDao;
     }
 
-    public Dao<Gst, Integer> getGstDao() {
+    public Dao<Guest, Integer> getGstDao() {
         if (gstDao == null) {
             try {
-                gstDao = getDao(Gst.class);
+                gstDao = getDao(Guest.class);
             } catch (SQLException e) {
             }
         }
         return gstDao;
+    }
+
+    public Dao<LectureGuest, Integer> getLectureGuestDao() {
+        if (lectureGuestDao == null) {
+            try {
+                lectureGuestDao = getDao(LectureGuest.class);
+            } catch (SQLException e) {
+            }
+        }
+        return lectureGuestDao;
     }
 
     public Dao<Question, Integer> getQuestionDao() {
@@ -241,6 +265,36 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return sessionDao;
     }
 
+    public Dao<Booking, Integer> getBookingDao() {
+        if (bookingDao == null) {
+            try {
+                bookingDao = getDao(Booking.class);
+            } catch (SQLException e) {
+            }
+        }
+        return bookingDao;
+    }
+
+    public Dao<Clinic, Integer> getClinicDao() {
+        if (clinicDao == null) {
+            try {
+                clinicDao = getDao(Clinic.class);
+            } catch (SQLException e) {
+            }
+        }
+        return clinicDao;
+    }
+
+    public Dao<Specialization, Integer> getSpecializationDao() {
+        if (specializationDao == null) {
+            try {
+                specializationDao = getDao(Specialization.class);
+            } catch (SQLException e) {
+            }
+        }
+        return specializationDao;
+    }
+
     /**
      * Close the database connections and clear any cached DAOs.
      */
@@ -256,9 +310,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         lectureInstructorDao = null;
         instructorDao = null;
         gstDao = null;
+        lectureGuestDao=null;
         questionDao = null;
         settingsDao = null;
         userDao = null;
         sessionDao = null;
+        specializationDao = null;
+        bookingDao = null;
+        clinicDao = null;
     }
 }
