@@ -43,6 +43,11 @@
 
     <!-- events -->
     <string name="empty_events_list">لاتوجد مؤتمرات</string>
+    <string name="add_question_button">أضف سؤال</string>
+    <string name="question_hint">السؤال أو الاستفسار</string>
+    <string name="cancel_button">إلغاء الأمر</string>
+    <string name="question_empty">قم بكتابة سؤال صحيح</string>
+    <string name="question_send_successfully">تم إرسال سؤالك بنجاح وسيتتم الإجابة عليه قريبا</string>
 
 
     <!-- Create booking -->

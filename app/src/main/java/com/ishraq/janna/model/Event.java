@@ -157,50 +157,38 @@ public class Event {
     }
 
 
-//    @DatabaseField(id = true)
-//    private Integer id;
-//
-//    @DatabaseField
-//    private String name;
-//
-//    @DatabaseField
-//    private String details;
-//
-//    @DatabaseField
-//    private String date;
-//
-//    @DatabaseField
-//    private String address;
-//
-//    @DatabaseField
-//    private double longitude;
-//
-//    @DatabaseField
-//    private double latitude;
-//
-//    @DatabaseField
-//    private String cover;
-//
-//    @DatabaseField
-//    private boolean liked;
-//
-//    @DatabaseField
-//    private String certificate;
 
 
-//    @ForeignCollectionField(eager = true)
-//    private Collection<EventImage> eventImages;
-//
-//    @ForeignCollectionField(eager = false)
-//    private Collection<EventLecturer> lecturers;
-//
-//    @ForeignCollectionField(eager = false)
-//    private Collection<EventGuest> guest;
-//
-//    @ForeignCollectionField(eager = false)
-//    private Collection<News> newses;
-//
-//    @ForeignCollectionField(eager = false)
-//    private Collection<Question> questions;
+    /////////////////////////////////////////////////// Question result //////////////////////////////
+    public class QuestionResult {
+        private Integer questionSaved;
+        private Integer questionID;
+        private String msg;
+
+
+        public Integer getQuestionSaved() {
+            return questionSaved;
+        }
+
+        public void setQuestionSaved(Integer questionSaved) {
+            this.questionSaved = questionSaved;
+        }
+
+        public Integer getQuestionID() {
+            return questionID;
+        }
+
+        public void setQuestionID(Integer questionID) {
+            this.questionID = questionID;
+        }
+
+        public String getMsg() {
+            return msg;
+        }
+
+        public void setMsg(String msg) {
+            this.msg = msg;
+        }
+    }
 
 }

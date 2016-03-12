@@ -19,4 +19,9 @@ public interface EventWebService {
 
     @GET("JsonViewEvents.aspx")
     Call<List<Event>> getEvent(@Query("id") Integer eventId);
+
+    @GET("JsonInsertQuestions.aspx")
+    Call<List<Event.QuestionResult>> sendEventQuestion(@Query("eventid") Integer eventId,
+                                        @Query("userid") Integer userId,
+                                        @Query("question") String question);
 }

@@ -1,16 +1,19 @@
 package com.ishraq.janna.fragment.main;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +25,8 @@ import com.ishraq.janna.model.Event;
 import com.ishraq.janna.model.EventSponsor;
 import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
-import com.ishraq.janna.model.Sponsor;
 import com.ishraq.janna.service.EventService;
+import com.ishraq.janna.service.SettingsService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.EventWebService;
@@ -46,6 +49,8 @@ public class EventDetailsFragment extends MainCommonFragment {
     private Integer eventId;
     private Event event;
     private EventItemAdapter adapter;
+
+    private Dialog dialog;
 
 
     @Override
@@ -137,6 +142,33 @@ public class EventDetailsFragment extends MainCommonFragment {
         }
     }
 
+    private class EventQuestionRequest implements CommonRequest {
+        private String question;
+
+        public EventQuestionRequest(String question) {
+            this.question = question;
+        }
+
+        @Override
+        public void execute() {
+            getMainActivity().startLoadingAnimator();
+            SettingsService settingsService = new SettingsService(getMainActivity());
+            eventWebService.sendEventQuestion(eventId,
+                    settingsService.getSettings().getLoggedInUser().getId(),
+                    question).enqueue(new RequestCallback<List<Event.QuestionResult>>(this) {
+
+                @Override
+                public void onResponse(Call<List<Event.QuestionResult>> call, Response<List<Event.QuestionResult>> response) {
+                    if (response.body().get(0).getQuestionSaved() == 1) {
+                        Toast.makeText(getMainActivity(), getResources().getString(R.string.question_send_successfully), Toast.LENGTH_SHORT).show();
+                    }
+
+                    getMainActivity().stopLoadingAnimator();
+                }
+            });
+        }
+    }
+
 
     ///////////////////////////////////// Adapter //////////////////////////////////////////////////
     class EventItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -210,6 +242,8 @@ public class EventDetailsFragment extends MainCommonFragment {
 
         private ExpandableHeightListView sessionListView, rulesListView, sponsorListView;
 
+        private Button addQuestionButton;
+
         public ItemViewHolder(View parent, Event event) {
             super(parent);
             this.event = event;
@@ -229,6 +263,8 @@ public class EventDetailsFragment extends MainCommonFragment {
 
             sponsorListView = (ExpandableHeightListView) parent.findViewById(R.id.sponsorListView);
             sponsorListView.setExpanded(true);
+
+            addQuestionButton = (Button) parent.findViewById(R.id.addQuestionButton);
         }
 
         public void setEventItem() {
@@ -264,6 +300,13 @@ public class EventDetailsFragment extends MainCommonFragment {
             final List<EventSponsor> eventSponsors = new ArrayList<EventSponsor>(event.getEventSponsors());
             SponsorListAdapter sponsorListAdapter = new SponsorListAdapter(JannaApp.getContext(), R.layout.row_sponsor, eventSponsors);
             sponsorListView.setAdapter(sponsorListAdapter);
+
+            addQuestionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showAddQuestionDialog();
+                }
+            });
 
         }
 
@@ -351,5 +394,48 @@ public class EventDetailsFragment extends MainCommonFragment {
 
             return row;
         }
+    }
+
+
+
+    ////////////////////////////////// Methods ///////////////////////////////////////
+    // show add question dialog
+    private void showAddQuestionDialog() {
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.dialog_add_question, null);
+
+        dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setContentView(dialogView);
+        dialog.show();
+
+        final EditText questionEditText = (EditText) dialog.findViewById(R.id.questionEditText);
+
+        Button sendQuestionButton = (Button) dialog.findViewById(R.id.sendQuestionButton);
+        Button cancelButton = (Button) dialog.findViewById(R.id.cancelButton);
+
+        sendQuestionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (questionEditText.getText().toString() == null || questionEditText.getText().toString().equals("")) {
+                    Toast.makeText(getMainActivity(), getResources().getString(R.string.question_empty), Toast.LENGTH_SHORT).show();
+                } else {
+                    dialog.dismiss();
+                    EventQuestionRequest request = new EventQuestionRequest(questionEditText.getText().toString());
+                    request.execute();
+                }
+
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
     }
 }

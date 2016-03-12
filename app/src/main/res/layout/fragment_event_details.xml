@@ -75,28 +75,6 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
-        <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="10dip"
-            android:text="جلسات المؤتمر:"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="25sp" />
-
-        <com.ishraq.janna.component.ExpandableHeightListView
-            android:id="@+id/sessionListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="13dip"
-            android:layout_marginRight="13dip"
-            android:layout_marginTop="0dip"
-            android:visibility="gone"
-            android:padding="8dp" />-->
-
-
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
@@ -168,6 +146,13 @@
             android:layout_marginTop="0dip"
             android:padding="8dp" />
 
+
+        <Button
+            android:id="@+id/addQuestionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/add_question_button"/>
     </LinearLayout>
 
 </ScrollView>
