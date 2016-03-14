@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-<<<<<<< HEAD
     android:layout_height="match_parent"
     android:background="@drawable/back"
-=======
-    android:layout_height="wrap_content"
-    android:background="@drawable/back1"
->>>>>>> ba058c30cbaedbb012fa9b7dc905db29efa454ef
     android:rotationY="180">
 
     <LinearLayout

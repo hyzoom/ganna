@@ -69,7 +69,7 @@ public class EventDetailsFragment extends MainCommonFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Toast.makeText(getMainActivity(), "دي صفحة  تفاصيل الحدث او ال event", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getMainActivity(), "دي صفحة  تفاصيل الحدث او ال event", Toast.LENGTH_LONG).show();
         showToolbar();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
@@ -129,7 +129,7 @@ public class EventDetailsFragment extends MainCommonFragment {
                 @Override
                 public void onFailure(Call<List<Event>> call, Throwable t) {
                     event = eventService.getEvent(eventId);
-                    if (event.getEventSponsors().size()== 0 && event.getRules().size() == 0 && event.getSess().size() == 0){
+                    if (event.getEventSponsors().size() == 0 && event.getRules().size() == 0 && event.getSess().size() == 0) {
                         super.onFailure(call, t);
                     } else {
                         adapter = new EventItemAdapter(event);
@@ -390,12 +390,11 @@ public class EventDetailsFragment extends MainCommonFragment {
             }
 
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
-            nameTextView.setText(sponsors.get(position).getSponsor().getSponserNameAra()+ "");
+            nameTextView.setText(sponsors.get(position).getSponsor().getSponserNameAra() + "");
 
             return row;
         }
     }
-
 
 
     ////////////////////////////////// Methods ///////////////////////////////////////

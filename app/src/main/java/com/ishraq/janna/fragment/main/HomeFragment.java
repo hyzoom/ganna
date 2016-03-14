@@ -62,15 +62,17 @@ public class HomeFragment extends MainCommonFragment {
             TextView eventsTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
             eventsTab.setText(getResources().getString(R.string.tab_session));
             tabLayout.getTabAt(1).setCustomView(eventsTab);
+            if (settings.getLoggedInUser().getMobile().equals("01112220298")) {
+                TextView quesTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
+                quesTab.setText(getResources().getString(R.string.tab_question));
+                tabLayout.getTabAt(2).setCustomView(quesTab);
+            }
         } else {
             TextView reservationTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
             reservationTab.setText(getResources().getString(R.string.tab_booking));
             tabLayout.getTabAt(1).setCustomView(reservationTab);
         }
 
-        TextView eventsTab = (TextView) LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.custom_tab, null);
-        eventsTab.setText(getResources().getString(R.string.tab_question));
-        tabLayout.getTabAt(2).setCustomView(eventsTab);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -80,11 +82,14 @@ public class HomeFragment extends MainCommonFragment {
         Settings settings = settingsService.getSettings();
         if (settings.getLoggedInUser().getUserType() == 1) {
             adapter.addFrag(new EventFragment());
+            if (settings.getLoggedInUser().getMobile().equals("01112220298")) {
+                adapter.addFrag(new QuestionFragment());
+            }
         } else {
             adapter.addFrag(new ReservationFragment());
         }
 
-        adapter.addFrag(new QuestionFragment());
+
         viewPager.setAdapter(adapter);
     }
 

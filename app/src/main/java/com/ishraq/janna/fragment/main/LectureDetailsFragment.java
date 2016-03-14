@@ -51,7 +51,6 @@ public class LectureDetailsFragment extends MainCommonFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Toast.makeText(getMainActivity(), "دي صفحة المحاضرين اللى في المحاضرة", Toast.LENGTH_LONG).show();
         showToolbar();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
@@ -91,7 +90,6 @@ public class LectureDetailsFragment extends MainCommonFragment {
 
         getMainActivity().stopLoadingAnimator();
     }
-
 
 
     /////////////////////////////////////////// Adapter //////////////////////////////////////////
