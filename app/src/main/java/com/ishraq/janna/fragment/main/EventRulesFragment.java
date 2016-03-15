@@ -2,73 +2,52 @@ package com.ishraq.janna.fragment.main;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
 import com.ishraq.janna.component.ExpandableHeightListView;
 import com.ishraq.janna.listner.HidingScrollListener;
-import com.ishraq.janna.model.Lecture;
+import com.ishraq.janna.model.Event;
+import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
 import com.ishraq.janna.service.EventService;
-import com.ishraq.janna.service.SessionService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
-import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.EventWebService;
-import com.ishraq.janna.webservice.SessionWebService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Response;
-
 /**
- * Created by Ahmed on 3/5/2016.
+ * Created by Ahmed on 3/15/2016.
  */
-public class SessionDetailsFragment extends MainCommonFragment {
-    private SessionWebService sessionWebService;
-    private SessionService sessionService;
-
-    private Integer eventId, sessionId;
+public class EventRulesFragment extends MainCommonFragment {
+    private EventService eventService;
 
     private RecyclerView recyclerView;
-    private SessionItemAdapter adapter;
 
-    private Session session;
+    private Event event;
+    private EventRulesAdapter adapter;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sessionService = new SessionService(getMainActivity());
-        sessionWebService = getWebService(SessionWebService.class);
-
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            eventId = bundle.getInt("eventId");
-            sessionId = bundle.getInt("sessionId");
-        }
-
+        eventService = new EventService(getMainActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-<<<<<<< HEAD
-=======
-//        Toast.makeText(getMainActivity(), "دي صفحة المحاضرات اللى في الحدث", Toast.LENGTH_LONG).show();
-        
->>>>>>> 69ef753b6191acefc644eaf5a8652d7c862f4d13
+
+        getMainActivity().getToolbar().setTitle(getResources().getString(R.string.rule_title));
         showToolbar();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
@@ -101,61 +80,40 @@ public class SessionDetailsFragment extends MainCommonFragment {
         return view;
     }
 
-
     private void initData() {
-        session = sessionService.getSession(sessionId);
-        adapter = new SessionItemAdapter(session);
+        event = eventService.getEvent(1);
+        adapter = new EventRulesAdapter(event);
         recyclerView.setAdapter(adapter);
-
         getMainActivity().stopLoadingAnimator();
-
-//        SessionDetailsRequest request = new SessionDetailsRequest();
-//        request.execute();
-    }
-
-    private class SessionDetailsRequest implements CommonRequest {
-        @Override
-        public void execute() {
-            getMainActivity().startLoadingAnimator();
-            sessionWebService.getSession(eventId, sessionId).enqueue(new RequestCallback<List<Session>>(this) {
-                @Override
-                public void onResponse(Call<List<Session>> call, Response<List<Session>> response) {
-                    session = response.body().get(0);
-
-                    adapter = new SessionItemAdapter(session);
-                    recyclerView.setAdapter(adapter);
-
-                    getMainActivity().stopLoadingAnimator();
-                }
-            });
-        }
     }
 
 
-    /////////////////////////////////////////// Adapter //////////////////////////////////////////
-    class SessionItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        private Session session;
+
+
+    ///////////////////////////////////// Adapter //////////////////////////////////////////////////
+    class EventRulesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+        private Event event;
 
         /*
         * Type header : layout of toolbar which will be empty
-        * Type Item : Session Item
+        * Type Item : Recipe Item
         * */
 
         private static final int TYPE_HEADER = 2;
         private static final int TYPE_ITEM = 1;
 
-        public SessionItemAdapter(Session session) {
-            getMainActivity().getToolbar().setTitle(session.getEventsSessionNameAra());
-            this.session = session;
+        public EventRulesAdapter(Event event) {
+            this.event = event;
         }
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Context context = parent.getContext();
             if (viewType == TYPE_ITEM) {
-                final View view = LayoutInflater.from(context).inflate(R.layout.fragment_session_details, parent, false);
-                return new ItemViewHolder(view, session);
+                final View view = LayoutInflater.from(context).inflate(R.layout.fragment_rule, parent, false);
+                return new ItemViewHolder(view, event);
             } else if (viewType == TYPE_HEADER) {
                 final View view = LayoutInflater.from(context).inflate(R.layout.recycler_header, parent, false);
                 return new RecyclerHeaderViewHolder(view, -1);
@@ -187,7 +145,7 @@ public class SessionDetailsFragment extends MainCommonFragment {
         }
 
         public int getBasicItemCount() {
-            return session == null ? 0 : 1;
+            return event == null ? 0 : 1;
         }
 
         private boolean isPositionHeader(int position) {
@@ -197,51 +155,39 @@ public class SessionDetailsFragment extends MainCommonFragment {
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private Session session;
+        private Event event;
 
-        private TextView nameTextView;
-        private ExpandableHeightListView lectureListView;
+        private ExpandableHeightListView rulesListView;
 
-        public ItemViewHolder(View parent, Session session) {
+        public ItemViewHolder(View parent, Event event) {
             super(parent);
-            this.session = session;
+            this.event = event;
 
-            nameTextView = (TextView) parent.findViewById(R.id.nameTextView);
+            rulesListView = (ExpandableHeightListView) parent.findViewById(R.id.rulesListView);
+            rulesListView.setExpanded(true);
 
-            lectureListView = (ExpandableHeightListView) parent.findViewById(R.id.lectureListView);
-            lectureListView.setExpanded(true);
         }
 
         public void setEventItem() {
-            nameTextView.setText(session.getEventsSessionNameAra() + "");
 
-            final List<Lecture> lectures = new ArrayList<Lecture>(session.getLect());
+            final List<Rule> rules = new ArrayList<Rule>(event.getRules());
 
-            LectureListAdapter lectureListAdapter = new LectureListAdapter(JannaApp.getContext(), R.layout.row_session, lectures);
-            lectureListView.setAdapter(lectureListAdapter);
+            RuleListAdapter ruleListAdapter = new RuleListAdapter(JannaApp.getContext(), R.layout.row_rule, rules);
+            rulesListView.setAdapter(ruleListAdapter);
 
-            lectureListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Fragment lectureDetailsFragment = new LectureDetailsFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("lectureId", lectures.get(position).getEventsLectureCode());
-                    lectureDetailsFragment.setArguments(bundle);
-                    getMainActivity().addFragment(lectureDetailsFragment, true, null);
-                }
-            });
         }
+
     }
 
-    class LectureListAdapter extends ArrayAdapter<Lecture> {
-        private List<Lecture> lectures;
+    class RuleListAdapter extends ArrayAdapter<Rule> {
+        private List<Rule> rules;
         private Context context;
         private int layoutResourceId;
 
 
-        public LectureListAdapter(Context context, int layoutResourceId, List<Lecture> lectures) {
-            super(context, layoutResourceId, lectures);
-            this.lectures = lectures;
+        public RuleListAdapter(Context context, int layoutResourceId, List<Rule> rules) {
+            super(context, layoutResourceId, rules);
+            this.rules = rules;
             this.context = context;
             this.layoutResourceId = layoutResourceId;
         }
@@ -255,9 +201,9 @@ public class SessionDetailsFragment extends MainCommonFragment {
             }
 
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
-            nameTextView.setText(lectures.get(position).getEventsLectureCode() + "");
+            nameTextView.setText(rules.get(position).getRuleName() + "");
+
             return row;
         }
     }
-
 }

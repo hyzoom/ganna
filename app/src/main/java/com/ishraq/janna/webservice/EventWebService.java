@@ -1,6 +1,7 @@
 package com.ishraq.janna.webservice;
 
 import com.ishraq.janna.model.Event;
+import com.ishraq.janna.model.Question;
 import com.ishraq.janna.model.Session;
 
 import java.util.List;
@@ -24,4 +25,8 @@ public interface EventWebService {
     Call<List<Event.QuestionResult>> sendEventQuestion(@Query("eventid") Integer eventId,
                                         @Query("userid") Integer userId,
                                         @Query("question") String question);
+
+
+    @GET("JsonViewQuestions.aspx")
+    Call<List<Question>> getEventQuestions(@Query("id") Integer eventId);
 }

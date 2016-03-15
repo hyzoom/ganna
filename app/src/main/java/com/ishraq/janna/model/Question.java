@@ -8,49 +8,64 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "question")
 public class Question {
-    @DatabaseField(id = true)
-    private Integer id;
+    @DatabaseField(id = true, columnName = "id")
+    private Integer EventQuestionCode;
 
     @DatabaseField
-    private String description;
+    private String EventQuestion;
 
     @DatabaseField
-    private String answer;
+    private String EventQuestionDate;
+
+    @DatabaseField
+    private String Notes;
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "event_id")
-    private Event event;
+    private Event EventCode;
+
+
 
     ///////////////////////////////////////////////////////////////
 
-    public Integer getId() {
-        return id;
+
+    public Integer getEventQuestionCode() {
+        return EventQuestionCode;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEventQuestionCode(Integer eventQuestionCode) {
+        EventQuestionCode = eventQuestionCode;
     }
 
-    public String getDescription() {
-        return description;
+    public String getEventQuestion() {
+        return EventQuestion;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setEventQuestion(String eventQuestion) {
+        EventQuestion = eventQuestion;
     }
 
-    public String getAnswer() {
-        return answer;
+
+    public String getEventQuestionDate() {
+        return EventQuestionDate;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setEventQuestionDate(String eventQuestionDate) {
+        EventQuestionDate = eventQuestionDate;
     }
 
-    public Event getEvent() {
-        return event;
+    public String getNotes() {
+        return Notes;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setNotes(String notes) {
+        Notes = notes;
+    }
+
+    public Event getEventCode() {
+        return EventCode;
+    }
+
+    public void setEventCode(Event eventCode) {
+        EventCode = eventCode;
     }
 }

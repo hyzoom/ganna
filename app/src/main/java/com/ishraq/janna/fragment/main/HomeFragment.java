@@ -39,6 +39,7 @@ public class HomeFragment extends MainCommonFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         getMainActivity().getToolbar().setTitle(getResources().getString(R.string.app_name));
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);

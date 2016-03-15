@@ -22,6 +22,7 @@ public class EventListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Context context;
     private List<Event> events;
     private boolean loadMore;
+    private String tag;
 
     /*
     * Type More: Endless progress view
@@ -33,10 +34,11 @@ public class EventListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int TYPE_HEADER = 2;
     private static final int TYPE_ITEM = 1;
 
-    public EventListAdapter(Context context, List<Event> events, boolean loadMore) {
+    public EventListAdapter(Context context, List<Event> events, boolean loadMore, String tag) {
         this.context = context;
         this.events = events;
         this.loadMore = loadMore;
+        this.tag = tag;
     }
 
     @Override
@@ -44,7 +46,7 @@ public class EventListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         Context context = parent.getContext();
         if (viewType == TYPE_ITEM) {
             final View view = LayoutInflater.from(context).inflate(R.layout.row_event, parent, false);
-            return new EventItemViewHolder(view, context, events);
+            return new EventItemViewHolder(view, context, events, tag);
         } else if (viewType == TYPE_HEADER) {
             final View view = LayoutInflater.from(context).inflate(R.layout.recycler_header, parent, false);
             return new RecyclerHeaderViewHolder(view, -1);

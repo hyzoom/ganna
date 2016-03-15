@@ -2,7 +2,9 @@ package com.ishraq.janna.service;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.database.DatabaseHelper;
 import com.ishraq.janna.model.Booking;
@@ -90,6 +92,18 @@ public class CommonService {
             Log.e(JannaApp.LOG_TAG, e.getMessage());
         }
         return settings;
+    }
+
+
+
+    /**
+     * display image with Glide into imageView
+     * @param imageUrl
+     * @param imageView
+     */
+    public void displayImage(String imageUrl, ImageView imageView) {
+        Glide.with(JannaApp.getContext()).load(imageUrl).thumbnail(0.01f)
+                .crossFade().into(imageView);
     }
 }
 

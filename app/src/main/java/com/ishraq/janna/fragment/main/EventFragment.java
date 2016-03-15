@@ -25,6 +25,7 @@ import retrofit2.Response;
  * Created by hp on 20/02/2016.
  */
 public class EventFragment extends HomeFragment {
+    public static final String TAG = "EVENTS";
 
     private EventWebService eventWebService;
     private EventService eventService;
@@ -52,14 +53,14 @@ public class EventFragment extends HomeFragment {
         recyclerView.addOnScrollListener(new HidingScrollListener() {
             @Override
             public void onHide() {
-                hideToolbar();
-                hideTabBar();
+//                hideToolbar();
+//                hideTabBar();
             }
 
             @Override
             public void onShow() {
-                showToolbar();
-                showTabBar();
+//                showToolbar();
+//                showTabBar();
             }
 
             @Override
@@ -99,7 +100,7 @@ public class EventFragment extends HomeFragment {
                     } else {
                         loadMore = false;
                     }
-                    adapter = new EventListAdapter(getMainActivity(), events, loadMore);
+                    adapter = new EventListAdapter(getMainActivity(), events, loadMore, TAG);
                     recyclerView.setAdapter(adapter);
 
                     getMainActivity().stopLoadingAnimator();
@@ -110,7 +111,7 @@ public class EventFragment extends HomeFragment {
                     loadMore = false;
                     events = eventService.getEvents();
 
-                    adapter = new EventListAdapter(getMainActivity(), events, loadMore);
+                    adapter = new EventListAdapter(getMainActivity(), events, loadMore, TAG);
                     recyclerView.setAdapter(adapter);
 
                     getMainActivity().stopLoadingAnimator();
