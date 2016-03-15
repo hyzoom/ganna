@@ -11,4 +11,9 @@
     <color name="refresh_progress_3">@color/colorAccent</color>
 
     <color name="white">#fff</color>
+    <color name="common_title">#d4d3d3</color>
+
+    <color name="recipe_list_background_color">#EEEEEE</color>
+
+
 </resources>
