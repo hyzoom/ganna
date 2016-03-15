@@ -53,6 +53,15 @@
     <string name="sponsor_title">رعاة المؤتمر</string>
     <string name="session_title">جلسات المؤتمر</string>
 
+
+    <string name="nav_booking_title">حجز</string>
+    <string name="nav_logout_title">خروج</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+
     <!-- Create booking -->
     <string name="title_booking">أضف حجز</string>
     <string name="clinic_hint">العيادة</string>
