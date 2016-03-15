@@ -2,13 +2,13 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
+    android:orientation="vertical"
     android:rotationY="180">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
         android:orientation="vertical">
 
         <TextView
@@ -36,33 +36,219 @@
             android:textColor="@android:color/black"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/sds"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="10dip"
-            android:text="عن المؤتمر:"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="20sp" />
+            android:layout_margin="5dip"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/structureTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dip"
-            android:layout_marginLeft="13dip"
-            android:layout_marginRight="13dip"
-            android:layout_marginTop="0dip"
-            android:textColor="@android:color/black"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/sds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="10dip"
+                android:text="عن المؤتمر:"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="20sp" />
 
-        <View
+            <TextView
+                android:id="@+id/structureTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="13dip"
+                android:layout_marginRight="13dip"
+                android:layout_marginTop="0dip"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="#FF0000FF" />
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/rulesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/rules_img"
+                android:text="قواعد المؤتمر:"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/sessionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/sessions_img"
+                android:text="جلسات المؤتمر:"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/aboutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/about_img1"
+                android:text="عن المؤتمر"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/sponsorButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/ro3aa_img"
+                android:text="الرعاة"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/newsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/news_img"
+                android:text="أخبار المؤتمر:"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/attendeesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/attendee"
+                android:text="السادة الحضور"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/surveyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/survey_img"
+                android:text="الاستبيانات"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/siteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/url_img"
+                android:text="زوروا موقعنا"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/locationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/location_img"
+                android:text="خريطة المؤتمر"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/linkedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/linked_img"
+                android:text="لينكد ان"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/twitterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/twitter_img"
+                android:text="تويتر"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/faceButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/face_img"
+                android:text="فيس بوك"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addQuestionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/question_img"
+                android:text="أضف سؤال"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/addressTextView"
@@ -77,131 +263,8 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
-        <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="10dip"
-            android:text="جلسات المؤتمر:"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="25sp" />
 
-        <com.ishraq.janna.component.ExpandableHeightListView
-            android:id="@+id/sessionListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="13dip"
-            android:layout_marginRight="13dip"
-            android:layout_marginTop="0dip"
-            android:visibility="gone"
-            android:padding="8dp" />-->
-
-=======
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="#FF0000FF" />
->>>>>>> ba058c30cbaedbb012fa9b7dc905db29efa454ef
-
-        <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="10dip"
-            android:text="قواعد الحضور:"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="20sp" />
-
-        <com.ishraq.janna.component.ExpandableHeightListView
-            android:id="@+id/rulesListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="13dip"
-            android:layout_marginRight="13dip"
-            android:layout_marginTop="0dip"
-            android:padding="8dp" />-->
-
-        <Button
-            android:id="@+id/rulesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="قواعد المؤتمر:"/>
-
-        <!--<View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="#FF0000FF" />-->
-
-        <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="10dip"
-            android:text="الجلسات:"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="20sp" />
-
-        <com.ishraq.janna.component.ExpandableHeightListView
-            android:id="@+id/sessionListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="13dip"
-            android:layout_marginRight="13dip"
-            android:layout_marginTop="0dip"
-            android:padding="8dp" />-->
-
-<<<<<<< HEAD
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="#FF0000FF" />
-=======
-        <Button
-            android:id="@+id/sponsorButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="رعاة المؤتمر:"/>
->>>>>>> 69ef753b6191acefc644eaf5a8652d7c862f4d13
-
-        <!--<TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="10dip"
-            android:text="الرعاة:"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="20sp" />
-
-        <com.ishraq.janna.component.ExpandableHeightListView
-            android:id="@+id/sponsorListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="13dip"
-            android:layout_marginRight="13dip"
-            android:layout_marginTop="0dip"
-            android:padding="8dp" />-->
-
-        <Button
-            android:id="@+id/sessionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="جلسات المؤتمر:"/>
-
-
-        <Button
-            android:id="@+id/addQuestionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/add_question_button"/>
     </LinearLayout>
+
 
 </ScrollView>

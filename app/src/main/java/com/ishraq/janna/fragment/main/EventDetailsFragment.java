@@ -69,13 +69,10 @@ public class EventDetailsFragment extends MainCommonFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-<<<<<<< HEAD
 //        Toast.makeText(getMainActivity(), "دي صفحة  تفاصيل الحدث او ال event", Toast.LENGTH_LONG).show();
-=======
 
 //        Toast.makeText(getMainActivity(), "دي صفحة  تفاصيل الحدث او ال event", Toast.LENGTH_LONG).show();
 
->>>>>>> 69ef753b6191acefc644eaf5a8652d7c862f4d13
         showToolbar();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
@@ -121,14 +118,17 @@ public class EventDetailsFragment extends MainCommonFragment {
             eventWebService.getEvent(eventId).enqueue(new RequestCallback<List<Event>>(this) {
                 @Override
                 public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-                    event = response.body().get(0);
-                    eventService.saveEvent(event);
+                    try {
+                        event = response.body().get(0);
+                        eventService.saveEvent(event);
 
-                    event = eventService.getEvent(event.getEventCode());
+                        event = eventService.getEvent(event.getEventCode());
 
-                    adapter = new EventItemAdapter(event);
-                    recyclerView.setAdapter(adapter);
+                        adapter = new EventItemAdapter(event);
+                        recyclerView.setAdapter(adapter);
+                    } catch (Exception ex) {
 
+                    }
                     getMainActivity().stopLoadingAnimator();
                 }
 

@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back1"
     android:rotationY="180">
 
     <LinearLayout
@@ -65,13 +64,13 @@
             android:id="@+id/clinicSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/clinic_array"/>
+            android:entries="@array/clinic_array" />
 
         <Spinner
             android:id="@+id/specialSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/special_array"/>
+            android:entries="@array/special_array" />
 
 
         <Button
