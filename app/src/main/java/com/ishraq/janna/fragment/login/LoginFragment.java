@@ -153,6 +153,7 @@ public class LoginFragment extends LoginCommonFragment implements View.OnClickLi
                     // Go to main activity
                     Intent i = new Intent(getActivity(), MainActivity.class);
                     startActivity(i);
+                    getLoginActivity().finish();
                 }
             });
         }

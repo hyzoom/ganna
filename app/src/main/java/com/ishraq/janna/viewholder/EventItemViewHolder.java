@@ -11,6 +11,9 @@ import android.widget.Toast;
 import com.ishraq.janna.R;
 import com.ishraq.janna.activity.MainActivity;
 import com.ishraq.janna.fragment.main.EventDetailsFragment;
+import com.ishraq.janna.fragment.main.EventFragment;
+import com.ishraq.janna.fragment.main.EventQuestionFragment;
+import com.ishraq.janna.fragment.main.QuestionFragment;
 import com.ishraq.janna.model.Event;
 
 import java.util.List;
@@ -23,13 +26,15 @@ public class EventItemViewHolder extends RecyclerView.ViewHolder {
     private View row;
     private Context context;
     private List<Event> events;
+    private String tag;
 
     private TextView eventNameTextView;
 
-    public EventItemViewHolder(View parent, Context context, List<Event> events) {
+    public EventItemViewHolder(View parent, Context context, List<Event> events, String tag) {
         super(parent);
         row = parent;
 
+        this.tag = tag;
         this.context = context;
         this.events = events;
 
@@ -50,12 +55,23 @@ public class EventItemViewHolder extends RecyclerView.ViewHolder {
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment eventDetailsFragment = new EventDetailsFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("eventId", event.getEventCode());
+                if (tag.equals(EventFragment.TAG)) {
+                    Fragment eventDetailsFragment = new EventDetailsFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("eventId", event.getEventCode());
 
-                eventDetailsFragment.setArguments(bundle);
-                ((MainActivity) context).addFragment(eventDetailsFragment, true, null);
+                    eventDetailsFragment.setArguments(bundle);
+                    ((MainActivity) context).addFragment(eventDetailsFragment, true, null);
+                }
+
+                if (tag.equals(QuestionFragment.TAG)) {
+                    Fragment eventQuestionFragment = new EventQuestionFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("eventId", event.getEventCode());
+
+                    eventQuestionFragment.setArguments(bundle);
+                    ((MainActivity) context).addFragment(eventQuestionFragment, true, null);
+                }
             }
         });
     }

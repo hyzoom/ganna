@@ -64,7 +64,8 @@ public class SessionDetailsFragment extends MainCommonFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Toast.makeText(getMainActivity(), "دي صفحة المحاضرات اللى في الحدث", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getMainActivity(), "دي صفحة المحاضرات اللى في الحدث", Toast.LENGTH_LONG).show();
+        
         showToolbar();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 

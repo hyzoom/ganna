@@ -80,7 +80,7 @@
             android:layout_height="1dp"
             android:background="#FF0000FF" />
 
-        <TextView
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dip"
@@ -98,14 +98,20 @@
             android:layout_marginLeft="13dip"
             android:layout_marginRight="13dip"
             android:layout_marginTop="0dip"
-            android:padding="8dp" />
+            android:padding="8dp" />-->
 
-        <View
+        <Button
+            android:id="@+id/rulesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="قواعد المؤتمر:"/>
+
+        <!--<View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="#FF0000FF" />
+            android:background="#FF0000FF" />-->
 
-        <TextView
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dip"
@@ -123,10 +129,15 @@
             android:layout_marginLeft="13dip"
             android:layout_marginRight="13dip"
             android:layout_marginTop="0dip"
-            android:padding="8dp" />
+            android:padding="8dp" />-->
 
+        <Button
+            android:id="@+id/sponsorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="رعاة المؤتمر:"/>
 
-        <TextView
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dip"
@@ -144,7 +155,13 @@
             android:layout_marginLeft="13dip"
             android:layout_marginRight="13dip"
             android:layout_marginTop="0dip"
-            android:padding="8dp" />
+            android:padding="8dp" />-->
+
+        <Button
+            android:id="@+id/sessionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="جلسات المؤتمر:"/>
 
 
         <Button

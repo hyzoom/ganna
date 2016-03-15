@@ -2,6 +2,7 @@ package com.ishraq.janna.fragment.main;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,50 +10,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
 import com.ishraq.janna.component.ExpandableHeightListView;
 import com.ishraq.janna.listner.HidingScrollListener;
-import com.ishraq.janna.model.Lecture;
-import com.ishraq.janna.model.LectureInstructor;
-import com.ishraq.janna.service.LectureService;
+import com.ishraq.janna.model.Event;
+import com.ishraq.janna.model.Rule;
+import com.ishraq.janna.model.Session;
+import com.ishraq.janna.service.EventService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ahmed on 3/11/2016.
+ * Created by Ahmed on 3/15/2016.
  */
-public class LectureDetailsFragment extends MainCommonFragment {
-    private LectureService lectureService;
+public class SessionFragment extends MainCommonFragment {
+    private EventService eventService;
 
-    private Lecture lecture;
-    private Integer lectureId;
     private RecyclerView recyclerView;
-    private LectureItemAdapter adapter;
+
+    private Event event;
+    private EventSessionAdapter adapter;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        lectureService = new LectureService(getMainActivity());
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            lectureId = bundle.getInt("lectureId");
-        }
-
+        eventService = new EventService(getMainActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Toast.makeText(getMainActivity(), "دي صفحة المحاضرين اللى في المحاضرة", Toast.LENGTH_LONG).show();
+
+        getMainActivity().getToolbar().setTitle(getResources().getString(R.string.session_title));
         showToolbar();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
@@ -86,39 +81,39 @@ public class LectureDetailsFragment extends MainCommonFragment {
     }
 
     private void initData() {
-        lecture = lectureService.getLecture(lectureId);
-        adapter = new LectureItemAdapter(lecture);
+        event = eventService.getEvent(1);
+        adapter = new EventSessionAdapter(event);
         recyclerView.setAdapter(adapter);
-
         getMainActivity().stopLoadingAnimator();
     }
 
 
 
-    /////////////////////////////////////////// Adapter //////////////////////////////////////////
-    class LectureItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        private Lecture lecture;
+
+    ///////////////////////////////////// Adapter //////////////////////////////////////////////////
+    class EventSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+        private Event event;
 
         /*
         * Type header : layout of toolbar which will be empty
-        * Type Item : Session Item
+        * Type Item : Recipe Item
         * */
 
         private static final int TYPE_HEADER = 2;
         private static final int TYPE_ITEM = 1;
 
-        public LectureItemAdapter(Lecture lecture) {
-            getMainActivity().getToolbar().setTitle(lecture.getEventsLectureNameAra());
-            this.lecture = lecture;
+        public EventSessionAdapter(Event event) {
+            this.event = event;
         }
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Context context = parent.getContext();
             if (viewType == TYPE_ITEM) {
-                final View view = LayoutInflater.from(context).inflate(R.layout.fragment_lecture_details, parent, false);
-                return new ItemViewHolder(view, lecture);
+                final View view = LayoutInflater.from(context).inflate(R.layout.fragment_session, parent, false);
+                return new ItemViewHolder(view, event);
             } else if (viewType == TYPE_HEADER) {
                 final View view = LayoutInflater.from(context).inflate(R.layout.recycler_header, parent, false);
                 return new RecyclerHeaderViewHolder(view, -1);
@@ -150,7 +145,7 @@ public class LectureDetailsFragment extends MainCommonFragment {
         }
 
         public int getBasicItemCount() {
-            return lecture == null ? 0 : 1;
+            return event == null ? 0 : 1;
         }
 
         private boolean isPositionHeader(int position) {
@@ -160,46 +155,48 @@ public class LectureDetailsFragment extends MainCommonFragment {
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private Lecture lecture;
+        private Event event;
 
-        private TextView nameTextView;
-        private ExpandableHeightListView lecturersListView;
+        private ExpandableHeightListView sessionListView;
 
-        public ItemViewHolder(View parent, Lecture lecture) {
+        public ItemViewHolder(View parent, Event event) {
             super(parent);
-            this.lecture = lecture;
+            this.event = event;
 
-            nameTextView = (TextView) parent.findViewById(R.id.nameTextView);
+            sessionListView = (ExpandableHeightListView) parent.findViewById(R.id.sessionListView);
+            sessionListView.setExpanded(true);
 
-            lecturersListView = (ExpandableHeightListView) parent.findViewById(R.id.lecturersListView);
-            lecturersListView.setExpanded(true);
         }
 
         public void setEventItem() {
-            nameTextView.setText(lecture.getEventsLectureCode() + "");
+            final List<Session> sessions = new ArrayList<Session>(event.getSess());
+            SessionListAdapter sessionListAdapter = new SessionListAdapter(JannaApp.getContext(), R.layout.row_session, sessions);
+            sessionListView.setAdapter(sessionListAdapter);
 
-            List<LectureInstructor> lectureInstructors = new ArrayList<LectureInstructor>(lecture.getLectureInstructors());
-
-            LecturerListAdapter lecturerListAdapter = new LecturerListAdapter(JannaApp.getContext(), R.layout.row_session, lectureInstructors);
-            lecturersListView.setAdapter(lecturerListAdapter);
-
-            lecturersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            sessionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Fragment sessionDetailsFragment = new SessionDetailsFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("eventId", 1);
+                    bundle.putInt("sessionId", sessions.get(position).getEventsSessionCode());
+                    sessionDetailsFragment.setArguments(bundle);
+                    getMainActivity().addFragment(sessionDetailsFragment, true, null);
                 }
             });
         }
+
     }
 
-    class LecturerListAdapter extends ArrayAdapter<LectureInstructor> {
-        private List<LectureInstructor> lectureInstructors;
+    class SessionListAdapter extends ArrayAdapter<Session> {
+        private List<Session> sessions;
         private Context context;
         private int layoutResourceId;
 
 
-        public LecturerListAdapter(Context context, int layoutResourceId, List<LectureInstructor> lectureInstructors) {
-            super(context, layoutResourceId, lectureInstructors);
-            this.lectureInstructors = lectureInstructors;
+        public SessionListAdapter(Context context, int layoutResourceId, List<Session> sessions) {
+            super(context, layoutResourceId, sessions);
+            this.sessions = sessions;
             this.context = context;
             this.layoutResourceId = layoutResourceId;
         }
@@ -213,12 +210,9 @@ public class LectureDetailsFragment extends MainCommonFragment {
             }
 
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
-            nameTextView.setText(lectureInstructors.get(position).getInstructor().getInstructorCode() + "");
+            nameTextView.setText(sessions.get(position).getEventsSessionNameAra() + "");
 
-            ImageView imageView = (ImageView) row.findViewById(R.id.imageView);
-            lectureService.displayImage(lectureInstructors.get(position).getInstructor().getInstructorImageUrl(), imageView);
             return row;
         }
     }
-
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
+import com.ishraq.janna.fragment.main.EventDetailsFragment;
 import com.ishraq.janna.fragment.main.HomeFragment;
 import com.ishraq.janna.fragment.main.MainCommonFragment;
 import com.ishraq.janna.webservice.CommonRequest;
@@ -30,7 +31,16 @@ public class MainActivity extends AppCompatActivity {
 
         initializeViews();
 
-        addFragment(new HomeFragment(), false, null);
+//        addFragment(new HomeFragment(), false, null);
+
+        Fragment eventDetailsFragment = new EventDetailsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("eventId", 1);
+
+        eventDetailsFragment.setArguments(bundle);
+        addFragment(eventDetailsFragment, true, null);
+
+        addFragment(new EventDetailsFragment(), false, null);
     }
 
     private void initializeViews() {

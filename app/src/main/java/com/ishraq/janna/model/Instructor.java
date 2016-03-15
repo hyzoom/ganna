@@ -14,6 +14,9 @@ public class Instructor {
     @DatabaseField
     private String InstructorCodeNameAra;
 
+    @DatabaseField
+    private String instructorImageUrl;
+
     ////////////////////////////////////////////////////////////////////////
 
     public Integer getInstructorCode() {
@@ -32,4 +35,11 @@ public class Instructor {
         InstructorCodeNameAra = instructorCodeNameAra;
     }
 
+    public String getInstructorImageUrl() {
+        return instructorImageUrl;
+    }
+
+    public void setInstructorImageUrl(String instructorImageUrl) {
+        this.instructorImageUrl = instructorImageUrl;
+    }
 }
