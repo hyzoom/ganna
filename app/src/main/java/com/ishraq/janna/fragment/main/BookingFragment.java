@@ -43,6 +43,11 @@ public class BookingFragment extends MainCommonFragment {
     }
 
     @Override
+    public void refreshContent() {
+        initData();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         showToolbar();
@@ -64,6 +69,7 @@ public class BookingFragment extends MainCommonFragment {
 
             @Override
             public void swipeRefresh(boolean state) {
+                getMainActivity().getSwipeRefreshLayout().setEnabled(state);
             }
 
             @Override
@@ -73,12 +79,16 @@ public class BookingFragment extends MainCommonFragment {
 
         recyclerView.setPadding(0, (int) getResources().getDimension(R.dimen.common_margin_padding_medium), 0, 0);
 
-        adapter = new CreateBookingAdapter();
-        recyclerView.setAdapter(adapter);
+        initData();
 
         return view;
     }
 
+    private void initData() {
+        adapter = new CreateBookingAdapter();
+        recyclerView.setAdapter(adapter);
+        getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+    }
 
     /////////////////////////////////////////// Adapter ///////////////////////////////////
     class CreateBookingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

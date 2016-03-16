@@ -44,6 +44,11 @@ public class EventRulesFragment extends MainCommonFragment {
     }
 
     @Override
+    public void refreshContent() {
+        initData();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -66,6 +71,7 @@ public class EventRulesFragment extends MainCommonFragment {
 
             @Override
             public void swipeRefresh(boolean state) {
+                getMainActivity().getSwipeRefreshLayout().setEnabled(state);
             }
 
             @Override
@@ -85,6 +91,7 @@ public class EventRulesFragment extends MainCommonFragment {
         adapter = new EventRulesAdapter(event);
         recyclerView.setAdapter(adapter);
         getMainActivity().stopLoadingAnimator();
+        getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
     }
 
 

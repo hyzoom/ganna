@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
 import com.ishraq.janna.fragment.NavigationDrawerFragment;
+import com.ishraq.janna.fragment.main.AboutFragment;
 import com.ishraq.janna.fragment.main.BookingFragment;
 import com.ishraq.janna.fragment.main.EventDetailsFragment;
 import com.ishraq.janna.fragment.main.HomeFragment;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private SettingsService settingsService;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -79,6 +82,10 @@ public class MainActivity extends AppCompatActivity
         if (mNavigationDrawerFragment.isDrawerOpen()) {
             mNavigationDrawerFragment.closeDrawer();
         }
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setProgressViewOffset(false, 0, 300);
+        swipeRefreshLayout.setEnabled(false);
     }
 
     public void addFragment(Fragment fragment, boolean addToBackStack, String tag) {
@@ -95,6 +102,7 @@ public class MainActivity extends AppCompatActivity
     public void showConnectionError(MainCommonFragment fragment, final CommonRequest request, Throwable error, final View mainView) {
         Log.e(JannaApp.LOG_TAG, "error " + error.getLocalizedMessage());
         stopLoadingAnimator();
+        swipeRefreshLayout.setRefreshing(false);
 
         final View errorView = LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.fragment_connection_error, null, false);
         final ViewGroup wrapperView  = (ViewGroup) findViewById(R.id.wrapper);
@@ -127,13 +135,20 @@ public class MainActivity extends AppCompatActivity
         return mToolbar;
     }
 
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefreshLayout;
+    }
+
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         switch (position) {
             case 0:
-                addFragment(new BookingFragment(), true, null);
+                addFragment(new AboutFragment(), true, null);
                 break;
             case 1:
+                addFragment(new BookingFragment(), true, null);
+                break;
+            case 2:
                 Settings settings = settingsService.getSettings();
                 settings.setLoggedInUser(null);
 

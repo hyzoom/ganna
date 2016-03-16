@@ -5,10 +5,6 @@
     android:orientation="vertical"
     android:rotationY="180">
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="?actionBarSize" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

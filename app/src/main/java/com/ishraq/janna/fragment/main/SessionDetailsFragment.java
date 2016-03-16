@@ -62,10 +62,13 @@ public class SessionDetailsFragment extends MainCommonFragment {
     }
 
     @Override
+    public void refreshContent() {
+        initData();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        Toast.makeText(getMainActivity(), "دي صفحة المحاضرات اللى في الحدث", Toast.LENGTH_LONG).show();
-
         showToolbar();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
@@ -84,6 +87,7 @@ public class SessionDetailsFragment extends MainCommonFragment {
 
             @Override
             public void swipeRefresh(boolean state) {
+                getMainActivity().getSwipeRefreshLayout().setEnabled(state);
             }
 
             @Override
@@ -105,7 +109,7 @@ public class SessionDetailsFragment extends MainCommonFragment {
         recyclerView.setAdapter(adapter);
 
         getMainActivity().stopLoadingAnimator();
-
+        getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
 //        SessionDetailsRequest request = new SessionDetailsRequest();
 //        request.execute();
     }

@@ -62,17 +62,20 @@ public class EventDetailsFragment extends MainCommonFragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             eventId = bundle.getInt("eventId");
+        } else {
+            eventId = 1;
         }
 
     }
 
     @Override
+    public void refreshContent() {
+        initData();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        Toast.makeText(getMainActivity(), "دي صفحة  تفاصيل الحدث او ال event", Toast.LENGTH_LONG).show();
-
-//        Toast.makeText(getMainActivity(), "دي صفحة  تفاصيل الحدث او ال event", Toast.LENGTH_LONG).show();
-
         showToolbar();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
@@ -91,6 +94,7 @@ public class EventDetailsFragment extends MainCommonFragment {
 
             @Override
             public void swipeRefresh(boolean state) {
+                getMainActivity().getSwipeRefreshLayout().setEnabled(state);
             }
 
             @Override
@@ -130,19 +134,26 @@ public class EventDetailsFragment extends MainCommonFragment {
 
                     }
                     getMainActivity().stopLoadingAnimator();
+                    getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
                 }
 
                 @Override
                 public void onFailure(Call<List<Event>> call, Throwable t) {
                     event = eventService.getEvent(eventId);
+                    if (event == null) {
+                        super.onFailure(call, t);
+                        return;
+                    }
                     if (event.getEventSponsors().size() == 0 && event.getRules().size() == 0 && event.getSess().size() == 0) {
                         super.onFailure(call, t);
+                        return;
                     } else {
                         adapter = new EventItemAdapter(event);
                         recyclerView.setAdapter(adapter);
 
                         getMainActivity().stopLoadingAnimator();
                     }
+                    getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
                 }
             });
         }

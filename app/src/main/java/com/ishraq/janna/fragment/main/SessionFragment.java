@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,11 @@ public class SessionFragment extends MainCommonFragment {
     }
 
     @Override
+    public void refreshContent() {
+        initData();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -66,6 +72,8 @@ public class SessionFragment extends MainCommonFragment {
 
             @Override
             public void swipeRefresh(boolean state) {
+//                Log.w("AhmedLog", state+"");
+                getMainActivity().getSwipeRefreshLayout().setEnabled(state);
             }
 
             @Override
@@ -85,6 +93,7 @@ public class SessionFragment extends MainCommonFragment {
         adapter = new EventSessionAdapter(event);
         recyclerView.setAdapter(adapter);
         getMainActivity().stopLoadingAnimator();
+        getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
     }
 
 

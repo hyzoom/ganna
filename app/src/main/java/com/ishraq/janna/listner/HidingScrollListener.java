@@ -2,6 +2,7 @@ package com.ishraq.janna.listner;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 /**
  * Created by Ahmed Saeed on 12/21/2015.
@@ -26,12 +27,13 @@ public abstract class HidingScrollListener extends RecyclerView.OnScrollListener
         int firstVisibleItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
 
         if (firstVisibleItem == 0) {
-            if (recyclerView.getChildAt(0).getTop() == 0) {
-                swipeRefresh(true);
-            }
-            else {
-                swipeRefresh(false);
-            }
+            swipeRefresh(true);
+//            if (recyclerView.getChildAt(0).getTop() == 0) {
+//                swipeRefresh(true);
+//            }
+//            else {
+//                swipeRefresh(false);
+//            }
 
             if(!mControlsVisible) {
                 onShow();

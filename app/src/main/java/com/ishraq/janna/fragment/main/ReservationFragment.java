@@ -55,6 +55,11 @@ public class ReservationFragment extends MainCommonFragment {
     }
 
     @Override
+    public void refreshContent() {
+        initData();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         showToolbar();
@@ -79,6 +84,7 @@ public class ReservationFragment extends MainCommonFragment {
 
             @Override
             public void swipeRefresh(boolean state) {
+                getMainActivity().getSwipeRefreshLayout().setEnabled(state);
             }
 
             @Override
@@ -103,6 +109,7 @@ public class ReservationFragment extends MainCommonFragment {
     private void initData() {
 //        BookingsRequest request = new BookingsRequest();
 //        request.execute();
+        getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
     }
 
     private class BookingsRequest implements CommonRequest {

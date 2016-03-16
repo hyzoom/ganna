@@ -2,6 +2,7 @@ package com.ishraq.janna.fragment.main;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -18,18 +19,29 @@ import retrofit2.Callback;
 /**
  * Created by Ahmed on 2/27/2016.
  */
-public class MainCommonFragment extends CommonFragment {
+public abstract class MainCommonFragment extends CommonFragment {
 
     protected Toolbar mToolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getMainActivity().startLoadingAnimator();
-
         mToolbar = getMainActivity().getToolbar();
+
+        getMainActivity().getSwipeRefreshLayout().setEnabled(true);
+        if (getMainActivity().getSwipeRefreshLayout() != null) {
+            getMainActivity().getSwipeRefreshLayout().setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    if (getMainActivity() != null) {
+                        refreshContent();
+                    }
+                }
+            });
+        }
     }
+    public abstract void refreshContent();
 
     protected MainActivity getMainActivity() {
         return (MainActivity) getActivity();

@@ -43,6 +43,11 @@ public class EventFragment extends HomeFragment {
     }
 
     @Override
+    public void refreshContent() {
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         getMainActivity().getToolbar().setTitle(getResources().getString(R.string.app_name));
@@ -65,7 +70,7 @@ public class EventFragment extends HomeFragment {
 
             @Override
             public void swipeRefresh(boolean state) {
-//                getMainActivity().getSwipeRefreshLayout().setEnabled(state);
+                getMainActivity().getSwipeRefreshLayout().setEnabled(state);
             }
 
             @Override

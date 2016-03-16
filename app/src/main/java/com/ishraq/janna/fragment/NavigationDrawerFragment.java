@@ -176,6 +176,10 @@ public class NavigationDrawerFragment extends Fragment {
     private List<Map<String, Integer>> getDrawerData() {
         List<Map<String, Integer>> entries = new ArrayList<Map<String, Integer>>();
         entries.add(new HashMap<String, Integer>() {{
+            put("icon", R.drawable.ic_info);
+            put("text", R.string.nav_info_title);
+        }});
+        entries.add(new HashMap<String, Integer>() {{
             put("icon", R.drawable.ic_bookmark);
             put("text", R.string.nav_booking_title);
         }});
