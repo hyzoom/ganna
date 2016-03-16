@@ -40,7 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/sds"
@@ -74,17 +75,6 @@
 
 
             <Button
-                android:id="@+id/rulesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector"
-                android:drawableTop="@drawable/rules_img"
-                android:text="قواعد المؤتمر:"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <Button
                 android:id="@+id/sessionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,36 +82,6 @@
                 android:background="@drawable/selector"
                 android:drawableTop="@drawable/sessions_img"
                 android:text="جلسات المؤتمر:"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/aboutButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector"
-                android:drawableTop="@drawable/about_img1"
-                android:text="عن المؤتمر"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/sponsorButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector"
-                android:drawableTop="@drawable/ro3aa_img"
-                android:text="الرعاة"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -137,98 +97,15 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/attendeesButton"
+                android:id="@+id/rulesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/attendee"
-                android:text="السادة الحضور"
+                android:drawableTop="@drawable/rules_img"
+                android:text="قواعد المؤتمر:"
                 android:textColor="#000000"
                 android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/surveyButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector"
-                android:drawableTop="@drawable/survey_img"
-                android:text="الاستبيانات"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/siteButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector"
-                android:drawableTop="@drawable/url_img"
-                android:text="زوروا موقعنا"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/locationButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector"
-                android:drawableTop="@drawable/location_img"
-                android:text="خريطة المؤتمر"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/linkedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector"
-                android:drawableTop="@drawable/linked_img"
-                android:text="لينكد ان"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/twitterButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector"
-                android:drawableTop="@drawable/twitter_img"
-                android:text="تويتر"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/faceButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector"
-                android:drawableTop="@drawable/face_img"
-                android:text="فيس بوك"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -248,7 +125,114 @@
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/attendeesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/attendee"
+                android:text="السادة الحضور"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/sponsorButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/ro3aa_img"
+                android:text="الرعاة"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/locationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/location_img"
+                android:text="خريطة المؤتمر"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/siteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/url_img"
+                android:text="زوروا موقعنا"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/surveyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/survey_img"
+                android:text="الاستبيانات"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/faceButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/face_img"
+                android:text="فيس بوك"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/twitterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/twitter_img"
+                android:text="تويتر"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/linkedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/linked_img"
+                android:text="لينكد ان"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/addressTextView"
