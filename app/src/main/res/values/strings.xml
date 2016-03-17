@@ -61,6 +61,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
+    <string name="newses">أخبار المؤتمر</string>
+    <string name="attendant">السادة الحضور</string>
+
 
     <!-- Create booking -->
     <string name="title_booking">أضف حجز</string>

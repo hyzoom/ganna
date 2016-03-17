@@ -14,6 +14,7 @@ import com.ishraq.janna.model.Instructor;
 import com.ishraq.janna.model.Lecture;
 import com.ishraq.janna.model.LectureGuest;
 import com.ishraq.janna.model.LectureInstructor;
+import com.ishraq.janna.model.News;
 import com.ishraq.janna.model.Question;
 import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
@@ -58,6 +59,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Booking, Integer> bookingDao = null;
     private Dao<Clinic, Integer> clinicDao = null;
     private Dao<Specialization, Integer> specializationDao = null;
+
+    private Dao<News, Integer> newsDao = null;
 
     // we do this so there is only one helper
     private static DatabaseHelper helper = null;
@@ -105,6 +108,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Booking.class);
             TableUtils.createTable(connectionSource, Clinic.class);
             TableUtils.createTable(connectionSource, Specialization.class);
+            TableUtils.createTable(connectionSource, News.class);
 
             initData();
         } catch (SQLException e) {
@@ -295,6 +299,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return specializationDao;
     }
 
+    public Dao<News, Integer> getNewsDao() {
+        if (newsDao == null) {
+            try {
+                newsDao = getDao(News.class);
+            } catch (SQLException e) {
+            }
+        }
+        return newsDao;
+    }
+
     /**
      * Close the database connections and clear any cached DAOs.
      */
@@ -318,5 +332,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         specializationDao = null;
         bookingDao = null;
         clinicDao = null;
+        newsDao = null;
     }
 }

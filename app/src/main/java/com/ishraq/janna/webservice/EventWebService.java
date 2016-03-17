@@ -1,8 +1,10 @@
 package com.ishraq.janna.webservice;
 
 import com.ishraq.janna.model.Event;
+import com.ishraq.janna.model.News;
 import com.ishraq.janna.model.Question;
 import com.ishraq.janna.model.Session;
+import com.ishraq.janna.model.User;
 
 import java.util.List;
 
@@ -29,4 +31,12 @@ public interface EventWebService {
 
     @GET("JsonViewQuestions.aspx")
     Call<List<Question>> getEventQuestions(@Query("id") Integer eventId);
+
+
+    @GET("JsonViewDoctors.aspx")
+    Call<List<User>> getAllAttendants();
+
+
+    @GET("JsonViewNews.aspx")
+    Call<List<News>> getAllNewses(@Query("id") Integer eventId);
 }

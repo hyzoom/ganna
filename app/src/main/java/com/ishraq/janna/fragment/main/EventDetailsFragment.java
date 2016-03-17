@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +18,6 @@ import android.widget.Toast;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
-import com.ishraq.janna.component.ExpandableHeightListView;
 import com.ishraq.janna.listner.HidingScrollListener;
 import com.ishraq.janna.model.Event;
 import com.ishraq.janna.model.EventSponsor;
@@ -31,7 +29,6 @@ import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.EventWebService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -257,9 +254,8 @@ public class EventDetailsFragment extends MainCommonFragment {
         private TextView nameTextView, startDateTextView, endDateTextView,
                 structureTextView, addressTextView, notesTextView;
 
-//        private ExpandableHeightListView sessionListView, rulesListView, sponsorListView;
-
-        private Button addQuestionButton, rulesButton, sponsorButton, sessionButton;
+        private Button addQuestionButton, rulesButton, sponsorButton, sessionButton,
+                faceButton, twitterButton, linkedButton, siteButton, attendeesButton, newsButton;
 
         public ItemViewHolder(View parent, Event event) {
             super(parent);
@@ -272,18 +268,16 @@ public class EventDetailsFragment extends MainCommonFragment {
             addressTextView = (TextView) parent.findViewById(R.id.addressTextView);
             notesTextView = (TextView) parent.findViewById(R.id.notesTextView);
 
-//            sessionListView = (ExpandableHeightListView) parent.findViewById(R.id.sessionListView);
-//            sessionListView.setExpanded(true);
-//
-//            rulesListView = (ExpandableHeightListView) parent.findViewById(R.id.rulesListView);
-//            rulesListView.setExpanded(true);
-//
-//            sponsorListView = (ExpandableHeightListView) parent.findViewById(R.id.sponsorListView);
-//            sponsorListView.setExpanded(true);
-
             rulesButton = (Button) parent.findViewById(R.id.rulesButton);
             sponsorButton = (Button) parent.findViewById(R.id.sponsorButton);
             sessionButton = (Button) parent.findViewById(R.id.sessionButton);
+
+            newsButton = (Button) parent.findViewById(R.id.newsButton);
+            attendeesButton = (Button) parent.findViewById(R.id.attendeesButton);
+            faceButton = (Button) parent.findViewById(R.id.faceButton);
+            twitterButton = (Button) parent.findViewById(R.id.twitterButton);
+            linkedButton = (Button) parent.findViewById(R.id.linkedButton);
+            siteButton = (Button) parent.findViewById(R.id.siteButton);
 
             addQuestionButton = (Button) parent.findViewById(R.id.addQuestionButton);
         }
@@ -295,33 +289,6 @@ public class EventDetailsFragment extends MainCommonFragment {
             structureTextView.setText(event.getEventStructure());
             addressTextView.setText(event.getEventAddress());
             notesTextView.setText(event.getNotes());
-
-//            final List<Session> sessions = new ArrayList<Session>(event.getSess());
-//            SessionListAdapter sessionListAdapter = new SessionListAdapter(JannaApp.getContext(), R.layout.row_session, sessions);
-//            sessionListView.setAdapter(sessionListAdapter);
-//
-//            sessionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    Fragment sessionDetailsFragment = new SessionDetailsFragment();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putInt("eventId", eventId);
-//                    bundle.putInt("sessionId", sessions.get(position).getEventsSessionCode());
-//                    sessionDetailsFragment.setArguments(bundle);
-//                    getMainActivity().addFragment(sessionDetailsFragment, true, null);
-//                }
-//            });
-
-
-//            final List<Rule> rules = new ArrayList<Rule>(event.getRules());
-//
-//            RuleListAdapter ruleListAdapter = new RuleListAdapter(JannaApp.getContext(), R.layout.row_rule, rules);
-//            rulesListView.setAdapter(ruleListAdapter);
-//
-//            final List<EventSponsor> eventSponsors = new ArrayList<EventSponsor>(event.getEventSponsors());
-//            SponsorListAdapter sponsorListAdapter = new SponsorListAdapter(JannaApp.getContext(), R.layout.row_sponsor, eventSponsors);
-//            sponsorListView.setAdapter(sponsorListAdapter);
-//
 
             rulesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -341,6 +308,64 @@ public class EventDetailsFragment extends MainCommonFragment {
                 @Override
                 public void onClick(View v) {
                     getMainActivity().addFragment(new SessionFragment(), true, null);
+                }
+            });
+
+            newsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getMainActivity().addFragment(new EventNewsFragment(), true, null);
+                }
+            });
+
+            attendeesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getMainActivity().addFragment(new AttendantFragment(), true, null);
+                }
+            });
+
+            siteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment webFragment = new WebViewFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("webViewNumber", 2);
+                    webFragment.setArguments(bundle);
+                    getMainActivity().addFragment(webFragment, true, null);
+                }
+            });
+
+            faceButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment webFragment = new WebViewFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("webViewNumber", 3);
+                    webFragment.setArguments(bundle);
+                    getMainActivity().addFragment(webFragment, true, null);
+                }
+            });
+
+            twitterButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment webFragment = new WebViewFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("webViewNumber", 4);
+                    webFragment.setArguments(bundle);
+                    getMainActivity().addFragment(webFragment, true, null);
+                }
+            });
+
+            linkedButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment webFragment = new WebViewFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("webViewNumber", 5);
+                    webFragment.setArguments(bundle);
+                    getMainActivity().addFragment(webFragment, true, null);
                 }
             });
 

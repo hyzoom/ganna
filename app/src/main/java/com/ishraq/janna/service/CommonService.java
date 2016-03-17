@@ -16,6 +16,7 @@ import com.ishraq.janna.model.Instructor;
 import com.ishraq.janna.model.Lecture;
 import com.ishraq.janna.model.LectureGuest;
 import com.ishraq.janna.model.LectureInstructor;
+import com.ishraq.janna.model.News;
 import com.ishraq.janna.model.Question;
 import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
@@ -55,6 +56,7 @@ public class CommonService {
     public Dao<Booking, Integer> bookingDao;
     public Dao<Clinic, Integer> clinicDao;
     public Dao<Specialization, Integer> specializationDao;
+    public Dao<News, Integer> newsDao;
 
 
     public CommonService(Context context) {
@@ -74,6 +76,7 @@ public class CommonService {
         bookingDao = DatabaseHelper.getHelper(context).getBookingDao();
         clinicDao = DatabaseHelper.getHelper(context).getClinicDao();
         specializationDao = DatabaseHelper.getHelper(context).getSpecializationDao();
+        newsDao = DatabaseHelper.getHelper(context).getNewsDao();
     }
 
 
