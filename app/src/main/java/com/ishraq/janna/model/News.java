@@ -23,6 +23,8 @@ public class News {
     @DatabaseField(columnName = "details")
     private String EventsNewsDetails;
 
+    @DatabaseField(columnName = "image")
+    private String image;
 
     public Integer getEventsNewsCode() {
         return EventsNewsCode;
@@ -62,5 +64,13 @@ public class News {
 
     public void setEventsNewsDetails(String eventsNewsDetails) {
         EventsNewsDetails = eventsNewsDetails;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

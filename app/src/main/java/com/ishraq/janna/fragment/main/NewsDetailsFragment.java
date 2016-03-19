@@ -2,22 +2,19 @@ package com.ishraq.janna.fragment.main;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ishraq.janna.R;
-import com.ishraq.janna.activity.MainActivity;
 import com.ishraq.janna.listner.HidingScrollListener;
 import com.ishraq.janna.model.News;
 import com.ishraq.janna.service.NewsService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
-import com.ishraq.janna.viewholder.RecyclerLoadMoreViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.EventWebService;
 
@@ -27,32 +24,37 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 /**
- * Created by Ahmed on 3/18/2016.
+ * Created by Ahmed on 3/19/2016.
  */
-public class EventNewsFragment extends MainCommonFragment {
+public class NewsDetailsFragment extends MainCommonFragment {
     private EventWebService eventWebService;
     private NewsService newsService;
 
+    private Integer newsId;
+    private News news;
     private RecyclerView recyclerView;
-    private List<News> newses;
-    private NewsListAdapter adapter;
+
+    private NewsItemAdapter adapter;
 
     private boolean refresh = false;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         eventWebService = getWebService(EventWebService.class);
         newsService = new NewsService(getMainActivity());
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            newsId = bundle.getInt("newsId");
+        }
+
     }
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getMainActivity().getToolbar().setTitle(getResources().getString(R.string.newses));
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        showToolbar();
         getMainActivity().startLoadingAnimator();
-
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -86,15 +88,13 @@ public class EventNewsFragment extends MainCommonFragment {
     }
 
     private void initData() {
-        newses = newsService.getNewses();
-        if (newses == null || newses.size() == 0 || refresh) {
+        news = newsService.getNews(newsId);
+        if (refresh) {
             ListNewsesRequest request = new ListNewsesRequest();
             request.execute();
         } else {
-            adapter = new NewsListAdapter(getMainActivity(), newses, false, null);
+            adapter = new NewsItemAdapter(news);
             recyclerView.setAdapter(adapter);
-
-            refresh = false;
             getMainActivity().stopLoadingAnimator();
             getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
         }
@@ -108,8 +108,6 @@ public class EventNewsFragment extends MainCommonFragment {
     }
 
 
-
-
     /////////////////////////////////////// Request /////////////////////////////////////
 
 
@@ -119,13 +117,15 @@ public class EventNewsFragment extends MainCommonFragment {
             eventWebService.getAllNewses(1).enqueue(new RequestCallback<List<News>>(this) {
                 @Override
                 public void onResponse(Call<List<News>> call, Response<List<News>> response) {
-                    newses = response.body();
+                    List<News> newses = response.body();
 
                     if (newses.size() > 0) {
                         newsService.saveNewses(newses);
                     }
 
-                    adapter = new NewsListAdapter(getMainActivity(), newses, false, null);
+                    news = newsService.getNews(newsId);
+
+                    adapter = new NewsItemAdapter(news);
                     recyclerView.setAdapter(adapter);
 
                     refresh = false;
@@ -138,43 +138,34 @@ public class EventNewsFragment extends MainCommonFragment {
     }
 
 
-    //////////////////////////////////////////// Adapter //////////////////////////////////////////
-    class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        private Context context;
-        private List<News> newses;
-        private boolean loadMore;
-        private String tag;
+    ///////////////////////////////////// Adapter //////////////////////////////////////////////////
+    class NewsItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+        private News news;
 
         /*
-        * Type More: Endless progress view
         * Type header : layout of toolbar which will be empty
-        * Type first : layout of subcategories and show more button
         * Type Item : Recipe Item
         * */
-        private static final int TYPE_MORE = 4;
+
         private static final int TYPE_HEADER = 2;
         private static final int TYPE_ITEM = 1;
 
-        public NewsListAdapter(Context context, List<News> newses, boolean loadMore, String tag) {
-            this.context = context;
-            this.newses = newses;
-            this.loadMore = loadMore;
-            this.tag = tag;
+        public NewsItemAdapter(News news) {
+            getMainActivity().getToolbar().setTitle(news.getEventsNewsNameLat());
+            this.news = news;
         }
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Context context = parent.getContext();
             if (viewType == TYPE_ITEM) {
-                final View view = LayoutInflater.from(context).inflate(R.layout.row_news, parent, false);
-                return new NewsItemViewHolder(view, context, newses, tag);
+                final View view = LayoutInflater.from(context).inflate(R.layout.fragment_news_details, parent, false);
+                return new ItemViewHolder(view, news);
             } else if (viewType == TYPE_HEADER) {
                 final View view = LayoutInflater.from(context).inflate(R.layout.recycler_header, parent, false);
                 return new RecyclerHeaderViewHolder(view, -1);
-            } else if (viewType == TYPE_MORE) {
-                final View view = LayoutInflater.from(context).inflate(R.layout.recycler_progress_view_holder, parent, false);
-                return new RecyclerLoadMoreViewHolder(view, loadMore);
             }
             throw new RuntimeException("There is no type that matches the type " + viewType + " + make sure your using types correctly");
         }
@@ -182,22 +173,16 @@ public class EventNewsFragment extends MainCommonFragment {
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
             if (!isPositionHeader(position)) {
-                if (position == getItemCount() -1){
-                    RecyclerLoadMoreViewHolder holder = (RecyclerLoadMoreViewHolder) viewHolder;
-                    holder.isLoadMore(loadMore);
-                } else {
-                    NewsItemViewHolder holder = (NewsItemViewHolder) viewHolder;
-                    holder.setEventItems(position - 1);
-                }
-            }
-            else {
+                ItemViewHolder holder = (ItemViewHolder) viewHolder;
+                holder.setNewsItem();
+            } else {
                 RecyclerHeaderViewHolder holder = (RecyclerHeaderViewHolder) viewHolder;
             }
         }
 
         @Override
         public int getItemCount() {
-            return getBasicItemCount() + 2;
+            return getBasicItemCount() + 1;
         }
 
         @Override
@@ -205,62 +190,43 @@ public class EventNewsFragment extends MainCommonFragment {
             if (isPositionHeader(position)) {
                 return TYPE_HEADER;
             }
-            if (position == getItemCount() -1) {
-                return TYPE_MORE;
-            }
             return TYPE_ITEM;
         }
 
         public int getBasicItemCount() {
-            return newses == null ? 0 : newses.size();
+            return news == null ? 0 : 1;
         }
 
         private boolean isPositionHeader(int position) {
             return position == 0;
         }
-
-        public void setLoadMore(boolean state) {
-            this.loadMore = state;
-        }
     }
 
-    class NewsItemViewHolder extends RecyclerView.ViewHolder {
+    class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private View row;
-        private Context context;
-        private List<News> newses;
-        private String tag;
+        private News news;
 
-        private TextView newsNameTextView;
+        private ImageView newsImageView;
+        private TextView nameTextView, dateTextView, detailsTextView;
 
-        public NewsItemViewHolder(View parent, Context context, List<News> newses, String tag) {
+        public ItemViewHolder(View parent, News news) {
             super(parent);
-            row = parent;
+            this.news = news;
 
-            this.tag = tag;
-            this.context = context;
-            this.newses = newses;
+            newsImageView = (ImageView) parent.findViewById(R.id.newsImageView);
 
-            newsNameTextView = (TextView) parent.findViewById(R.id.newsNameTextView);
+            nameTextView = (TextView) parent.findViewById(R.id.nameTextView);
+            dateTextView = (TextView) parent.findViewById(R.id.dateTextView);
+            detailsTextView = (TextView) parent.findViewById(R.id.detailsTextView);
 
         }
 
-        public void setEventItems(int position) {
-            final News news = newses.get(position);
-            newsNameTextView.setText(news.getEventsNewsNameLat());
+        public void setNewsItem() {
+            newsService.displayImage(news.getImage(), newsImageView);
 
-
-            row.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Fragment newsDetailsFragment = new NewsDetailsFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("newsId", news.getEventsNewsCode());
-
-                    newsDetailsFragment.setArguments(bundle);
-                    ((MainActivity) context).addFragment(newsDetailsFragment, true, null);
-                }
-            });
+            nameTextView.setText(news.getEventsNewsNameLat());
+            dateTextView.setText(news.getEventsNewsDate());
+            detailsTextView.setText(news.getEventsNewsDetails());
         }
 
     }

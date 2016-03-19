@@ -22,14 +22,20 @@ import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
 import com.ishraq.janna.service.EventService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
+import com.ishraq.janna.webservice.CommonRequest;
+import com.ishraq.janna.webservice.EventWebService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by Ahmed on 3/15/2016.
  */
 public class SessionFragment extends MainCommonFragment {
+    private EventWebService eventWebService;
     private EventService eventService;
 
     private RecyclerView recyclerView;
@@ -37,15 +43,19 @@ public class SessionFragment extends MainCommonFragment {
     private Event event;
     private EventSessionAdapter adapter;
 
+    private boolean refresh = false;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        eventWebService = getWebService(EventWebService.class);
         eventService = new EventService(getMainActivity());
     }
 
     @Override
     public void refreshContent() {
+        refresh= true;
         initData();
     }
 
@@ -72,7 +82,6 @@ public class SessionFragment extends MainCommonFragment {
 
             @Override
             public void swipeRefresh(boolean state) {
-//                Log.w("AhmedLog", state+"");
                 getMainActivity().getSwipeRefreshLayout().setEnabled(state);
             }
 
@@ -90,14 +99,17 @@ public class SessionFragment extends MainCommonFragment {
 
     private void initData() {
         event = eventService.getEvent(1);
-        adapter = new EventSessionAdapter(event);
-        recyclerView.setAdapter(adapter);
-        getMainActivity().stopLoadingAnimator();
-        getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+        if (event == null || refresh) {
+            EventDetailsRequest request = new EventDetailsRequest();
+            request.execute();
+        } else {
+            adapter = new EventSessionAdapter(event);
+            recyclerView.setAdapter(adapter);
+            getMainActivity().stopLoadingAnimator();
+            getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+        }
+
     }
-
-
-
 
 
     ///////////////////////////////////// Adapter //////////////////////////////////////////////////
@@ -224,4 +236,35 @@ public class SessionFragment extends MainCommonFragment {
             return row;
         }
     }
+
+
+
+    ///////////////////////////////////////////////// Request ////////////////////////////////
+
+    private class EventDetailsRequest implements CommonRequest {
+        @Override
+        public void execute() {
+            eventWebService.getEvent(1).enqueue(new RequestCallback<List<Event>>(this) {
+                @Override
+                public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                    event = response.body().get(0);
+                    eventService.saveEvent(event);
+                    event = eventService.getEvent(event.getEventCode());
+
+                    adapter = new EventSessionAdapter(event);
+                    recyclerView.setAdapter(adapter);
+
+                    refresh = false;
+                    getMainActivity().stopLoadingAnimator();
+                    getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+                }
+
+                @Override
+                public void onFailure(Call<List<Event>> call, Throwable t) {
+                    getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+                }
+            });
+        }
+    }
+
 }

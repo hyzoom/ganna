@@ -48,6 +48,7 @@ public class EventDetailsFragment extends MainCommonFragment {
     private EventItemAdapter adapter;
 
     private Dialog dialog;
+    private boolean refresh = false;
 
 
     @Override
@@ -67,6 +68,7 @@ public class EventDetailsFragment extends MainCommonFragment {
 
     @Override
     public void refreshContent() {
+        refresh= true;
         initData();
     }
 
@@ -74,6 +76,7 @@ public class EventDetailsFragment extends MainCommonFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         showToolbar();
+        getMainActivity().startLoadingAnimator();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -108,14 +111,22 @@ public class EventDetailsFragment extends MainCommonFragment {
 
 
     private void initData() {
-        EventDetailsRequest request = new EventDetailsRequest();
-        request.execute();
+        event = eventService.getEvent(eventId);
+        if (event == null || refresh) {
+            EventDetailsRequest request = new EventDetailsRequest();
+            request.execute();
+        } else {
+            adapter = new EventItemAdapter(event);
+            recyclerView.setAdapter(adapter);
+            getMainActivity().stopLoadingAnimator();
+            getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+        }
+
     }
 
     private class EventDetailsRequest implements CommonRequest {
         @Override
         public void execute() {
-            getMainActivity().startLoadingAnimator();
             eventWebService.getEvent(eventId).enqueue(new RequestCallback<List<Event>>(this) {
                 @Override
                 public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
@@ -130,6 +141,7 @@ public class EventDetailsFragment extends MainCommonFragment {
                     } catch (Exception ex) {
 
                     }
+                    refresh = false;
                     getMainActivity().stopLoadingAnimator();
                     getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
                 }
@@ -150,6 +162,7 @@ public class EventDetailsFragment extends MainCommonFragment {
 
                         getMainActivity().stopLoadingAnimator();
                     }
+                    refresh = false;
                     getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
                 }
             });
@@ -379,91 +392,6 @@ public class EventDetailsFragment extends MainCommonFragment {
         }
 
     }
-
-    class SessionListAdapter extends ArrayAdapter<Session> {
-        private List<Session> sessions;
-        private Context context;
-        private int layoutResourceId;
-
-
-        public SessionListAdapter(Context context, int layoutResourceId, List<Session> sessions) {
-            super(context, layoutResourceId, sessions);
-            this.sessions = sessions;
-            this.context = context;
-            this.layoutResourceId = layoutResourceId;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View row = convertView;
-            if (row == null) {
-                LayoutInflater inflater = LayoutInflater.from(JannaApp.getContext());
-                row = inflater.inflate(layoutResourceId, parent, false);
-            }
-
-            TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
-            nameTextView.setText(sessions.get(position).getEventsSessionNameAra() + "");
-
-            return row;
-        }
-    }
-
-    class RuleListAdapter extends ArrayAdapter<Rule> {
-        private List<Rule> rules;
-        private Context context;
-        private int layoutResourceId;
-
-
-        public RuleListAdapter(Context context, int layoutResourceId, List<Rule> rules) {
-            super(context, layoutResourceId, rules);
-            this.rules = rules;
-            this.context = context;
-            this.layoutResourceId = layoutResourceId;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View row = convertView;
-            if (row == null) {
-                LayoutInflater inflater = LayoutInflater.from(JannaApp.getContext());
-                row = inflater.inflate(layoutResourceId, parent, false);
-            }
-
-            TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
-            nameTextView.setText(rules.get(position).getRuleName() + "");
-
-            return row;
-        }
-    }
-
-    class SponsorListAdapter extends ArrayAdapter<EventSponsor> {
-        private List<EventSponsor> sponsors;
-        private Context context;
-        private int layoutResourceId;
-
-
-        public SponsorListAdapter(Context context, int layoutResourceId, List<EventSponsor> sponsors) {
-            super(context, layoutResourceId, sponsors);
-            this.sponsors = sponsors;
-            this.context = context;
-            this.layoutResourceId = layoutResourceId;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View row = convertView;
-            if (row == null) {
-                LayoutInflater inflater = LayoutInflater.from(JannaApp.getContext());
-                row = inflater.inflate(layoutResourceId, parent, false);
-            }
-
-            TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
-            nameTextView.setText(sponsors.get(position).getSponsor().getSponserNameAra() + "");
-
-            return row;
-        }
-    }
-
 
     ////////////////////////////////// Methods ///////////////////////////////////////
     // show add question dialog

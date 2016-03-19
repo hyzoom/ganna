@@ -25,6 +25,8 @@
     <dimen name="common_dialog_width_min">400dp</dimen>
 
 
+    <!-- Fragment news details -->
+
     <!-- common -->
     <dimen name="card_corner_radius">2dp</dimen>
 
@@ -40,5 +42,7 @@
     <dimen name="common_text_small">12sp</dimen>
     <dimen name="common_text_very_small">8sp</dimen>
     <dimen name="common_text_space_extra">4sp</dimen>
+
+    <dimen name="image_size">120dp</dimen>
 
 </resources>
