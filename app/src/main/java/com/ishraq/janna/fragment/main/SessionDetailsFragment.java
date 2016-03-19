@@ -261,7 +261,7 @@ public class SessionDetailsFragment extends MainCommonFragment {
 
             nameTextView.setText(lectures.get(position).getEventsLectureNameLat());
 
-            sessionService.displayImage(lectures.get(position).getEventsLectureNameLat(), imageView);
+            sessionService.displayImage(lectures.get(position).getImage(), imageView);
 
             return row;
         }
