@@ -2,13 +2,16 @@ package com.ishraq.janna.fragment.main;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
@@ -34,6 +37,7 @@ public class SponsorFragment extends MainCommonFragment {
     private Event event;
     private EventSponsorsAdapter adapter;
 
+    LinearLayout li1, li2, li3, li4, li5, li6, li7, li8;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,8 +57,9 @@ public class SponsorFragment extends MainCommonFragment {
         getMainActivity().getToolbar().setTitle(getResources().getString(R.string.sponsor_title));
         showToolbar();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
-
+        Toast.makeText(getActivity(), "يمكنك زيارة موقع الراعي بالضغط على الصورة", Toast.LENGTH_LONG).show();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addOnScrollListener(new HidingScrollListener() {
             @Override
@@ -80,6 +85,7 @@ public class SponsorFragment extends MainCommonFragment {
         recyclerView.setPadding(0, (int) getResources().getDimension(R.dimen.common_margin_padding_medium), 0, 0);
 
         initData();
+//        visitSites();
 
         return view;
     }
@@ -92,8 +98,95 @@ public class SponsorFragment extends MainCommonFragment {
         getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
     }
 
+    public void visitSites() {
+        li1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment webFragment = new WebViewFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("webViewNumber", 6);
+                webFragment.setArguments(bundle);
+                getMainActivity().addFragment(webFragment, true, null);
+            }
+        });
 
+        li2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment webFragment = new WebViewFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("webViewNumber", 7);
+                webFragment.setArguments(bundle);
+                getMainActivity().addFragment(webFragment, true, null);
+            }
+        });
 
+        li3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment webFragment = new WebViewFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("webViewNumber", 8);
+                webFragment.setArguments(bundle);
+                getMainActivity().addFragment(webFragment, true, null);
+            }
+        });
+
+        li4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment webFragment = new WebViewFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("webViewNumber", 9);
+                webFragment.setArguments(bundle);
+                getMainActivity().addFragment(webFragment, true, null);
+            }
+        });
+
+        li5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment webFragment = new WebViewFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("webViewNumber", 10);
+                webFragment.setArguments(bundle);
+                getMainActivity().addFragment(webFragment, true, null);
+            }
+        });
+
+        li6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment webFragment = new WebViewFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("webViewNumber", 11);
+                webFragment.setArguments(bundle);
+                getMainActivity().addFragment(webFragment, true, null);
+            }
+        });
+
+        li7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment webFragment = new WebViewFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("webViewNumber", 12);
+                webFragment.setArguments(bundle);
+                getMainActivity().addFragment(webFragment, true, null);
+            }
+        });
+
+        li8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment webFragment = new WebViewFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("webViewNumber", 13);
+                webFragment.setArguments(bundle);
+                getMainActivity().addFragment(webFragment, true, null);
+            }
+        });
+    }
 
 
     ///////////////////////////////////// Adapter //////////////////////////////////////////////////
@@ -118,6 +211,15 @@ public class SponsorFragment extends MainCommonFragment {
             Context context = parent.getContext();
             if (viewType == TYPE_ITEM) {
                 final View view = LayoutInflater.from(context).inflate(R.layout.fragment_sponsor, parent, false);
+                li1 = (LinearLayout) view.findViewById(R.id.li1);
+                li2 = (LinearLayout) view.findViewById(R.id.li2);
+                li3 = (LinearLayout) view.findViewById(R.id.li3);
+                li4 = (LinearLayout) view.findViewById(R.id.li4);
+                li5 = (LinearLayout) view.findViewById(R.id.li5);
+                li6 = (LinearLayout) view.findViewById(R.id.li6);
+                li7 = (LinearLayout) view.findViewById(R.id.li7);
+                li8 = (LinearLayout) view.findViewById(R.id.li8);
+                visitSites();
                 return new ItemViewHolder(view, event);
             } else if (viewType == TYPE_HEADER) {
                 final View view = LayoutInflater.from(context).inflate(R.layout.recycler_header, parent, false);
@@ -205,7 +307,7 @@ public class SponsorFragment extends MainCommonFragment {
             }
 
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
-            nameTextView.setText(sponsors.get(position).getSponsor().getSponserNameAra()+ "");
+            nameTextView.setText(sponsors.get(position).getSponsor().getSponserNameAra() + "");
 
             return row;
         }
