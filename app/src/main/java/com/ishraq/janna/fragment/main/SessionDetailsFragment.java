@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -255,8 +256,13 @@ public class SessionDetailsFragment extends MainCommonFragment {
                 row = inflater.inflate(layoutResourceId, parent, false);
             }
 
+            ImageView imageView  = (ImageView) row.findViewById(R.id.imageView);
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
-            nameTextView.setText(lectures.get(position).getEventsLectureCode() + "");
+
+            nameTextView.setText(lectures.get(position).getEventsLectureNameLat());
+
+            sessionService.displayImage(lectures.get(position).getEventsLectureNameLat(), imageView);
+
             return row;
         }
     }
