@@ -5,18 +5,30 @@
     android:orientation="vertical"
     android:rotationY="180">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dip"
-        android:lineSpacingExtra="5dip"
-        android:text="اولا : الالتزام التام بالمواعيد\n
-ثانيا: اغلاق المحمول او جعله صامت\n
-ثالثا: الاسئلة للمحاضر ومناقشته ستكون الكترونيا  بحيث يمكن ارسال السؤال عن طريق الواتس اب على رقم 01027287777 او ارسالها عن طريق تطبيق الاندرويد\n
-رابعا : يجب استخدام تطبيق الاندرويد لمعرفة اخبار المؤتمر واى تغييرات طفيفة فى البرنامج\n
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dip"
+                android:lineSpacingExtra="5dip"
+                android:text="اولا : الالتزام التام بالمواعيد\n\n\n
+ثانيا: اغلاق المحمول او جعله صامت\n\n\n
+ثالثا: الاسئلة للمحاضر ومناقشته ستكون الكترونيا  بحيث يمكن ارسال السؤال عن طريق الواتس اب على رقم 01027287777 او ارسالها عن طريق تطبيق الاندرويد\n\n\n
+رابعا : يجب استخدام تطبيق الاندرويد لمعرفة اخبار المؤتمر واى تغييرات طفيفة فى البرنامج\n\n\n
 خامسا: التطبيق يستخدم بعد المؤتمر فى عمل حجوزات للاطباء فى مستشفى جنة "
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </ScrollView>
+
 
     <com.ishraq.janna.component.ExpandableHeightListView
         android:id="@+id/rulesListView"
