@@ -68,7 +68,7 @@ public class EventDetailsFragment extends MainCommonFragment {
 
     @Override
     public void refreshContent() {
-        refresh= true;
+        refresh = true;
         initData();
     }
 
@@ -327,7 +327,7 @@ public class EventDetailsFragment extends MainCommonFragment {
             newsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getMainActivity().addFragment(new EventNewsFragment(), true, null);
+                    getMainActivity().addFragment(new NewsFragment(), true, null);
                 }
             });
 
