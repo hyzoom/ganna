@@ -21,6 +21,8 @@ import com.ishraq.janna.model.Session;
 import com.ishraq.janna.model.Settings;
 import com.ishraq.janna.model.Specialization;
 import com.ishraq.janna.model.Sponsor;
+import com.ishraq.janna.model.Survey;
+import com.ishraq.janna.model.SurveyAnswer;
 import com.ishraq.janna.model.User;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -61,6 +63,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Specialization, Integer> specializationDao = null;
 
     private Dao<News, Integer> newsDao = null;
+
+    private Dao<Survey, Integer> surveyDao = null;
+    private Dao<SurveyAnswer, Integer> answerDao = null;
 
     // we do this so there is only one helper
     private static DatabaseHelper helper = null;
@@ -109,6 +114,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Clinic.class);
             TableUtils.createTable(connectionSource, Specialization.class);
             TableUtils.createTable(connectionSource, News.class);
+            TableUtils.createTable(connectionSource, Survey.class);
+            TableUtils.createTable(connectionSource, SurveyAnswer.class);
 
             initData();
         } catch (SQLException e) {
@@ -309,6 +316,26 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return newsDao;
     }
 
+    public Dao<Survey, Integer> getSurveyDao() {
+        if (surveyDao == null) {
+            try {
+                surveyDao = getDao(Survey.class);
+            } catch (SQLException e) {
+            }
+        }
+        return surveyDao;
+    }
+
+    public Dao<SurveyAnswer, Integer> getSurveyAnswersDao() {
+        if (answerDao == null) {
+            try {
+                answerDao = getDao(SurveyAnswer.class);
+            } catch (SQLException e) {
+            }
+        }
+        return answerDao;
+    }
+
     /**
      * Close the database connections and clear any cached DAOs.
      */
@@ -333,5 +360,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         bookingDao = null;
         clinicDao = null;
         newsDao = null;
+        surveyDao = null;
+        answerDao = null;
     }
 }

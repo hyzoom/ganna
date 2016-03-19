@@ -23,6 +23,8 @@ import com.ishraq.janna.model.Session;
 import com.ishraq.janna.model.Settings;
 import com.ishraq.janna.model.Specialization;
 import com.ishraq.janna.model.Sponsor;
+import com.ishraq.janna.model.Survey;
+import com.ishraq.janna.model.SurveyAnswer;
 import com.ishraq.janna.model.User;
 import com.j256.ormlite.dao.Dao;
 
@@ -57,6 +59,8 @@ public class CommonService {
     public Dao<Clinic, Integer> clinicDao;
     public Dao<Specialization, Integer> specializationDao;
     public Dao<News, Integer> newsDao;
+    public Dao<Survey, Integer> surveyDao;
+    public Dao<SurveyAnswer, Integer> answerDao;
 
 
     public CommonService(Context context) {
@@ -77,6 +81,9 @@ public class CommonService {
         clinicDao = DatabaseHelper.getHelper(context).getClinicDao();
         specializationDao = DatabaseHelper.getHelper(context).getSpecializationDao();
         newsDao = DatabaseHelper.getHelper(context).getNewsDao();
+        surveyDao = DatabaseHelper.getHelper(context).getSurveyDao();
+        answerDao = DatabaseHelper.getHelper(context).getSurveyAnswersDao();
+
     }
 
 

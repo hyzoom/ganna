@@ -52,6 +52,7 @@
     <string name="rule_title">قواعد المؤتمر</string>
     <string name="sponsor_title">رعاة المؤتمر</string>
     <string name="session_title">جلسات المؤتمر</string>
+    <string name="survey_title">الاستبيانات</string>
 
     <string name="nav_info_title">عن مستشفى جنة</string>
     <string name="nav_booking_title">حجز</string>
