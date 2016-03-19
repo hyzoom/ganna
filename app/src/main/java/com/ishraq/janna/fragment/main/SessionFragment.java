@@ -230,6 +230,7 @@ public class SessionFragment extends MainCommonFragment {
                 row = inflater.inflate(layoutResourceId, parent, false);
             }
 
+            row.findViewById(R.id.imageView).setVisibility(View.GONE);
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
             nameTextView.setText(sessions.get(position).getEventsSessionNameAra() + "");
 
