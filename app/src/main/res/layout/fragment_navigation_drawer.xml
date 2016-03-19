@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_drawer_image_height"
+        android:layout_height="200dip"
         android:background="@drawable/side_nav_bar"
         android:padding="@dimen/common_margin_padding_big">
 
@@ -42,7 +42,8 @@
                 android:id="@+id/desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="تطبيق جنة دليلك لحضور المؤتمرات الطبية وكذلك حجز مواعيد الكشف في عيادات جنة"
+                android:gravity="center"
+                android:text="تطبيق جنة للاندرويد يهدف الى استخدام التكنولوجيا الحديثة فى مجال المؤتمرات وتسجيل الحجوزات سواء لمؤتمر جنة العلمى او مجموعة مستشفيات جنة"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
         </LinearLayout>

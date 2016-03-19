@@ -2,7 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:rotationY="180">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dip"
+        android:lineSpacingExtra="5dip"
+        android:text="اولا : الالتزام التام بالمواعيد\n
+ثانيا: اغلاق المحمول او جعله صامت\n
+ثالثا: الاسئلة للمحاضر ومناقشته ستكون الكترونيا  بحيث يمكن ارسال السؤال عن طريق الواتس اب على رقم 01027287777 او ارسالها عن طريق تطبيق الاندرويد\n
+رابعا : يجب استخدام تطبيق الاندرويد لمعرفة اخبار المؤتمر واى تغييرات طفيفة فى البرنامج\n
+خامسا: التطبيق يستخدم بعد المؤتمر فى عمل حجوزات للاطباء فى مستشفى جنة "
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
     <com.ishraq.janna.component.ExpandableHeightListView
         android:id="@+id/rulesListView"
@@ -11,6 +25,7 @@
         android:layout_marginLeft="13dip"
         android:layout_marginRight="13dip"
         android:layout_marginTop="0dip"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:visibility="gone" />
 
 </LinearLayout>
