@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,9 +20,6 @@ import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
 import com.ishraq.janna.listner.HidingScrollListener;
 import com.ishraq.janna.model.Event;
-import com.ishraq.janna.model.EventSponsor;
-import com.ishraq.janna.model.Rule;
-import com.ishraq.janna.model.Session;
 import com.ishraq.janna.service.EventService;
 import com.ishraq.janna.service.SettingsService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
@@ -130,20 +127,21 @@ public class EventDetailsFragment extends MainCommonFragment {
             eventWebService.getEvent(eventId).enqueue(new RequestCallback<List<Event>>(this) {
                 @Override
                 public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                    event = response.body().get(0);
+                    eventService.saveEvent(event);
+
+                    event = eventService.getEvent(event.getEventCode());
+                    adapter = new EventItemAdapter(event);
+
                     try {
-                        event = response.body().get(0);
-                        eventService.saveEvent(event);
-
-                        event = eventService.getEvent(event.getEventCode());
-
-                        adapter = new EventItemAdapter(event);
                         recyclerView.setAdapter(adapter);
-                    } catch (Exception ex) {
 
+                        refresh = false;
+                        getMainActivity().stopLoadingAnimator();
+                        getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+                    } catch (Exception e) {
+                        Log.i(JannaApp.LOG_TAG, e + "This fragment is finished.");
                     }
-                    refresh = false;
-                    getMainActivity().stopLoadingAnimator();
-                    getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
                 }
 
                 @Override
@@ -327,7 +325,7 @@ public class EventDetailsFragment extends MainCommonFragment {
             newsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getMainActivity().addFragment(new EventNewsFragment(), true, null);
+                    getMainActivity().addFragment(new NewsFragment(), true, null);
                 }
             });
 

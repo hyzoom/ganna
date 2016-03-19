@@ -251,12 +251,17 @@ public class SessionFragment extends MainCommonFragment {
                     eventService.saveEvent(event);
                     event = eventService.getEvent(event.getEventCode());
 
-                    adapter = new EventSessionAdapter(event);
-                    recyclerView.setAdapter(adapter);
+                    try {
+                        adapter = new EventSessionAdapter(event);
+                        recyclerView.setAdapter(adapter);
 
-                    refresh = false;
-                    getMainActivity().stopLoadingAnimator();
-                    getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+                        refresh = false;
+                        getMainActivity().stopLoadingAnimator();
+                        getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+                    } catch (Exception e) {
+                        Log.i(JannaApp.LOG_TAG, e + "This fragment is finished.");
+                    }
+
                 }
 
                 @Override

@@ -29,7 +29,7 @@ import retrofit2.Response;
 /**
  * Created by Ahmed on 3/18/2016.
  */
-public class EventNewsFragment extends MainCommonFragment {
+public class NewsFragment extends MainCommonFragment {
     private EventWebService eventWebService;
     private NewsService newsService;
 

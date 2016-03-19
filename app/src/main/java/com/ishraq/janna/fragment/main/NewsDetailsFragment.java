@@ -4,15 +4,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
 import com.ishraq.janna.listner.HidingScrollListener;
 import com.ishraq.janna.model.News;
+import com.ishraq.janna.model.User;
 import com.ishraq.janna.service.NewsService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
@@ -125,12 +128,17 @@ public class NewsDetailsFragment extends MainCommonFragment {
 
                     news = newsService.getNews(newsId);
 
-                    adapter = new NewsItemAdapter(news);
-                    recyclerView.setAdapter(adapter);
+                    try {
+                        adapter = new NewsItemAdapter(news);
+                        recyclerView.setAdapter(adapter);
 
-                    refresh = false;
-                    getMainActivity().stopLoadingAnimator();
-                    getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+                        refresh = false;
+                        getMainActivity().stopLoadingAnimator();
+                        getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+                    } catch (Exception e) {
+                        Log.i(JannaApp.LOG_TAG, e + "This fragment is finished.");
+                    }
+
                 }
             });
 
