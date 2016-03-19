@@ -68,7 +68,7 @@ public class EventDetailsFragment extends MainCommonFragment {
 
     @Override
     public void refreshContent() {
-        refresh = true;
+        refresh= true;
         initData();
     }
 
@@ -268,7 +268,7 @@ public class EventDetailsFragment extends MainCommonFragment {
                 structureTextView, addressTextView, notesTextView;
 
         private Button addQuestionButton, rulesButton, sponsorButton, sessionButton,
-                faceButton, twitterButton, linkedButton, siteButton, attendeesButton, newsButton, locationButton;
+                faceButton, twitterButton, linkedButton, siteButton, attendeesButton, newsButton;
 
         public ItemViewHolder(View parent, Event event) {
             super(parent);
@@ -291,7 +291,6 @@ public class EventDetailsFragment extends MainCommonFragment {
             twitterButton = (Button) parent.findViewById(R.id.twitterButton);
             linkedButton = (Button) parent.findViewById(R.id.linkedButton);
             siteButton = (Button) parent.findViewById(R.id.siteButton);
-            locationButton = (Button) parent.findViewById(R.id.locationButton);
 
             addQuestionButton = (Button) parent.findViewById(R.id.addQuestionButton);
         }
@@ -338,16 +337,7 @@ public class EventDetailsFragment extends MainCommonFragment {
                     getMainActivity().addFragment(new AttendantFragment(), true, null);
                 }
             });
-            locationButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Fragment webFragment = new WebViewFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("webViewNumber", 1);
-                    webFragment.setArguments(bundle);
-                    getMainActivity().addFragment(webFragment, true, null);
-                }
-            });
+
             siteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -391,7 +381,6 @@ public class EventDetailsFragment extends MainCommonFragment {
                     getMainActivity().addFragment(webFragment, true, null);
                 }
             });
-
 
             addQuestionButton.setOnClickListener(new View.OnClickListener() {
                 @Override

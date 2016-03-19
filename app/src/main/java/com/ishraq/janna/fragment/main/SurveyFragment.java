@@ -2,24 +2,23 @@ package com.ishraq.janna.fragment.main;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
 import com.ishraq.janna.listner.HidingScrollListener;
-import com.ishraq.janna.model.News;
-import com.ishraq.janna.model.User;
-import com.ishraq.janna.service.NewsService;
+import com.ishraq.janna.model.Survey;
+import com.ishraq.janna.service.SurveyService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
-import com.ishraq.janna.webservice.EventWebService;
+import com.ishraq.janna.webservice.SurveyWebService;
 
 import java.util.List;
 
@@ -29,35 +28,39 @@ import retrofit2.Response;
 /**
  * Created by Ahmed on 3/19/2016.
  */
-public class NewsDetailsFragment extends MainCommonFragment {
-    private EventWebService eventWebService;
-    private NewsService newsService;
+public class SurveyFragment extends MainCommonFragment {
+    private SurveyWebService surveyWebService;
+    private SurveyService surveyService;
 
-    private Integer newsId;
-    private News news;
+    private Integer eventId;
+    private List<Survey> surveys;
+
     private RecyclerView recyclerView;
+    private SurveyAdapter adapter;
 
-    private NewsItemAdapter adapter;
 
     private boolean refresh = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        eventWebService = getWebService(EventWebService.class);
-        newsService = new NewsService(getMainActivity());
+        surveyWebService= getWebService(SurveyWebService.class);
+        surveyService = new SurveyService(getMainActivity());
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            newsId = bundle.getInt("newsId");
+            eventId = bundle.getInt("eventId");
+        } else {
+            eventId = 1;
         }
 
     }
+
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getMainActivity().getToolbar().setTitle(getResources().getString(R.string.survey_title));
         showToolbar();
-        getMainActivity().startLoadingAnimator();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -90,19 +93,21 @@ public class NewsDetailsFragment extends MainCommonFragment {
         return view;
     }
 
+
     private void initData() {
-        news = newsService.getNews(newsId);
-        if (refresh) {
-            ListNewsesRequest request = new ListNewsesRequest();
+        surveys = surveyService.getSurveys();
+        if (surveys == null || surveys.size() == 0 || refresh) {
+            ListSurveyQuestionsRequest request = new ListSurveyQuestionsRequest();
             request.execute();
         } else {
-            adapter = new NewsItemAdapter(news);
+            adapter = new SurveyAdapter(surveys);
             recyclerView.setAdapter(adapter);
             getMainActivity().stopLoadingAnimator();
             getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
         }
 
     }
+
 
     @Override
     public void refreshContent() {
@@ -111,46 +116,48 @@ public class NewsDetailsFragment extends MainCommonFragment {
     }
 
 
-    /////////////////////////////////////// Request /////////////////////////////////////
 
+    /////////////////////////////////////////////////////////////////////////////////////
 
-    private class ListNewsesRequest implements CommonRequest {
+    private class ListSurveyQuestionsRequest implements CommonRequest {
         @Override
         public void execute() {
-            eventWebService.getAllNewses(1).enqueue(new RequestCallback<List<News>>(this) {
+            getMainActivity().startLoadingAnimator();
+            surveyWebService.getAllSurveyQuestions().enqueue(new RequestCallback<List<Survey>>(this) {
                 @Override
-                public void onResponse(Call<List<News>> call, Response<List<News>> response) {
-                    List<News> newses = response.body();
+                public void onResponse(Call<List<Survey>> call, Response<List<Survey>> response) {
+                    surveys = response.body();
 
-                    if (newses.size() > 0) {
-                        newsService.saveNewses(newses);
-                    }
-
-                    news = newsService.getNews(newsId);
+                    surveyService.saveSurveys(surveys);
 
                     try {
-                        adapter = new NewsItemAdapter(news);
+                        adapter = new SurveyAdapter(surveys);
                         recyclerView.setAdapter(adapter);
-
-                        refresh = false;
                         getMainActivity().stopLoadingAnimator();
                         getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
                     } catch (Exception e) {
                         Log.i(JannaApp.LOG_TAG, e + "This fragment is finished.");
                     }
+                }
+
+                @Override
+                public void onFailure(Call<List<Survey>> call, Throwable t) {
+//                    super.onFailure(call, t);
+
+
+                    Log.w("AhmedLog", t.getMessage());
+
 
                 }
             });
-
         }
     }
 
 
-
     ///////////////////////////////////// Adapter //////////////////////////////////////////////////
-    class NewsItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        private News news;
+        private List<Survey> surveys;
 
         /*
         * Type header : layout of toolbar which will be empty
@@ -160,17 +167,16 @@ public class NewsDetailsFragment extends MainCommonFragment {
         private static final int TYPE_HEADER = 2;
         private static final int TYPE_ITEM = 1;
 
-        public NewsItemAdapter(News news) {
-            getMainActivity().getToolbar().setTitle(news.getEventsNewsNameLat());
-            this.news = news;
+        public SurveyAdapter(List<Survey> surveys) {
+            this.surveys = surveys;
         }
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Context context = parent.getContext();
             if (viewType == TYPE_ITEM) {
-                final View view = LayoutInflater.from(context).inflate(R.layout.fragment_news_details, parent, false);
-                return new ItemViewHolder(view, news);
+                final View view = LayoutInflater.from(context).inflate(R.layout.row_survey, parent, false);
+                return new ItemViewHolder(view, surveys);
             } else if (viewType == TYPE_HEADER) {
                 final View view = LayoutInflater.from(context).inflate(R.layout.recycler_header, parent, false);
                 return new RecyclerHeaderViewHolder(view, -1);
@@ -182,7 +188,7 @@ public class NewsDetailsFragment extends MainCommonFragment {
         public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
             if (!isPositionHeader(position)) {
                 ItemViewHolder holder = (ItemViewHolder) viewHolder;
-                holder.setNewsItem();
+                holder.setSurveyItem(position);
             } else {
                 RecyclerHeaderViewHolder holder = (RecyclerHeaderViewHolder) viewHolder;
             }
@@ -202,7 +208,7 @@ public class NewsDetailsFragment extends MainCommonFragment {
         }
 
         public int getBasicItemCount() {
-            return news == null ? 0 : 1;
+            return surveys == null ? 0 : surveys.size();
         }
 
         private boolean isPositionHeader(int position) {
@@ -212,30 +218,24 @@ public class NewsDetailsFragment extends MainCommonFragment {
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private News news;
+        private List<Survey> surveys;
 
-        private ImageView newsImageView;
-        private TextView nameTextView, dateTextView, detailsTextView;
+        private TextView surveyNameTextView;
 
-        public ItemViewHolder(View parent, News news) {
+        public ItemViewHolder(View parent, List<Survey> surveys) {
             super(parent);
-            this.news = news;
+            this.surveys = surveys;
 
-            newsImageView = (ImageView) parent.findViewById(R.id.newsImageView);
-
-            nameTextView = (TextView) parent.findViewById(R.id.nameTextView);
-            dateTextView = (TextView) parent.findViewById(R.id.dateTextView);
-            detailsTextView = (TextView) parent.findViewById(R.id.detailsTextView);
-
+            surveyNameTextView = (TextView) parent.findViewById(R.id.surveyNameTextView);
         }
 
-        public void setNewsItem() {
-            newsService.displayImage(news.getImage(), newsImageView);
+        public void setSurveyItem(int position) {
+            final Survey survey = surveys.get(position);
 
-            nameTextView.setText(news.getEventsNewsNameLat());
-            dateTextView.setText(news.getEventsNewsDate());
-            detailsTextView.setText(news.getEventsNewsDetails());
+            surveyNameTextView.setText(survey.getSurveyNameAra());
         }
 
     }
+
+
 }
