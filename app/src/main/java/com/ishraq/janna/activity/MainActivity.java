@@ -1,16 +1,28 @@
 package com.ishraq.janna.activity;
 
+import android.Manifest;
+import android.app.SearchManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -105,7 +117,7 @@ public class MainActivity extends AppCompatActivity
         swipeRefreshLayout.setRefreshing(false);
 
         final View errorView = LayoutInflater.from(JannaApp.getContext()).inflate(R.layout.fragment_connection_error, null, false);
-        final ViewGroup wrapperView  = (ViewGroup) findViewById(R.id.wrapper);
+        final ViewGroup wrapperView = (ViewGroup) findViewById(R.id.wrapper);
 
         wrapperView.removeAllViews();
         wrapperView.addView(errorView);
@@ -119,8 +131,52 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        TextView errorMessageTextView = (TextView)errorView.findViewById(R.id.errorMessageTextView);
+        TextView errorMessageTextView = (TextView) errorView.findViewById(R.id.errorMessageTextView);
         errorMessageTextView.setText(R.string.common_error_message);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_share) {
+            shareText("تطبيق جنة", "حمله من هنا \n https://play.google.com/store/apps/details?id=com.ishraq.a7ya2");
+        } else if (id == R.id.action_call) {
+            makeCall();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void shareText(String subject, String body) {
+        Intent txtIntent = new Intent(Intent.ACTION_SEND);
+        txtIntent.setType("text/plain");
+        txtIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        txtIntent.putExtra(Intent.EXTRA_TEXT, body);
+        startActivity(Intent.createChooser(txtIntent, "Share"));
+    }
+
+    public void makeCall() {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+
+        intent.setData(Uri.parse("tel:01027287777"));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        getApplicationContext().startActivity(intent);
     }
 
     public void stopLoadingAnimator() {

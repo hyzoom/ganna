@@ -9,7 +9,7 @@
         android:layout_width="@dimen/image_size"
         android:layout_height="@dimen/image_size"
         android:layout_margin="@dimen/common_margin_padding_medium"
-        android:src="@drawable/back1"/>
+        android:src="@drawable/back1" />
 
     <TextView
         android:id="@+id/nameTextView"

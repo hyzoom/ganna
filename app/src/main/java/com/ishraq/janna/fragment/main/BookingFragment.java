@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -34,6 +35,8 @@ public class BookingFragment extends MainCommonFragment {
 
     private RecyclerView recyclerView;
     private CreateBookingAdapter adapter;
+    String[] clinics = {"اختر العيادة", "عيادة الهرم", "عيادة المهندسين", "عيادة اكتوبر"};
+    String[] diseaType = {"اختر التخصص", "نساء وتوليد", "أطفال", "عظام", "جراحة"};
 
 
     @Override
@@ -154,6 +157,7 @@ public class BookingFragment extends MainCommonFragment {
         private EditText nameEditText, mobileEditText, notesEditText;
         private Spinner clinicSpinner, specialSpinner;
         private Button addBookingButton;
+
         public ItemViewHolder(View parent) {
             super(parent);
 
@@ -163,6 +167,12 @@ public class BookingFragment extends MainCommonFragment {
 
             clinicSpinner = (Spinner) parent.findViewById(R.id.clinicSpinner);
             specialSpinner = (Spinner) parent.findViewById(R.id.specialSpinner);
+
+            clinicSpinner.setAdapter(new ArrayAdapter(
+                    getActivity(), R.layout.spinner_layout, clinics));
+
+            specialSpinner.setAdapter(new ArrayAdapter(
+                    getActivity(), R.layout.spinner_layout, diseaType));
 
             addBookingButton = (Button) parent.findViewById(R.id.addBookingButton);
 
@@ -205,11 +215,11 @@ public class BookingFragment extends MainCommonFragment {
                 notesEditText.setText("");
             }
 
-            if (clinicSpinner.getSelectedItemPosition() == 0){
+            if (clinicSpinner.getSelectedItemPosition() == 0) {
                 Toast.makeText(getActivity(), getString(R.string.clinic_spinner_empty), Toast.LENGTH_SHORT).show();
                 return false;
             }
-            if (specialSpinner.getSelectedItemPosition() == 0){
+            if (specialSpinner.getSelectedItemPosition() == 0) {
                 Toast.makeText(getActivity(), getString(R.string.special_spinner_empty), Toast.LENGTH_SHORT).show();
                 return false;
             }

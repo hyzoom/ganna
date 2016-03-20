@@ -24,7 +24,7 @@ public class Lecture {
     private String EventsLectureDetails;
 
     @DatabaseField
-    private String image;
+    private String lecturesImageUrl;
 
     @ForeignCollectionField(eager = true, columnName = "lecture_instructor")
     private Collection<LectureInstructor> lectureInstructors;
@@ -116,10 +116,10 @@ public class Lecture {
     }
 
     public String getImage() {
-        return image;
+        return lecturesImageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage(String lecturesImageUrl) {
+        this.lecturesImageUrl = lecturesImageUrl;
     }
 }
