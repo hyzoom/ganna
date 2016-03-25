@@ -1,28 +1,19 @@
 package com.ishraq.janna.fragment.main;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
-import com.ishraq.janna.adapter.EventListAdapter;
 import com.ishraq.janna.listner.HidingScrollListener;
-import com.ishraq.janna.model.Event;
 import com.ishraq.janna.model.Question;
-import com.ishraq.janna.model.Survey;
-import com.ishraq.janna.service.EventService;
 import com.ishraq.janna.service.QuestionService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
@@ -201,22 +192,36 @@ public class QuestionFragment extends MainCommonFragment {
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView questionTextView, dateTextView;
+        private final View row;
+        private final CheckBox solvedCheckBox;
+        private final TextView questionTextView, dateTextView;
 
         public ItemViewHolder(View parent) {
             super(parent);
-
+            row= parent;
+            solvedCheckBox = (CheckBox) parent.findViewById(R.id.solvedCheckBox);
             questionTextView = (TextView) parent.findViewById(R.id.questionTextView);
             dateTextView = (TextView) parent.findViewById(R.id.dateTextView);
         }
 
         public void setSurveyItem(int position) {
+            solvedCheckBox.setVisibility(View.GONE);
             Question question = questions.get(position);
+
             questionTextView.setText(question.getEventQuestion());
             dateTextView.setText(question.getEventQuestionDate());
+
+            solvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        row.setBackgroundColor(getResources().getColor(R.color.common_title));
+                    } else {
+                        row.setBackgroundColor(getResources().getColor(R.color.white));
+                    }
+                }
+            });
+
         }
-
     }
-
-
 }

@@ -15,11 +15,19 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/common_margin_padding_medium">
 
+        <CheckBox
+            android:id="@+id/solvedCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/common_title" />
+
         <TextView
             android:id="@+id/questionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
+            android:layout_toLeftOf="@+id/solvedCheckBox"
+            android:textSize="@dimen/common_text_title_big"
             android:layout_margin="@dimen/common_margin_padding_small"/>
 
         <TextView
@@ -27,7 +35,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
+            android:layout_toLeftOf="@+id/solvedCheckBox"
             android:layout_below="@+id/questionTextView"
+            android:textSize="@dimen/common_text_title"
             android:layout_margin="@dimen/common_margin_padding_small"/>
 
 

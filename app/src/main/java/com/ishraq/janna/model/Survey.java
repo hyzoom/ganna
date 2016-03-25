@@ -24,6 +24,7 @@ public class Survey {
 
     private List<SurveyAnswer> answers;
 
+    @DatabaseField(columnName = "answer_id")
     private Integer answerId;
 
     //////////////////////////////////////////////////////////////////////////////////////////

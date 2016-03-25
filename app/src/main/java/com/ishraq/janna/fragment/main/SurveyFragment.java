@@ -28,6 +28,7 @@ import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.SurveyWebService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -42,7 +43,7 @@ public class SurveyFragment extends MainCommonFragment {
     private SurveyService surveyService;
 
     private Integer eventId;
-    private List<Survey> surveys;
+    private List<Survey> surveys, tempSurvey;
 
     private RecyclerView recyclerView;
     private SurveyAdapter adapter;
@@ -100,9 +101,6 @@ public class SurveyFragment extends MainCommonFragment {
 
         recyclerView.setPadding(0, (int) getResources().getDimension(R.dimen.common_margin_padding_medium), 0, 0);
 
-        initData();
-
-
         submitButton = (Button) view.findViewById(R.id.submitButton);
         submitButton.setText(getResources().getString(R.string.survey_button_text));
         submitButton.setVisibility(View.VISIBLE);
@@ -112,7 +110,10 @@ public class SurveyFragment extends MainCommonFragment {
             public void onClick(View v) {
                 if (surveys != null && surveys.size() != 0) {
                     if (checkAllQuestionsSolved()) {
-
+                        tempSurvey = new ArrayList<Survey>();
+                        tempSurvey.addAll(surveys);
+                        SendSurveyRequest request = new SendSurveyRequest();
+                        request.execute();
                     } else {
                         Toast.makeText(getContext(), getResources().getString(R.string.all_survey_questions_not_solved),
                                 Toast.LENGTH_LONG).show();
@@ -120,6 +121,9 @@ public class SurveyFragment extends MainCommonFragment {
                 }
             }
         });
+
+
+        initData();
 
         return view;
     }
@@ -136,6 +140,10 @@ public class SurveyFragment extends MainCommonFragment {
             recyclerView.setAdapter(adapter);
             getMainActivity().stopLoadingAnimator();
             getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+
+            if (checkAllQuestionsSolved()) {
+                submitButton.setVisibility(View.GONE);
+            }
         }
 
     }
@@ -143,7 +151,7 @@ public class SurveyFragment extends MainCommonFragment {
 
     @Override
     public void refreshContent() {
-        refresh = true;
+//        refresh = true;
         initData();
     }
 
@@ -190,19 +198,25 @@ public class SurveyFragment extends MainCommonFragment {
         @Override
         public void execute() {
             getMainActivity().startLoadingAnimator();
-            Survey survey = surveys.get(0);
+            Survey survey = tempSurvey.get(0);
+
             surveyWebService.sendAllSurveyQuestions(1,
-                    settingsService.getSettings().getLoggedInUser().getId(),
                     survey.getSurveyCode(),
                     survey.getAnswerId()).enqueue(new RequestCallback<List<Survey>>(this) {
 
                 @Override
                 public void onResponse(Call<List<Survey>> call, Response<List<Survey>> response) {
-                    surveys.remove(0);
-                    if (surveys.size() > 0) {
+                    tempSurvey.remove(0);
+                    if (tempSurvey.size() > 0) {
                         execute();
                     } else {
+                        surveyService.saveSurveys(surveys);
                         getMainActivity().stopLoadingAnimator();
+
+                        adapter = new SurveyAdapter();
+                        recyclerView.setAdapter(adapter);
+
+                        submitButton.setVisibility(View.GONE);
                     }
                 }
             });
@@ -302,6 +316,10 @@ public class SurveyFragment extends MainCommonFragment {
                 radioGroup.addView(radioButton);
                 radioButton.setText(survey.getAnswers().get(i).getAnswerName());
                 radioButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
+                if (survey.getAnswerId() != null && survey.getAnswers().get(i).getAnswerCode() == survey.getAnswerId()) {
+                    radioButton.setChecked(true);
+                }
 
                 final int finalI = i;
                 radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

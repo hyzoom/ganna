@@ -1,16 +1,17 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    android:orientation="vertical">
-
+    android:layout_height="match_parent"
+    android:background="@android:color/white" >
 
     <RelativeLayout
+        android:id="@+id/helloLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
+        android:layout_height="@dimen/nav_header_height"
         android:background="@drawable/side_nav_bar"
-        android:padding="@dimen/common_margin_padding_big">
+        android:paddingRight="@dimen/common_margin_padding_medium"
+        android:paddingLeft="@dimen/common_margin_padding_medium"
+        android:paddingTop="@dimen/common_margin_padding_medium">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,21 +23,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="مرحبا: "
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="@dimen/common_text_title_big"
+                android:textStyle="bold|italic"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/userNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dip"
+                android:layout_marginRight="@dimen/common_margin_padding_big"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/common_text_title" />
+                android:textSize="@dimen/common_text_title_big" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@android:color/black" />
+                android:background="@color/common_title"
+                android:layout_marginBottom="@dimen/common_margin_padding_big"/>
 
             <TextView
                 android:id="@+id/desc"
@@ -45,7 +48,7 @@
                 android:gravity="center"
                 android:text="تطبيق جنة للاندرويد يهدف الى استخدام التكنولوجيا الحديثة فى مجال المؤتمرات وتسجيل الحجوزات سواء لمؤتمر جنة العلمى او مجموعة مستشفيات جنة"
                 android:textColor="@android:color/white"
-                android:textSize="15sp" />
+                android:textSize="@dimen/common_text_title" />
         </LinearLayout>
 
 
@@ -61,14 +64,15 @@
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
+        android:layout_below="@+id/helloLayout"
         tools:context=".NavigationDrawerFragment" />
 
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:foregroundGravity="bottom"
-        android:src="@drawable/icon"
-        android:text="برعاية" />
+        android:layout_height="@dimen/navigation_drawer_image_height"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon" />
 
-</LinearLayout>
+</RelativeLayout>

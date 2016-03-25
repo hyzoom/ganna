@@ -145,7 +145,7 @@ public class LoginFragment extends LoginCommonFragment implements View.OnClickLi
                     User usr = response.body().get(0);
 
                     // To test manager user
-//                    usr.setIsManager(true);
+                    usr.setIsManager(true);
 
                     userService.saveUser(usr);
 
