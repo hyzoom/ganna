@@ -68,6 +68,11 @@
     <string name="attendant">السادة الحضور</string>
 
 
+    <string name="survey_button_text">أرسل الاستبيان</string>
+    <string name="all_survey_questions_not_solved">إملأ كل أسئلة الاستبيان من فضلك</string>
+
+
+
     <!-- Create booking -->
     <string name="title_booking">أضف حجز</string>
     <string name="clinic_hint">العيادة</string>

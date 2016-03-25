@@ -21,4 +21,14 @@
         android:src="@drawable/ic_add_white"
         android:visibility="gone"/>
 
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/common_margin_padding_medium"
+        android:rotationY="180"
+        android:visibility="gone"/>
+
 </RelativeLayout>

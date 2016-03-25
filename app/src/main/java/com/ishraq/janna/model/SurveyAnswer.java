@@ -14,8 +14,8 @@ public class SurveyAnswer {
     @DatabaseField(columnName = "name")
     private String AnswerName;
 
-    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "survey_id")
-    private Survey SurveyCode;
+    @DatabaseField(columnName = "survey_id")
+    private Integer SurveyCode;
 
     /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -35,11 +35,11 @@ public class SurveyAnswer {
         AnswerName = answerName;
     }
 
-    public Survey getSurveyCode() {
+    public Integer getSurveyCode() {
         return SurveyCode;
     }
 
-    public void setSurveyCode(Survey surveyCode) {
+    public void setSurveyCode(Integer surveyCode) {
         SurveyCode = surveyCode;
     }
 }

@@ -17,4 +17,10 @@ public interface SurveyWebService {
     Call<List<Survey>> getAllSurveyQuestions();
 //    Call<List<Survey>> getAllSurveyQuestions(@Query("id") Integer eventId);
 
+    @GET("JsonViewSurvey.aspx")
+    Call<List<Survey>> sendAllSurveyQuestions(@Query("event_id") Integer eventId,
+                                              @Query("user_id") Integer userId,
+                                              @Query("question_id") Integer questionId,
+                                              @Query("result_id") Integer resultId);
+
 }
