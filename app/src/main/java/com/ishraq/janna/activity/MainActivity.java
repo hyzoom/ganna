@@ -35,6 +35,7 @@ import com.ishraq.janna.fragment.main.BookingFragment;
 import com.ishraq.janna.fragment.main.EventDetailsFragment;
 import com.ishraq.janna.fragment.main.HomeFragment;
 import com.ishraq.janna.fragment.main.MainCommonFragment;
+import com.ishraq.janna.fragment.main.QuestionFragment;
 import com.ishraq.janna.model.Settings;
 import com.ishraq.janna.service.SettingsService;
 import com.ishraq.janna.webservice.CommonRequest;
@@ -197,6 +198,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        Settings settings = settingsService.getSettings();
+
         switch (position) {
             case 0:
                 addFragment(new AboutFragment(), true, null);
@@ -205,7 +208,22 @@ public class MainActivity extends AppCompatActivity
                 addFragment(new BookingFragment(), true, null);
                 break;
             case 2:
-                Settings settings = settingsService.getSettings();
+                if (settings.getLoggedInUser().isManager()) {
+                    addFragment(new QuestionFragment(), true, null);
+                } else{
+                    settings.setLoggedInUser(null);
+
+                    settingsService.updateSettings(settings);
+
+                    Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(i);
+
+                    finish();
+                }
+                break;
+
+            case 3:
+                settings = settingsService.getSettings();
                 settings.setLoggedInUser(null);
 
                 settingsService.updateSettings(settings);

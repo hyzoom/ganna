@@ -20,8 +20,8 @@ public class Question {
     @DatabaseField
     private String Notes;
 
-    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "event_id")
-    private Event EventCode;
+    @DatabaseField
+    private Integer EventCode;
 
 
 
@@ -61,11 +61,11 @@ public class Question {
         Notes = notes;
     }
 
-    public Event getEventCode() {
+    public Integer getEventCode() {
         return EventCode;
     }
 
-    public void setEventCode(Event eventCode) {
+    public void setEventCode(Integer eventCode) {
         EventCode = eventCode;
     }
 }

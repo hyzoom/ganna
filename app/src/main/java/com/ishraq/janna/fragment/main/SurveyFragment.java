@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,11 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -26,7 +22,6 @@ import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
 import com.ishraq.janna.listner.HidingScrollListener;
 import com.ishraq.janna.model.Survey;
-import com.ishraq.janna.model.SurveyAnswer;
 import com.ishraq.janna.service.SettingsService;
 import com.ishraq.janna.service.SurveyService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
@@ -77,6 +72,7 @@ public class SurveyFragment extends MainCommonFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getMainActivity().getToolbar().setTitle(getResources().getString(R.string.survey_title));
         showToolbar();
+        getMainActivity().startLoadingAnimator();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -169,7 +165,6 @@ public class SurveyFragment extends MainCommonFragment {
     private class ListSurveyQuestionsRequest implements CommonRequest {
         @Override
         public void execute() {
-            getMainActivity().startLoadingAnimator();
             surveyWebService.getAllSurveyQuestions().enqueue(new RequestCallback<List<Survey>>(this) {
                 @Override
                 public void onResponse(Call<List<Survey>> call, Response<List<Survey>> response) {
@@ -189,7 +184,6 @@ public class SurveyFragment extends MainCommonFragment {
             });
         }
     }
-
 
     private class SendSurveyRequest implements CommonRequest {
 
