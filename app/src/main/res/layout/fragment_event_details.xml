@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/news_img1"
+                android:drawableTop="@drawable/news_img2"
                 android:text="أخبار المؤتمر:"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/rules_img1"
+                android:drawableTop="@drawable/rules_img2"
                 android:text="قواعد المؤتمر:"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/question_img1"
+                android:drawableTop="@drawable/question_img2"
                 android:text="أضف سؤال"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -174,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/url_img1"
+                android:drawableTop="@drawable/url_img2"
                 android:text="زوروا موقعنا"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -186,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/survey_img1"
+                android:drawableTop="@drawable/survey_img2"
                 android:text="الاستبيانات"
                 android:textColor="#000000"
                 android:textStyle="bold" />
