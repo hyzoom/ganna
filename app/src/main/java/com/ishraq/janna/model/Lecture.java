@@ -23,8 +23,17 @@ public class Lecture {
     @DatabaseField
     private String EventsLectureDetails;
 
+    // Lecturer
+    @DatabaseField
+    private String lecturerName;
+
+    @DatabaseField
+    private String lecturerDate;
+
     @DatabaseField
     private String lecturesImageUrl;
+
+    //
 
     @ForeignCollectionField(eager = true, columnName = "lecture_instructor")
     private Collection<LectureInstructor> lectureInstructors;

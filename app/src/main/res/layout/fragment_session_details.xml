@@ -11,9 +11,16 @@
 
         <TextView
             android:id="@+id/nameTextView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black" />
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/common_margin_padding_medium"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/common_text_title_big"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"/>
 
         <com.ishraq.janna.component.ExpandableHeightListView
             android:id="@+id/lectureListView"

@@ -151,7 +151,6 @@ public class SurveyFragment extends MainCommonFragment {
 
     @Override
     public void refreshContent() {
-//        refresh = true;
         initData();
     }
 
@@ -307,6 +306,7 @@ public class SurveyFragment extends MainCommonFragment {
                 button.setVisibility(View.VISIBLE);
             }
 
+            Log.w("AhmedLog", survey.getAnswers().size() + "");
             if (survey.getAnswers() == null || survey.getAnswers().size() ==0)
                 return;
 

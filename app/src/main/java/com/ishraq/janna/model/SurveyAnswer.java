@@ -8,7 +8,10 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "answer")
 public class SurveyAnswer {
-    @DatabaseField(id = true, columnName = "id")
+    @DatabaseField(id = true)
+    private Integer id;
+
+    @DatabaseField(columnName = "answer_id")
     private Integer AnswerCode;
 
     @DatabaseField(columnName = "name")
@@ -41,5 +44,13 @@ public class SurveyAnswer {
 
     public void setSurveyCode(Integer surveyCode) {
         SurveyCode = surveyCode;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

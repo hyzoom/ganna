@@ -33,6 +33,9 @@ public class Session {
     @ForeignCollectionField(eager = true)
     private Collection<Lecture> lect;
 
+    @DatabaseField(columnName = "image")
+    private String SessionsImageUrl;
+
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "event_id")
     private Event event;
 
@@ -100,5 +103,13 @@ public class Session {
 
     public void setLect(Collection<Lecture> lect) {
         this.lect = lect;
+    }
+
+    public String getSessionsImageUrl() {
+        return SessionsImageUrl;
+    }
+
+    public void setSessionsImageUrl(String sessionsImageUrl) {
+        SessionsImageUrl = sessionsImageUrl;
     }
 }
