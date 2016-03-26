@@ -111,8 +111,6 @@ public class SessionDetailsFragment extends MainCommonFragment {
 
         getMainActivity().stopLoadingAnimator();
         getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
-//        SessionDetailsRequest request = new SessionDetailsRequest();
-//        request.execute();
     }
 
     private class SessionDetailsRequest implements CommonRequest {
@@ -219,19 +217,19 @@ public class SessionDetailsFragment extends MainCommonFragment {
 
             final List<Lecture> lectures = new ArrayList<Lecture>(session.getLect());
 
-            LectureListAdapter lectureListAdapter = new LectureListAdapter(JannaApp.getContext(), R.layout.row_session, lectures);
+            LectureListAdapter lectureListAdapter = new LectureListAdapter(JannaApp.getContext(), R.layout.row_lecture, lectures);
             lectureListView.setAdapter(lectureListAdapter);
 
-            lectureListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Fragment lectureDetailsFragment = new LectureDetailsFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("lectureId", lectures.get(position).getEventsLectureCode());
-                    lectureDetailsFragment.setArguments(bundle);
-                    getMainActivity().addFragment(lectureDetailsFragment, true, null);
-                }
-            });
+//            lectureListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    Fragment lectureDetailsFragment = new LectureDetailsFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putInt("lectureId", lectures.get(position).getEventsLectureCode());
+//                    lectureDetailsFragment.setArguments(bundle);
+//                    getMainActivity().addFragment(lectureDetailsFragment, true, null);
+//                }
+//            });
         }
     }
 
@@ -258,8 +256,12 @@ public class SessionDetailsFragment extends MainCommonFragment {
 
             ImageView imageView  = (ImageView) row.findViewById(R.id.imageView);
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
+            TextView lecturerNameTextView = (TextView) row.findViewById(R.id.lecturerNameTextView);
+            TextView dateTextView = (TextView) row.findViewById(R.id.dateTextView);
 
             nameTextView.setText(lectures.get(position).getEventsLectureNameLat());
+            lecturerNameTextView.setText(lectures.get(position).getEventsLectureNameLat());
+            dateTextView.setText(lectures.get(position).getEventsLectureNameLat());
 
             sessionService.displayImage(lectures.get(position).getImage(), imageView);
 

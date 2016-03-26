@@ -90,8 +90,6 @@ public class SessionFragment extends MainCommonFragment {
             }
         });
 
-        recyclerView.setPadding(0, (int) getResources().getDimension(R.dimen.common_margin_padding_medium), 0, 0);
-
         initData();
 
         return view;
@@ -230,7 +228,6 @@ public class SessionFragment extends MainCommonFragment {
                 row = inflater.inflate(layoutResourceId, parent, false);
             }
 
-            row.findViewById(R.id.imageView).setVisibility(View.GONE);
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
             nameTextView.setText(sessions.get(position).getEventsSessionNameAra() + "");
 

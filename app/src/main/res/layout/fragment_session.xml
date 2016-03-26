@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="@dimen/common_margin_padding_medium"
+    android:paddingBottom="@dimen/common_margin_padding_medium"
     android:rotationY="180">
 
     <com.ishraq.janna.component.ExpandableHeightListView
         android:id="@+id/sessionListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="13dip"
-        android:layout_marginRight="13dip"
-        android:layout_marginTop="0dip"
-        android:padding="8dp" />
+        android:background="@android:color/white"
+        android:divider="@color/common_title"
+        android:dividerHeight="@dimen/common_margin_padding_small"/>
 
 </LinearLayout>
