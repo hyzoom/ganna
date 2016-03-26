@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/sessions_img"
+                android:drawableTop="@drawable/sessions_img1"
                 android:text="جلسات المؤتمر:"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/news_img"
+                android:drawableTop="@drawable/news_img1"
                 android:text="أخبار المؤتمر:"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/rules_img"
+                android:drawableTop="@drawable/rules_img1"
                 android:text="قواعد المؤتمر:"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/question_img"
+                android:drawableTop="@drawable/question_img1"
                 android:text="أضف سؤال"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/attendee"
+                android:drawableTop="@drawable/attendee1"
                 android:text="السادة الحضور"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/ro3aa_img"
+                android:drawableTop="@drawable/ro3aa_img1"
                 android:text="الرعاة"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/location_img"
+                android:drawableTop="@drawable/location_img1"
                 android:text="خريطة المؤتمر"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -174,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/url_img"
+                android:drawableTop="@drawable/url_img1"
                 android:text="زوروا موقعنا"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -186,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/survey_img"
+                android:drawableTop="@drawable/survey_img1"
                 android:text="الاستبيانات"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -204,7 +204,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/face_img"
+                android:drawableTop="@drawable/face_img1"
                 android:text="فيس بوك"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/twitter_img"
+                android:drawableTop="@drawable/twitter_img1"
                 android:text="تويتر"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -227,7 +227,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector"
-                android:drawableTop="@drawable/linked_img"
+                android:drawableTop="@drawable/linked_img1"
                 android:text="لينكد ان"
                 android:textColor="#000000"
                 android:textStyle="bold" />

@@ -34,7 +34,7 @@ import retrofit2.Response;
 /**
  * Created by Ahmed on 2/18/2016.
  */
-public class RegistrationFragment extends LoginCommonFragment implements View.OnClickListener{
+public class RegistrationFragment extends LoginCommonFragment implements View.OnClickListener {
 
     private SettingsService settingsService;
     private UserService userService;
@@ -123,7 +123,7 @@ public class RegistrationFragment extends LoginCommonFragment implements View.On
             Toast.makeText(getActivity(), getString(R.string.re_password_empty), Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (!passwordEditText.getText().toString().toString().equals(rePasswordEditText.getText().toString().toString())){
+        if (!passwordEditText.getText().toString().toString().equals(rePasswordEditText.getText().toString().toString())) {
             Toast.makeText(getActivity(), getString(R.string.repeating_not_right), Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -198,6 +198,7 @@ public class RegistrationFragment extends LoginCommonFragment implements View.On
                     // Go to main activity
                     Intent i = new Intent(getActivity(), MainActivity.class);
                     startActivity(i);
+                    getActivity().finish();
                 }
             });
         }
