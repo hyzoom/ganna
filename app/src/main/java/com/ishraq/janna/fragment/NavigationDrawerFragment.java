@@ -152,22 +152,6 @@ public class NavigationDrawerFragment extends Fragment {
                 icon.setImageResource(rowData.get("icon"));
                 text.setText(rowData.get("text"));
 
-//                if (position == mCurrentSelectedPosition) {
-//                    convertView.setBackgroundColor(getActivity().getResources().getColor(R.color.recipe_list_background_color));
-//                    text.setTextColor(getResources().getColor(R.color.colorPrimary));
-//
-//                    switch (position) {
-//                        case 0:
-//                            icon.setImageResource(R.drawable.ic_bookmark);
-//                            break;
-//
-//                        case 1:
-//                            icon.setImageResource(R.drawable.ic_exit);
-//                            break;
-//                    }
-//                }
-
-
                 return convertView;
             }
         });
@@ -183,10 +167,18 @@ public class NavigationDrawerFragment extends Fragment {
             put("icon", R.drawable.ic_bookmark);
             put("text", R.string.nav_booking_title);
         }});
+        if (settingsService.getSettings().getLoggedInUser().isManager()) {
+            entries.add(new HashMap<String, Integer>() {{
+                put("icon", R.drawable.ic_question);
+                put("text", R.string.nav_question_title);
+            }});
+        }
         entries.add(new HashMap<String, Integer>() {{
             put("icon", R.drawable.ic_exit);
             put("text", R.string.nav_logout_title);
         }});
+
+
         return entries;
     }
 

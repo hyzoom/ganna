@@ -5,6 +5,7 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Ahmed on 3/19/2016.
@@ -18,13 +19,13 @@ public class Survey {
     @DatabaseField(columnName = "name")
     private String SurveyNameAra;
 
-    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "event_id")
-    private Event EventCode;
+    @DatabaseField(columnName = "event_id")
+    private Integer EventCode;
 
+    private List<SurveyAnswer> answers;
 
-    @ForeignCollectionField(eager = true)
-    private Collection<SurveyAnswer> answers;
-
+    @DatabaseField(columnName = "answer_id")
+    private Integer answerId;
 
     //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -45,19 +46,28 @@ public class Survey {
         SurveyNameAra = surveyNameAra;
     }
 
-    public Event getEvent() {
+
+    public Integer getEventCode() {
         return EventCode;
     }
 
-    public void setEvent(Event EventCode) {
-        this.EventCode = EventCode;
+    public void setEventCode(Integer eventCode) {
+        EventCode = eventCode;
     }
 
-    public Collection<SurveyAnswer> getAnswers() {
+    public List<SurveyAnswer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(Collection<SurveyAnswer> answers) {
+    public void setAnswers(List<SurveyAnswer> answers) {
         this.answers = answers;
+    }
+
+    public Integer getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(Integer answerId) {
+        this.answerId = answerId;
     }
 }

@@ -1,0 +1,44 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">25.6dp</dimen>
+    <dimen name="nav_header_height">256dp</dimen>
+
+    <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html -->
+    <dimen name="navigation_drawer_width">384dp</dimen>
+    <dimen name="navigation_drawer_row_height">76.8dp</dimen>
+    <dimen name="navigation_drawer_image_height">236.8dp</dimen>
+
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">25.6dp</dimen>
+    <dimen name="activity_vertical_margin">25.6dp</dimen>
+    <dimen name="fab_margin">25.6dp</dimen>
+
+    <!--error fragment-->
+    <dimen name="error_image_size">160dp</dimen>
+
+    <!-- Dialogs -->
+    <dimen name="common_dialog_width_min">640dp</dimen>
+
+
+
+    <!-- common -->
+    <dimen name="card_corner_radius">3.2dp</dimen>
+
+    <dimen name="common_margin_padding_medium">12.8dp</dimen>
+    <dimen name="common_margin_padding_small">6.4dip</dimen>
+    <dimen name="common_margin_padding_big">25.6dp</dimen>
+
+    <dimen name="common_icon_size">38.4dp</dimen>
+
+    <dimen name="common_text_title">22.4sp</dimen>
+    <dimen name="common_text_title_big">28.8sp</dimen>
+    <dimen name="common_text_small">19.2sp</dimen>
+    <dimen name="common_text_very_small">12.8sp</dimen>
+    <dimen name="common_text_space_extra">6.4sp</dimen>
+
+    <dimen name="image_size">192dp</dimen>
+
+</resources>

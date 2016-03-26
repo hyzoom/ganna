@@ -267,7 +267,7 @@ public class EventDetailsFragment extends MainCommonFragment {
         private TextView nameTextView, startDateTextView, endDateTextView,
                 structureTextView, addressTextView, notesTextView;
 
-        private Button addQuestionButton, rulesButton, sponsorButton, sessionButton,
+        private Button addQuestionButton, rulesButton, sponsorButton, sessionButton, surveyButton,
                 faceButton, twitterButton, linkedButton, siteButton, attendeesButton, newsButton;
 
         public ItemViewHolder(View parent, Event event) {
@@ -291,6 +291,7 @@ public class EventDetailsFragment extends MainCommonFragment {
             twitterButton = (Button) parent.findViewById(R.id.twitterButton);
             linkedButton = (Button) parent.findViewById(R.id.linkedButton);
             siteButton = (Button) parent.findViewById(R.id.siteButton);
+            surveyButton = (Button) parent.findViewById(R.id.surveyButton);
 
             addQuestionButton = (Button) parent.findViewById(R.id.addQuestionButton);
         }
@@ -335,6 +336,13 @@ public class EventDetailsFragment extends MainCommonFragment {
                 @Override
                 public void onClick(View v) {
                     getMainActivity().addFragment(new AttendantFragment(), true, null);
+                }
+            });
+
+            surveyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getMainActivity().addFragment(new SurveyFragment(), true, null);
                 }
             });
 

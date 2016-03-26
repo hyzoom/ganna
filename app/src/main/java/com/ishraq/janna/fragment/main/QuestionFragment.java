@@ -1,17 +1,21 @@
 package com.ishraq.janna.fragment.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.ishraq.janna.R;
-import com.ishraq.janna.adapter.EventListAdapter;
 import com.ishraq.janna.listner.HidingScrollListener;
-import com.ishraq.janna.model.Event;
-import com.ishraq.janna.service.EventService;
+import com.ishraq.janna.model.Question;
+import com.ishraq.janna.service.QuestionService;
+import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.EventWebService;
 
@@ -27,29 +31,36 @@ public class QuestionFragment extends MainCommonFragment {
     public static final String TAG = "QUESTIONS";
 
     private EventWebService eventWebService;
-    private EventService eventService;
+
+    private QuestionService questionService;
+
     private RecyclerView recyclerView;
 
-    private List<Event> events;
-    private EventListAdapter adapter;
-    private boolean loadMore = true;
+    private List<Question> questions;
+    private QuestionAdapter adapter;
+
+    private boolean refresh = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        eventService = new EventService(getMainActivity());
         eventWebService = getWebService(EventWebService.class);
+
+        questionService = new QuestionService(getMainActivity());
     }
 
     @Override
     public void refreshContent() {
+        refresh = true;
         initData();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getMainActivity().getToolbar().setTitle(getResources().getString(R.string.app_name));
+        getMainActivity().getToolbar().setTitle(getResources().getString(R.string.nav_question_title));
+
+        getMainActivity().startLoadingAnimator();
         View view = inflater.inflate(R.layout.recycler_view, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -85,45 +96,132 @@ public class QuestionFragment extends MainCommonFragment {
     }
 
     private void initData() {
-        ListEventRequest request = new ListEventRequest();
-        request.execute();
+        questions = questionService.getQuestions();
+
+        if (questions == null || questions.size() == 0 || refresh) {
+            ListEventRequest request = new ListEventRequest();
+            request.execute();
+        } else {
+            adapter = new QuestionAdapter();
+            recyclerView.setAdapter(adapter);
+            getMainActivity().stopLoadingAnimator();
+            getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+        }
     }
 
     private class ListEventRequest implements CommonRequest {
         @Override
         public void execute() {
-            getMainActivity().startLoadingAnimator();
-            eventWebService.getAllEvents().enqueue(new RequestCallback<List<Event>>(this) {
+
+            eventWebService.getEventQuestions(1).enqueue(new RequestCallback<List<Question>>(this) {
                 @Override
-                public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-                    events = response.body();
-//                    eventService.saveEvents(events);
+                public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+                    questions = response.body();
+                    questionService.saveQuestions(questions);
 
-                    if (events.size() == 10) {
-                        loadMore = true;
-                    } else {
-                        loadMore = false;
-                    }
-                    adapter = new EventListAdapter(getMainActivity(), events, loadMore, TAG);
+                    adapter = new QuestionAdapter();
                     recyclerView.setAdapter(adapter);
-
                     getMainActivity().stopLoadingAnimator();
                     getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
-                }
-
-                @Override
-                public void onFailure(Call<List<Event>> call, Throwable t) {
-                    loadMore = false;
-                    events = eventService.getEvents();
-
-                    adapter = new EventListAdapter(getMainActivity(), events, loadMore, TAG);
-                    recyclerView.setAdapter(adapter);
-
-                    getMainActivity().stopLoadingAnimator();
-                    getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+                    refresh = false;
                 }
             });
         }
     }
 
+
+    ///////////////////////////////////// Adapter //////////////////////////////////////////////////
+    class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+        /*
+        * Type header : layout of toolbar which will be empty
+        * Type Item : Recipe Item
+        * */
+
+        private static final int TYPE_SUBMIT = 3;
+        private static final int TYPE_HEADER = 2;
+        private static final int TYPE_ITEM = 1;
+
+        public QuestionAdapter() {
+        }
+
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            Context context = parent.getContext();
+            if (viewType == TYPE_ITEM) {
+                final View view = LayoutInflater.from(context).inflate(R.layout.row_question, parent, false);
+                return new ItemViewHolder(view);
+            } else if (viewType == TYPE_HEADER) {
+                final View view = LayoutInflater.from(context).inflate(R.layout.recycler_header, parent, false);
+                return new RecyclerHeaderViewHolder(view, -1);
+            }
+            throw new RuntimeException("There is no type that matches the type " + viewType + " + make sure your using types correctly");
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+            if (!isPositionHeader(position)) {
+                ItemViewHolder holder = (ItemViewHolder) viewHolder;
+                holder.setSurveyItem(position-1);
+            } else {
+                RecyclerHeaderViewHolder holder = (RecyclerHeaderViewHolder) viewHolder;
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return getBasicItemCount() + 1;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (isPositionHeader(position)) {
+                return TYPE_HEADER;
+            }
+            return TYPE_ITEM;
+        }
+
+        public int getBasicItemCount() {
+            return questions == null ? 0 : questions.size();
+        }
+
+        private boolean isPositionHeader(int position) {
+            return position == 0;
+        }
+    }
+
+    class ItemViewHolder extends RecyclerView.ViewHolder {
+
+        private final View row;
+        private final CheckBox solvedCheckBox;
+        private final TextView questionTextView, dateTextView;
+
+        public ItemViewHolder(View parent) {
+            super(parent);
+            row= parent;
+            solvedCheckBox = (CheckBox) parent.findViewById(R.id.solvedCheckBox);
+            questionTextView = (TextView) parent.findViewById(R.id.questionTextView);
+            dateTextView = (TextView) parent.findViewById(R.id.dateTextView);
+        }
+
+        public void setSurveyItem(int position) {
+            solvedCheckBox.setVisibility(View.GONE);
+            Question question = questions.get(position);
+
+            questionTextView.setText(question.getEventQuestion());
+            dateTextView.setText(question.getEventQuestionDate());
+
+            solvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        row.setBackgroundColor(getResources().getColor(R.color.common_title));
+                    } else {
+                        row.setBackgroundColor(getResources().getColor(R.color.white));
+                    }
+                }
+            });
+
+        }
+    }
 }

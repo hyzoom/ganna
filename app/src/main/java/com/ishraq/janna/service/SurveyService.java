@@ -24,12 +24,31 @@ public class SurveyService extends CommonService {
 
     /**
      *
+     * @return SurveyAnswer
+     */
+    public List<SurveyAnswer> getSurveyAnswers(Integer surveyId) {
+        List<SurveyAnswer> surveyAnswers = null;
+        try {
+            surveyAnswers = answerDao.queryForEq("survey_id", surveyId);
+        } catch (SQLException e) {
+            Log.e(JannaApp.LOG_TAG, e.getMessage());
+        }
+        return surveyAnswers;
+    }
+
+    /**
+     *
      * @return Surveys
      */
     public List<Survey> getSurveys() {
         List<Survey> surveys = null;
         try {
             surveys = surveyDao.queryForAll();
+
+            for (int i = 0; i < surveys.size(); i++) {
+                surveys.get(i).setAnswers(getSurveyAnswers(surveys.get(i).getSurveyCode()));
+            }
+
         } catch (SQLException e) {
             Log.e(JannaApp.LOG_TAG, e.getMessage());
         }
@@ -90,14 +109,6 @@ public class SurveyService extends CommonService {
             Log.e(JannaApp.LOG_TAG, e.getMessage());
         }
 
-        // Save answers
-        if (survey.getAnswers() != null && survey.getAnswers().size() > 0) {
-            List<SurveyAnswer> surveyAnswers = new ArrayList<SurveyAnswer>(survey.getAnswers());
-            for (SurveyAnswer surveyAnswer : surveyAnswers) {
-                surveyAnswer.setSurveyCode(survey);
-                result = saveSurveyAnswer(surveyAnswer);
-            }
-        }
         return result;
     }
 

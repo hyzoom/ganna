@@ -19,12 +19,10 @@
     <!--error fragment-->
     <dimen name="error_image_size">100dp</dimen>
 
-
     <!-- Dialogs -->
     <dimen name="common_dialog_width_min">400dp</dimen>
 
 
-    <!-- Fragment news details -->
 
     <!-- common -->
     <dimen name="card_corner_radius">2dp</dimen>
@@ -35,7 +33,6 @@
 
     <dimen name="common_icon_size">24dp</dimen>
 
-    <!--commons-->
     <dimen name="common_text_title">14sp</dimen>
     <dimen name="common_text_title_big">18sp</dimen>
     <dimen name="common_text_small">12sp</dimen>
