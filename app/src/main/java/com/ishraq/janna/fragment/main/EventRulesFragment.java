@@ -1,5 +1,6 @@
 package com.ishraq.janna.fragment.main;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,9 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
@@ -19,28 +23,39 @@ import com.ishraq.janna.model.Event;
 import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
 import com.ishraq.janna.service.EventService;
+import com.ishraq.janna.service.SettingsService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
+import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.EventWebService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Response;
+
 /**
  * Created by Ahmed on 3/15/2016.
  */
-public class EventRulesFragment extends MainCommonFragment {
+public class EventRulesFragment extends MainCommonFragment implements View.OnClickListener {
     private EventService eventService;
+    private EventWebService eventWebService;
 
     private RecyclerView recyclerView;
 
+    private Button addQuestionButton, eventNewsButton, addBookingButton;
+
     private Event event;
     private EventRulesAdapter adapter;
+
+    private Dialog dialog;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         eventService = new EventService(getMainActivity());
+        eventWebService = getWebService(EventWebService.class);
     }
 
     @Override
@@ -94,8 +109,89 @@ public class EventRulesFragment extends MainCommonFragment {
         getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.addQuestionButton:
+                showAddQuestionDialog();
+                break;
+
+            case R.id.eventNewsButton:
+                getMainActivity().addFragment(new NewsFragment(), true, null);
+                break;
+
+            case R.id.addBookingButton:
+                getMainActivity().addFragment(new BookingFragment(), true, null);
+                break;
+        }
+    }
 
 
+    // show add question dialog
+    private void showAddQuestionDialog() {
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.dialog_add_question, null);
+
+        dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setContentView(dialogView);
+        dialog.show();
+
+        final EditText questionEditText = (EditText) dialog.findViewById(R.id.questionEditText);
+
+        Button sendQuestionButton = (Button) dialog.findViewById(R.id.sendQuestionButton);
+        Button cancelButton = (Button) dialog.findViewById(R.id.cancelButton);
+
+        sendQuestionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (questionEditText.getText().toString() == null || questionEditText.getText().toString().equals("")) {
+                    Toast.makeText(getMainActivity(), getResources().getString(R.string.question_empty), Toast.LENGTH_SHORT).show();
+                } else {
+                    dialog.dismiss();
+                    EventQuestionRequest request = new EventQuestionRequest(questionEditText.getText().toString());
+                    request.execute();
+                }
+
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+
+    private class EventQuestionRequest implements CommonRequest {
+        private String question;
+
+        public EventQuestionRequest(String question) {
+            this.question = question;
+        }
+
+        @Override
+        public void execute() {
+            getMainActivity().startLoadingAnimator();
+            SettingsService settingsService = new SettingsService(getMainActivity());
+            eventWebService.sendEventQuestion(1,
+                    settingsService.getSettings().getLoggedInUser().getId(),
+                    question).enqueue(new RequestCallback<List<Event.QuestionResult>>(this) {
+
+                @Override
+                public void onResponse(Call<List<Event.QuestionResult>> call, Response<List<Event.QuestionResult>> response) {
+                    if (response.body().get(0).getQuestionSaved() == 1) {
+                        Toast.makeText(getMainActivity(), getResources().getString(R.string.question_send_successfully), Toast.LENGTH_SHORT).show();
+                    }
+
+                    getMainActivity().stopLoadingAnimator();
+                }
+            });
+        }
+    }
 
 
     ///////////////////////////////////// Adapter //////////////////////////////////////////////////
@@ -169,6 +265,15 @@ public class EventRulesFragment extends MainCommonFragment {
         public ItemViewHolder(View parent, Event event) {
             super(parent);
             this.event = event;
+
+            addQuestionButton = (Button) parent.findViewById(R.id.addQuestionButton);
+            eventNewsButton = (Button) parent.findViewById(R.id.eventNewsButton);
+            addBookingButton = (Button) parent.findViewById(R.id.addBookingButton);
+
+            addQuestionButton.setOnClickListener(EventRulesFragment.this);
+            eventNewsButton.setOnClickListener(EventRulesFragment.this);
+            addBookingButton.setOnClickListener(EventRulesFragment.this);
+
 
             rulesListView = (ExpandableHeightListView) parent.findViewById(R.id.rulesListView);
             rulesListView.setExpanded(true);
