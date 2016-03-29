@@ -254,14 +254,14 @@ public class SessionDetailsFragment extends MainCommonFragment {
                 row = inflater.inflate(layoutResourceId, parent, false);
             }
 
-            ImageView imageView  = (ImageView) row.findViewById(R.id.imageView);
+            ImageView imageView = (ImageView) row.findViewById(R.id.imageView);
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
             TextView lecturerNameTextView = (TextView) row.findViewById(R.id.lecturerNameTextView);
             TextView dateTextView = (TextView) row.findViewById(R.id.dateTextView);
 
             nameTextView.setText(lectures.get(position).getEventsLectureNameLat());
-            lecturerNameTextView.setText(lectures.get(position).getEventsLectureNameLat());
-            dateTextView.setText(lectures.get(position).getEventsLectureNameLat());
+            lecturerNameTextView.setText("Dr. Hesham Al-anany");//lectures.get(position).getEventsLectureNameLat()
+            dateTextView.setText("10:11 AM");//lectures.get(position).getEventsLectureNameLat()
 
             sessionService.displayImage(lectures.get(position).getImage(), imageView);
 
