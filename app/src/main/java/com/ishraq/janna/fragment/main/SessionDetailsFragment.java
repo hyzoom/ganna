@@ -259,12 +259,11 @@ public class SessionDetailsFragment extends MainCommonFragment {
             TextView lecturerNameTextView = (TextView) row.findViewById(R.id.lecturerNameTextView);
             TextView dateTextView = (TextView) row.findViewById(R.id.dateTextView);
 
-            nameTextView.setText(lectures.get(position).getEventsLectureNameLat());
-            lecturerNameTextView.setText("Dr. Hesham Al-anany");//lectures.get(position).getEventsLectureNameLat()
-            dateTextView.setText("10:11 AM");//lectures.get(position).getEventsLectureNameLat()
+            nameTextView.setText(lectures.get(position).getEventsLectureNameAra());
+            lecturerNameTextView.setText(lectures.get(position).getInstructorName());//
+            dateTextView.setText(lectures.get(position).getEventsLectureDate());//
 
             sessionService.displayImage(lectures.get(position).getImage(), imageView);
-
             return row;
         }
     }

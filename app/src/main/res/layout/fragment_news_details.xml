@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dip"
             android:text="ADDRESS"
-            android:textColor="@android:color/black"
+            android:textColor="#035680"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -28,7 +28,7 @@
             android:layout_margin="15dip"
             android:text="DATE"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/newsImageView"
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_margin_padding_medium"
-            android:gravity="center"
+            android:gravity="right"
             android:lineSpacingExtra="@dimen/common_margin_padding_small"
             android:textColor="@android:color/black"
             android:textSize="20sp" />

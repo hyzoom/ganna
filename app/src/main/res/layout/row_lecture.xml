@@ -21,23 +21,29 @@
             android:id="@+id/nameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/common_text_title" />
+            android:layout_margin="3dip"
+            android:text="Lecture"
+            android:textColor="#035680"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lecturerNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:layout_margin="@dimen/common_margin_padding_small"
-            android:textSize="@dimen/common_text_title" />
+            android:layout_margin="3dip"
+            android:text="By"
+            android:textColor="#035680"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/dateTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/common_text_title" />
+            android:layout_margin="3dip"
+            android:text="Date"
+            android:textColor="#3282ab"
+            android:textSize="13sp" />
 
     </LinearLayout>
 

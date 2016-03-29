@@ -25,10 +25,10 @@ public class Lecture {
 
     // Lecturer
     @DatabaseField
-    private String lecturerName;
+    private String InstructorName;
 
     @DatabaseField
-    private String lecturerDate;
+    private String EventsLectureDate;
 
     @DatabaseField
     private String lecturesImageUrl;
@@ -130,5 +130,21 @@ public class Lecture {
 
     public void setImage(String lecturesImageUrl) {
         this.lecturesImageUrl = lecturesImageUrl;
+    }
+
+    public String getInstructorName() {
+        return InstructorName;
+    }
+
+    public void setInstructorName(String instructorName) {
+        InstructorName = instructorName;
+    }
+
+    public String getEventsLectureDate() {
+        return EventsLectureDate;
+    }
+
+    public void setEventsLectureDate(String eventsLectureDate) {
+        EventsLectureDate = eventsLectureDate;
     }
 }

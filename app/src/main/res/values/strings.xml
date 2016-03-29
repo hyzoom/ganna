@@ -47,7 +47,7 @@
     <string name="question_hint">السؤال أو الاستفسار</string>
     <string name="cancel_button">إلغاء الأمر</string>
     <string name="question_empty">قم بكتابة سؤال صحيح</string>
-    <string name="question_send_successfully">تم ارسال رسالتك بنجاح</string>
+    <string name="question_send_successfully">تم ارسال سؤالك بنجاح</string>
 
     <string name="rule_title">قواعد المؤتمر</string>
     <string name="sponsor_title">رعاة المؤتمر</string>

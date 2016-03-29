@@ -6,12 +6,19 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"/>
+        android:layout_height="?actionBarSize" />
+
+    <ImageView
+        android:id="@+id/internal_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/internal_map"
+        android:visibility="gone" />
 
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/common_margin_padding_medium"/>
+        android:padding="@dimen/common_margin_padding_medium" />
 
 </LinearLayout>
