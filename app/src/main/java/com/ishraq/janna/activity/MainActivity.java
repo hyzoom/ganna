@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
@@ -46,7 +48,9 @@ public class MainActivity extends AppCompatActivity
     private SettingsService settingsService;
 
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    MenuItem play_music;
+    MenuItem stop_music;
+    VideoView videoHolder;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -78,6 +82,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initializeViews() {
+        videoHolder = (VideoView) findViewById(R.id.ganna_song1);
         progressBar = (ContentLoadingProgressBar) findViewById(R.id.progressBar);
         //Toolbar
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -140,18 +145,51 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        play_music = menu.findItem(R.id.action_play);
+        stop_music = menu.findItem(R.id.action_stop);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.action_share) {
             shareText("تطبيق جنة", "حمله من هنا \n https://play.google.com/store/apps/details?id=com.ishraq.a7ya2");
         } else if (id == R.id.action_call) {
             makeCall();
+        } else if (id == R.id.action_play) {
+            play_music.setVisible(false);
+            stop_music.setVisible(true);
+            play_music();
+        } else if (id == R.id.action_stop) {
+            play_music.setVisible(true);
+            stop_music.setVisible(false);
+            stop_music();
         }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    public void play_music() {
+
+//        setContentView(videoHolder);
+        Uri video = Uri.parse("android.resource://" + getPackageName() + "/"
+                + R.raw.ganna_song);
+        videoHolder.setVideoURI(video);
+        videoHolder.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                videoHolder.start(); //jump to the next Activity
+            }
+        });
+        videoHolder.start();
+    }
+
+    public void stop_music() {
+        if (videoHolder.isPlaying()) {
+            videoHolder.pause();
+        }
+
     }
 
     public void shareText(String subject, String body) {
@@ -210,7 +248,7 @@ public class MainActivity extends AppCompatActivity
             case 2:
                 if (settings.getLoggedInUser().isManager()) {
                     addFragment(new QuestionFragment(), true, null);
-                } else{
+                } else {
                     settings.setLoggedInUser(null);
 
                     settingsService.updateSettings(settings);

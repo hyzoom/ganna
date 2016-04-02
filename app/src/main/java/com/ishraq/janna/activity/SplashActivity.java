@@ -38,7 +38,7 @@ public class SplashActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-        splashPlayer();
+//        splashPlayer();
         pass_song = (Button) findViewById(R.id.pass_song);
         pass_song.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,30 +46,30 @@ public class SplashActivity extends Activity {
                 jumpMain();
             }
         });
-//        new Handler().postDelayed(new Runnable() {
-//
-//            /*
-//             * Showing splash screen with a timer. This will be useful when you
-//             * want to show case your app logo / company
-//             */
-//
-//            @Override
-//            public void run() {
-//                // This method will be executed once the timer is over
-//                // Start your app main activity
-//
-//                if (commonService.getSettings().getLoggedInUser() == null) {
-//                    Intent i = new Intent(SplashActivity.this, LoginActivity.class);
-//                    startActivity(i);
-//                } else {
-//                    Intent i = new Intent(SplashActivity.this, MainActivity.class);
-//                    startActivity(i);
-//                }
-//
-//                // close this activity
-//                finish();
-//            }
-//        }, SPLASH_TIME_OUT);
+        new Handler().postDelayed(new Runnable() {
+
+            /*
+             * Showing splash screen with a timer. This will be useful when you
+             * want to show case your app logo / company
+             */
+
+            @Override
+            public void run() {
+                // This method will be executed once the timer is over
+                // Start your app main activity
+
+                if (commonService.getSettings().getLoggedInUser() == null) {
+                    Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(i);
+                } else {
+                    Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(i);
+                }
+
+                // close this activity
+                finish();
+            }
+        }, SPLASH_TIME_OUT);
     }
 
     public void splashPlayer() {

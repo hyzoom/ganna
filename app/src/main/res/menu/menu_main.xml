@@ -15,4 +15,18 @@
         android:orderInCategory="100"
         android:title="@string/action_share"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_play"
+        android:icon="@android:drawable/ic_media_play"
+        android:orderInCategory="100"
+        android:title="@string/action_music"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_stop"
+        android:icon="@android:drawable/ic_media_pause"
+        android:orderInCategory="100"
+        android:title="@string/action_music"
+        android:visible="false"
+        app:showAsAction="always" />
 </menu>
