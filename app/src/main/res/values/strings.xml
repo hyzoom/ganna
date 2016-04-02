@@ -73,6 +73,8 @@
     <string name="all_survey_questions_not_solved">إملأ كل أسئلة الاستبيان من فضلك</string>
 
 
+    <string name="chair_text">رؤساء الجلسة</string>
+    <string name="lecture_text">المحاضرات</string>
 
     <!-- Create booking -->
     <string name="title_booking">أضف حجز</string>

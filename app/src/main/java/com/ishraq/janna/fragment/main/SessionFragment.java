@@ -18,6 +18,7 @@ import com.ishraq.janna.R;
 import com.ishraq.janna.component.ExpandableHeightListView;
 import com.ishraq.janna.listner.HidingScrollListener;
 import com.ishraq.janna.model.Event;
+import com.ishraq.janna.model.Guest;
 import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
 import com.ishraq.janna.service.EventService;
@@ -176,7 +177,7 @@ public class SessionFragment extends MainCommonFragment {
 
         private Event event;
 
-        private ExpandableHeightListView sessionListView;
+        private ExpandableHeightListView chairListView, sessionListView;
 
         public ItemViewHolder(View parent, Event event) {
             super(parent);
@@ -189,20 +190,10 @@ public class SessionFragment extends MainCommonFragment {
 
         public void setEventItem() {
             final List<Session> sessions = new ArrayList<Session>(event.getSess());
+//            final List<Guest> guests = new ArrayList<Guest>(sessions.);
+
             SessionListAdapter sessionListAdapter = new SessionListAdapter(JannaApp.getContext(), R.layout.row_session, sessions);
             sessionListView.setAdapter(sessionListAdapter);
-
-            sessionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Fragment sessionDetailsFragment = new SessionDetailsFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("eventId", 1);
-                    bundle.putInt("sessionId", sessions.get(position).getEventsSessionCode());
-                    sessionDetailsFragment.setArguments(bundle);
-                    getMainActivity().addFragment(sessionDetailsFragment, true, null);
-                }
-            });
         }
 
     }
@@ -221,7 +212,7 @@ public class SessionFragment extends MainCommonFragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             View row = convertView;
             if (row == null) {
                 LayoutInflater inflater = LayoutInflater.from(JannaApp.getContext());
@@ -231,6 +222,28 @@ public class SessionFragment extends MainCommonFragment {
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
             nameTextView.setText(sessions.get(position).getEventsSessionNameAra() + "");
 
+            if (sessions.get(position).getEventsSessionCode() == 6
+                    || sessions.get(position).getEventsSessionCode() == 9
+                    || sessions.get(position).getEventsSessionCode() == 12) {
+                nameTextView.setText(sessions.get(position).getEventsSessionNameAra() + "\n"
+                        + sessions.get(position).getEventsSessionNameLat());
+            }
+
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (sessions.get(position).getEventsSessionCode() != 6
+                            && sessions.get(position).getEventsSessionCode() != 9
+                            && sessions.get(position).getEventsSessionCode() != 12) {
+                        Fragment sessionDetailsFragment = new SessionDetailsFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("eventId", 1);
+                        bundle.putInt("sessionId", sessions.get(position).getEventsSessionCode());
+                        sessionDetailsFragment.setArguments(bundle);
+                        getMainActivity().addFragment(sessionDetailsFragment, true, null);
+                    }
+                }
+            });
             return row;
         }
     }

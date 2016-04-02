@@ -342,11 +342,21 @@ public class EventService extends CommonService {
             result = saveLectureInstructors(lecture, instructors);
         }
 
-        // save lecture guests
+
+        // save guests
         if (lecture.getGst() != null && lecture.getGst().size() > 0) {
             List<Guest> guests = new ArrayList<Guest>(lecture.getGst());
-            result = saveLectureGuests(lecture, guests);
+            for (Guest guest : guests) {
+                guest.setLecture(lecture);
+                result = saveGuest(guest);
+            }
         }
+
+        // save lecture guests
+//        if (lecture.getGst() != null && lecture.getGst().size() > 0) {
+//            List<Guest> guests = new ArrayList<Guest>(lecture.getGst());
+//            result = saveLectureGuests(lecture, guests);
+//        }
 
 
         return result;

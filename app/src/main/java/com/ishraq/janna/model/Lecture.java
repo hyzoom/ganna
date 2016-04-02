@@ -33,8 +33,6 @@ public class Lecture {
     @DatabaseField
     private String lecturesImageUrl;
 
-    //
-
     @ForeignCollectionField(eager = true, columnName = "lecture_instructor")
     private Collection<LectureInstructor> lectureInstructors;
 
@@ -47,6 +45,7 @@ public class Lecture {
 
     private Collection<Instructor> inst;
 
+    @ForeignCollectionField(eager = true, columnName = "guest")
     private Collection<Guest> Gst;
 
 

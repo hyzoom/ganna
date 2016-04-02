@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
 import com.ishraq.janna.component.ExpandableHeightListView;
 import com.ishraq.janna.listner.HidingScrollListener;
+import com.ishraq.janna.model.Guest;
 import com.ishraq.janna.model.Lecture;
 import com.ishraq.janna.model.Session;
 import com.ishraq.janna.service.EventService;
@@ -200,13 +202,16 @@ public class SessionDetailsFragment extends MainCommonFragment {
         private Session session;
 
         private TextView nameTextView;
-        private ExpandableHeightListView lectureListView;
+        private ExpandableHeightListView chairListView, lectureListView;
 
         public ItemViewHolder(View parent, Session session) {
             super(parent);
             this.session = session;
 
             nameTextView = (TextView) parent.findViewById(R.id.nameTextView);
+
+            chairListView = (ExpandableHeightListView) parent.findViewById(R.id.chairListView);
+            chairListView.setExpanded(true);
 
             lectureListView = (ExpandableHeightListView) parent.findViewById(R.id.lectureListView);
             lectureListView.setExpanded(true);
@@ -216,6 +221,10 @@ public class SessionDetailsFragment extends MainCommonFragment {
             nameTextView.setText(session.getEventsSessionNameAra() + "");
 
             final List<Lecture> lectures = new ArrayList<Lecture>(session.getLect());
+            final List<Guest> guests = new ArrayList<Guest>(lectures.get(0).getGst());
+
+            GuestListAdapter guestListAdapter = new GuestListAdapter(JannaApp.getContext(), R.layout.row_lecture, guests);
+            chairListView.setAdapter(guestListAdapter);
 
             LectureListAdapter lectureListAdapter = new LectureListAdapter(JannaApp.getContext(), R.layout.row_lecture, lectures);
             lectureListView.setAdapter(lectureListAdapter);
@@ -263,7 +272,44 @@ public class SessionDetailsFragment extends MainCommonFragment {
             lecturerNameTextView.setText(lectures.get(position).getInstructorName());//
             dateTextView.setText(lectures.get(position).getEventsLectureDate());//
 
-            sessionService.displayImage(lectures.get(position).getImage(), imageView);
+            if (lectures.get(position).getImage().equals("http://ganah.zagel1.com/Images/0")) {
+                imageView.setVisibility(View.GONE);
+                lecturerNameTextView.setVisibility(View.GONE);
+            } else {
+                sessionService.displayImage(lectures.get(position).getImage(), imageView);
+            }
+
+            return row;
+        }
+    }
+
+    class GuestListAdapter extends ArrayAdapter<Guest> {
+        private List<Guest> guests;
+        private Context context;
+        private int layoutResourceId;
+
+
+        public GuestListAdapter(Context context, int layoutResourceId, List<Guest> guests) {
+            super(context, layoutResourceId, guests);
+            this.guests = guests;
+            this.context = context;
+            this.layoutResourceId = layoutResourceId;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View row = convertView;
+            if (row == null) {
+                LayoutInflater inflater = LayoutInflater.from(JannaApp.getContext());
+                row = inflater.inflate(layoutResourceId, parent, false);
+            }
+
+            ImageView imageView = (ImageView) row.findViewById(R.id.imageView);
+            TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
+
+            nameTextView.setText(guests.get(position).getGuestsCodeNameAra());
+
+            sessionService.displayImage(guests.get(position).getGuestsImageUrl(), imageView);
             return row;
         }
     }
