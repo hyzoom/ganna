@@ -167,7 +167,7 @@ public class RegistrationFragment extends LoginCommonFragment implements View.On
                 public void onFailure(Call<List<User.ExistUser>> call, Throwable t) {
                     super.onFailure(call, t);
                     getLoginActivity().stopLoadingAnimator();
-                    Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "An error occurred, Retry again. ", Toast.LENGTH_LONG).show();
                 }
             });
         }

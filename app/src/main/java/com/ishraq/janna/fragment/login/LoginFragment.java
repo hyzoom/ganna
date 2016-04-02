@@ -115,8 +115,9 @@ public class LoginFragment extends LoginCommonFragment implements View.OnClickLi
                         GetUserRequest request = new GetUserRequest(result.getId());
                         request.execute();
                     } else {
+                        getLoginActivity().stopLoadingAnimator();
                         // Not exist
-                        Toast.makeText(getLoginActivity(), result.getErrorMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getLoginActivity(), result.getErrorMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -145,7 +146,7 @@ public class LoginFragment extends LoginCommonFragment implements View.OnClickLi
                     User usr = response.body().get(0);
 
                     // To test manager user
-                    usr.setIsManager(true);
+//                    usr.setIsManager(true);
 
                     userService.saveUser(usr);
 
