@@ -19,86 +19,122 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/common_margin_padding_medium"
                 android:lineSpacingExtra="@dimen/common_text_space_extra"
+                android:text="أولا: الالتزام التام بالمواعيد."
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/common_text_title"
-                android:text="أولا: الالتزام التام بالمواعيد."/>
+                android:textSize="@dimen/common_text_title" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/common_margin_padding_medium"
                 android:lineSpacingExtra="@dimen/common_text_space_extra"
+                android:text="ثانياً: إغلاق المحمول أو جعله صامت."
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/common_text_title"
-                android:text="ثانياً: إغلاق المحمول أو جعله صامت."/>
+                android:textSize="@dimen/common_text_title" />
 
-            <TextView
-                android:layout_width="match_parent"
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin_padding_medium"
-                android:lineSpacingExtra="@dimen/common_text_space_extra"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/common_text_title"
-                android:text="ثالثا: الأسئلة للمحاضر ومناقشته ستكون إلكترونياً بحيث يمكن إرسال السؤال عن طريق الواتس آب على الرقم 0102728777 أو إرسالها عن طريق تطبيق اﻷندرويد."/>
+                android:layout_margin="5dip"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/addQuestionButton"
-                android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/addQuestionButton"
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector"
+                    android:drawableTop="@drawable/question_img2"
+                    android:text="أضف سؤال"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentTop="true"
+                    android:lineSpacingExtra="@dimen/common_text_space_extra"
+                    android:text="ثالثا: الأسئلة للمحاضر ومناقشته ستكون إلكترونياً بحيث يمكن إرسال السؤال عن طريق الواتس آب على الرقم 0102728777 أو إرسالها عن طريق تطبيق اﻷندرويد."
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/common_text_title"
+                    android:layout_toLeftOf="@+id/addQuestionButton"
+                    android:layout_toStartOf="@+id/addQuestionButton" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_padding_small"
-                android:layout_marginRight="@dimen/common_margin_padding_big"
-                android:layout_marginLeft="@dimen/common_margin_padding_big"
-                android:layout_marginBottom="@dimen/common_margin_padding_big"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/common_text_title_big"
-                android:textStyle="bold"
-                android:text="أرسل سؤال"/>
+                android:layout_margin="5dip"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/common_margin_padding_medium"
+                    android:layout_marginTop="@dimen/common_margin_padding_medium"
+                    android:lineSpacingExtra="@dimen/common_text_space_extra"
+                    android:text="رابعاً: يجب استخدام تطبيق اﻷندرويد لمعرفة أخبار المؤتمر وأي تغييرات في البرنامج."
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/common_text_title"
+                    android:id="@+id/textView6"
+                    android:layout_toLeftOf="@+id/eventNewsButton"
+                    android:layout_toStartOf="@+id/eventNewsButton" />
 
-            <TextView
-                android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/eventNewsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector"
+                    android:drawableTop="@drawable/news_img2"
+                    android:text="أخبار المؤتمر"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin_padding_medium"
-                android:lineSpacingExtra="@dimen/common_text_space_extra"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/common_text_title"
-                android:text="رابعاً: يجب استخدام تطبيق اﻷندرويد لمعرفة أخبار المؤتمر وأي تغييرات في البرنامج."/>
+                android:layout_margin="5dip"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/eventNewsButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_padding_small"
-                android:layout_marginRight="@dimen/common_margin_padding_big"
-                android:layout_marginLeft="@dimen/common_margin_padding_big"
-                android:layout_marginBottom="@dimen/common_margin_padding_big"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/common_text_title_big"
-                android:textStyle="bold"
-                android:text="معرفة أخبار المؤتمر "/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/common_margin_padding_medium"
+                    android:layout_marginTop="@dimen/common_margin_padding_medium"
+                    android:lineSpacingExtra="@dimen/common_text_space_extra"
+                    android:text="خامساً: التطبيق يستخدم أيضاً لعمل حجوزات للأطباء في مستشفى جنة."
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/common_text_title"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@+id/addBookingButton"
+                    android:layout_toStartOf="@+id/addBookingButton" />
 
+                <Button
+                    android:id="@+id/addBookingButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector"
+                    android:drawableTop="@drawable/survey_img2"
+                    android:text="اضافة حجز"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin_padding_medium"
-                android:lineSpacingExtra="@dimen/common_text_space_extra"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/common_text_title"
-                android:text="خامساً: التطبيق يستخدم أيضاً لعمل حجوزات للأطباء في مستشفى جنة."/>
-
-            <Button
-                android:id="@+id/addBookingButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin_padding_small"
-                android:layout_marginRight="@dimen/common_margin_padding_big"
-                android:layout_marginLeft="@dimen/common_margin_padding_big"
-                android:layout_marginBottom="@dimen/common_margin_padding_big"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/common_text_title_big"
-                android:textStyle="bold"
-                android:text="إضافة حجز"/>
 
         </LinearLayout>
 

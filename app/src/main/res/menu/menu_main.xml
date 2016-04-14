@@ -20,6 +20,7 @@
         android:icon="@android:drawable/ic_media_play"
         android:orderInCategory="100"
         android:title="@string/action_music"
+        android:visible="false"
         app:showAsAction="always" />
 
     <item

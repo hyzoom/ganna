@@ -51,7 +51,7 @@
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
                 android:layout_marginTop="10dip"
-                android:text="عن المؤتمر:"
+                android:text="عن المؤتمر"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="20sp" />
 
@@ -81,7 +81,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector"
                 android:drawableTop="@drawable/sessions_img1"
-                android:text="جلسات المؤتمر:"
+                android:text="جلسات المؤتمر"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -92,7 +92,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector"
                 android:drawableTop="@drawable/news_img2"
-                android:text="أخبار المؤتمر:"
+                android:text="أخبار المؤتمر"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -103,7 +103,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector"
                 android:drawableTop="@drawable/rules_img2"
-                android:text="قواعد المؤتمر:"
+                android:text="قواعد المؤتمر"
                 android:textColor="#000000"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -166,7 +166,36 @@
                 android:drawableTop="@drawable/location_img1"
                 android:text="خريطة المؤتمر"
                 android:textColor="#000000"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/playSong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/play_img"
+                android:text="أغنية جنة"
+                android:textColor="#000000"
                 android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/stopSong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector"
+                android:drawableTop="@drawable/stop_img"
+                android:text="أغنية جنة"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <VideoView
+                android:id="@+id/ganna_song2"
+                android:layout_width="1dip"
+                android:layout_height="1dip" />
 
             <Button
                 android:id="@+id/siteButton"
@@ -205,7 +234,6 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector"
                 android:drawableTop="@drawable/face_img1"
-                android:text="فيس بوك"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -216,7 +244,6 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector"
                 android:drawableTop="@drawable/twitter_img1"
-                android:text="تويتر"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -228,7 +255,6 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector"
                 android:drawableTop="@drawable/linked_img1"
-                android:text="لينكد ان"
                 android:textColor="#000000"
                 android:textStyle="bold" />
         </LinearLayout>

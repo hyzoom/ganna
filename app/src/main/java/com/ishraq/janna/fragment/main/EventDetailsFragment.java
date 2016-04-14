@@ -2,6 +2,8 @@ package com.ishraq.janna.fragment.main;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
@@ -50,6 +53,9 @@ public class EventDetailsFragment extends MainCommonFragment {
     private Dialog dialog;
     private boolean refresh = false;
 
+    VideoView videoHolder;
+    private Button addQuestionButton, rulesButton, sponsorButton, sessionButton, surveyButton,
+            faceButton, twitterButton, linkedButton, siteButton, attendeesButton, newsButton, locationButton, playSong, stopSong;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -267,9 +273,6 @@ public class EventDetailsFragment extends MainCommonFragment {
         private TextView nameTextView, startDateTextView, endDateTextView,
                 structureTextView, addressTextView, notesTextView;
 
-        private Button addQuestionButton, rulesButton, sponsorButton, sessionButton, surveyButton,
-                faceButton, twitterButton, linkedButton, siteButton, attendeesButton, newsButton, locationButton;
-
         public ItemViewHolder(View parent, Event event) {
             super(parent);
             this.event = event;
@@ -294,6 +297,10 @@ public class EventDetailsFragment extends MainCommonFragment {
             surveyButton = (Button) parent.findViewById(R.id.surveyButton);
             locationButton = (Button) parent.findViewById(R.id.locationButton);
             addQuestionButton = (Button) parent.findViewById(R.id.addQuestionButton);
+
+            playSong = (Button) parent.findViewById(R.id.playSong);
+            stopSong = (Button) parent.findViewById(R.id.stopSong);
+            videoHolder = (VideoView) parent.findViewById(R.id.ganna_song2);
         }
 
         public void setEventItem() {
@@ -406,6 +413,20 @@ public class EventDetailsFragment extends MainCommonFragment {
                 }
             });
 
+            playSong.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    play_music();
+                }
+            });
+
+            stopSong.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    stop_music();
+                }
+            });
+
         }
 
     }
@@ -448,6 +469,31 @@ public class EventDetailsFragment extends MainCommonFragment {
             }
         });
 
+
+    }
+
+    public void play_music() {
+
+//        setContentView(videoHolder);
+        Uri video = Uri.parse("android.resource://" + getActivity().getPackageName() + "/"
+                + R.raw.ganna_song);
+        videoHolder.setVideoURI(video);
+        videoHolder.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                videoHolder.start(); //jump to the next Activity
+            }
+        });
+        videoHolder.start();
+        playSong.setVisibility(View.GONE);
+        stopSong.setVisibility(View.VISIBLE);
+    }
+
+    public void stop_music() {
+        if (videoHolder.isPlaying()) {
+            videoHolder.pause();
+            playSong.setVisibility(View.VISIBLE);
+            stopSong.setVisibility(View.GONE);
+        }
 
     }
 }

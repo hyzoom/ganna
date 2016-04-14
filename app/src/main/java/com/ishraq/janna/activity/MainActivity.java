@@ -6,9 +6,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -20,6 +22,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,6 +44,9 @@ import com.ishraq.janna.fragment.main.QuestionFragment;
 import com.ishraq.janna.model.Settings;
 import com.ishraq.janna.service.SettingsService;
 import com.ishraq.janna.webservice.CommonRequest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -155,7 +161,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.action_share) {
-            shareText("تطبيق جنة", "حمله من هنا \n https://play.google.com/store/apps/details?id=com.ishraq.a7ya2");
+            share();
         } else if (id == R.id.action_call) {
             makeCall();
         } else if (id == R.id.action_play) {
@@ -198,6 +204,40 @@ public class MainActivity extends AppCompatActivity
         txtIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         txtIntent.putExtra(Intent.EXTRA_TEXT, body);
         startActivity(Intent.createChooser(txtIntent, "Share"));
+    }
+
+    public void share() {
+        List<Intent> targetedShareIntents = new ArrayList<Intent>();
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "تطبيق جنة للاندرويد حمله من هنا \n https://play.google.com/store/apps/details?id=com.ishraq.janna";
+
+        PackageManager pm = getApplicationContext().getPackageManager();
+        List<ResolveInfo> activityList = pm.queryIntentActivities(
+                sharingIntent, 0);
+        for (final ResolveInfo app : activityList) {
+            String packageName = app.activityInfo.packageName;
+            Intent targetedShareIntent = new Intent(
+                    android.content.Intent.ACTION_SEND);
+            targetedShareIntent.setType("text/plain");
+            targetedShareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                    "share");
+            if (TextUtils.equals(packageName, "com.facebook.katana")) {
+                targetedShareIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+                        "https://play.google.com/store/apps/details?id=com.ishraq.janna");
+            } else {
+                targetedShareIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+                        shareBody);
+            }
+            targetedShareIntent.setPackage(packageName);
+            targetedShareIntents.add(targetedShareIntent);
+        }
+        Intent chooserIntent = Intent.createChooser(
+                targetedShareIntents.remove(0), "Share Idea");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS,
+                targetedShareIntents.toArray(new Parcelable[]{}));
+        startActivity(chooserIntent);
+
     }
 
     public void makeCall() {

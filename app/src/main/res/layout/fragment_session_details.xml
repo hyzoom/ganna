@@ -16,21 +16,23 @@
             android:layout_gravity="center_horizontal"
             android:padding="@dimen/common_margin_padding_medium"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/common_text_title_big"/>
+            android:textSize="@dimen/common_text_title_big" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/chairTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin_padding_medium"
+            android:gravity="center"
             android:text="@string/chair_text"
+            android:textColor="@color/cardview_dark_background"
             android:textSize="@dimen/common_text_title_big"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:layout_margin="@dimen/common_margin_padding_medium"/>
+            android:textStyle="bold" />
 
         <com.ishraq.janna.component.ExpandableHeightListView
             android:id="@+id/chairListView"
@@ -41,11 +43,12 @@
             android:id="@+id/lectureTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/common_margin_padding_medium"
             android:text="@string/lecture_text"
+            android:textColor="@color/cardview_dark_background"
             android:textSize="@dimen/common_text_title_big"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:layout_margin="@dimen/common_margin_padding_medium"/>
+            android:textStyle="bold" />
 
         <com.ishraq.janna.component.ExpandableHeightListView
             android:id="@+id/lectureListView"

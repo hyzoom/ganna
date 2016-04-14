@@ -67,7 +67,7 @@
             <EditText
                 android:id="@+id/notesEditText"
                 android:layout_width="match_parent"
-                android:layout_height="250dip"
+                android:layout_height="150dip"
                 android:hint="@string/notes_hint"
                 android:inputType="text"
                 android:textColor="@android:color/black"

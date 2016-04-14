@@ -82,17 +82,17 @@ public class WebViewFragment extends MainCommonFragment implements View.OnTouchL
 
             case 3:
                 // Load Facebook page
-                webView.loadUrl("https://www.facebook.com/");
+                webView.loadUrl("https://www.facebook.com/groups/314911565200565/");
                 break;
 
             case 4:
                 // Load Twitter page
-                webView.loadUrl("https://www.twitter.com/");
+                webView.loadUrl("https://twitter.com/kaainih");
                 break;
 
             case 5:
                 // Load linked in page
-                webView.loadUrl("https://www.linked-in.com/");
+                webView.loadUrl("https://www.linkedin.com/in/hesham-elenani-21b6202b?trk=hp-identity-name");
                 break;
             case 6:
                 // Load linked in page
