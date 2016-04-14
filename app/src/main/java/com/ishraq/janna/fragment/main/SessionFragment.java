@@ -96,6 +96,17 @@ public class SessionFragment extends MainCommonFragment {
         return view;
     }
 
+    private List<Session> reArrangeData(List<Session> sessions) {
+        for (int i = 0; i < sessions.size(); i++){
+            if (sessions.get(i).getEventsSessionNameAra().equals("Registration")) {
+                Session tempSession = sessions.get(i);
+                sessions.remove(i);
+                sessions.add(0, tempSession);
+            }
+        }
+        return sessions;
+    }
+
     private void initData() {
         event = eventService.getEvent(1);
         if (event == null || refresh) {
@@ -189,8 +200,7 @@ public class SessionFragment extends MainCommonFragment {
         }
 
         public void setEventItem() {
-            final List<Session> sessions = new ArrayList<Session>(event.getSess());
-//            final List<Guest> guests = new ArrayList<Guest>(sessions.);
+            final List<Session> sessions = reArrangeData(new ArrayList<Session>(event.getSess()));
 
             SessionListAdapter sessionListAdapter = new SessionListAdapter(JannaApp.getContext(), R.layout.row_session, sessions);
             sessionListView.setAdapter(sessionListAdapter);
@@ -222,19 +232,33 @@ public class SessionFragment extends MainCommonFragment {
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
             nameTextView.setText(sessions.get(position).getEventsSessionNameAra() + "");
 
-            if (sessions.get(position).getEventsSessionCode() == 6
+            if (sessions.get(position).getEventsSessionCode() == 3
+                    || sessions.get(position).getEventsSessionCode() == 6
                     || sessions.get(position).getEventsSessionCode() == 9
-                    || sessions.get(position).getEventsSessionCode() == 12) {
-                nameTextView.setText(sessions.get(position).getEventsSessionNameAra() + "\n"
-                        + sessions.get(position).getEventsSessionNameLat());
+                    || sessions.get(position).getEventsSessionCode() == 12
+                    || sessions.get(position).getEventsSessionCode() == 15) {
+
+                row.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                String text = sessions.get(position).getEventsSessionNameAra() + "\n   "
+                        + sessions.get(position).getEventsSessionNameLat();
+
+                if (!sessions.get(position).getEventsSessionInformations().equals("0")) {
+                    text = sessions.get(position).getEventsSessionNameAra() + "\n   "
+                            + sessions.get(position).getEventsSessionNameLat()
+                            + sessions.get(position).getEventsSessionInformations();
+                }
+
+                nameTextView.setText(text);
             }
 
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (sessions.get(position).getEventsSessionCode() != 6
+                    if (sessions.get(position).getEventsSessionCode() != 3
+                            && sessions.get(position).getEventsSessionCode() != 6
                             && sessions.get(position).getEventsSessionCode() != 9
-                            && sessions.get(position).getEventsSessionCode() != 12) {
+                            && sessions.get(position).getEventsSessionCode() != 12
+                            && sessions.get(position).getEventsSessionCode() != 15) {
                         Fragment sessionDetailsFragment = new SessionDetailsFragment();
                         Bundle bundle = new Bundle();
                         bundle.putInt("eventId", 1);
