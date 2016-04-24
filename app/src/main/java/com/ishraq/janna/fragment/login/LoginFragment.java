@@ -37,7 +37,7 @@ public class LoginFragment extends LoginCommonFragment implements View.OnClickLi
 
     private UserWebService userWebService;
 
-    private Button loginButton, newUserButton;
+    private Button loginButton, newUserButton, forgetPassButton;
     private EditText mobileEditText, passwordEditText;
 
     @Override
@@ -56,9 +56,11 @@ public class LoginFragment extends LoginCommonFragment implements View.OnClickLi
 
         loginButton = (Button) view.findViewById(R.id.loginButton);
         newUserButton = (Button) view.findViewById(R.id.newUserButton);
+        forgetPassButton = (Button) view.findViewById(R.id.forgetPassButton);
 
         loginButton.setOnClickListener(this);
         newUserButton.setOnClickListener(this);
+        forgetPassButton.setOnClickListener(this);
 
         mobileEditText = (EditText) view.findViewById(R.id.mobileEditText);
         passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
@@ -96,6 +98,10 @@ public class LoginFragment extends LoginCommonFragment implements View.OnClickLi
 
             case R.id.newUserButton:
                 ((LoginActivity) getActivity()).addFragment(new RegistrationFragment(), true, null);
+                break;
+            case R.id.forgetPassButton:
+//                ((LoginActivity) getActivity()).addFragment(new ForgetPassWordFragment(), true, null);
+                Toast.makeText(getActivity(), "SOON", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -145,8 +151,10 @@ public class LoginFragment extends LoginCommonFragment implements View.OnClickLi
                     // Save user
                     User usr = response.body().get(0);
 
-                    // To test manager user
-                    usr.setIsManager(true);
+                    if (usr.getId() == 3086 || usr.getId() == 4086) {
+                        // To manager user
+                        usr.setIsManager(true);
+                    }
 
                     userService.saveUser(usr);
 

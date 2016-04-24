@@ -167,7 +167,8 @@ public class NavigationDrawerFragment extends Fragment {
             put("icon", R.drawable.ic_bookmark);
             put("text", R.string.nav_booking_title);
         }});
-        if (settingsService.getSettings().getLoggedInUser().isManager()) {
+        if (settingsService.getSettings().getLoggedInUser() != null
+                && settingsService.getSettings().getLoggedInUser().isManager()) {
             entries.add(new HashMap<String, Integer>() {{
                 put("icon", R.drawable.ic_question);
                 put("text", R.string.nav_question_title);

@@ -3,6 +3,8 @@ package com.ishraq.janna.fragment.main;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -229,8 +231,9 @@ public class SessionFragment extends MainCommonFragment {
                 row = inflater.inflate(layoutResourceId, parent, false);
             }
 
+            CardView cardView = (CardView) row.findViewById(R.id.cardView);
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
-            nameTextView.setText(sessions.get(position).getEventsSessionNameAra() + "");
+            nameTextView.setText(sessions.get(position).getEventsSessionNameLat() + "");
 
             if (sessions.get(position).getEventsSessionCode() == 3
                     || sessions.get(position).getEventsSessionCode() == 6
@@ -238,7 +241,8 @@ public class SessionFragment extends MainCommonFragment {
                     || sessions.get(position).getEventsSessionCode() == 12
                     || sessions.get(position).getEventsSessionCode() == 15) {
 
-                row.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.light_gray));
+
                 String text = sessions.get(position).getEventsSessionNameAra() + "\n   "
                         + sessions.get(position).getEventsSessionNameLat();
 

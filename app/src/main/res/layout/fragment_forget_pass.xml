@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/common_margin_padding_medium">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize" />
+
+        <!--              Mobile                   -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputLayoutMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/mobileEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/mobile_hint"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                android:theme="@style/EditTextTest" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <!--              Email                   -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputLayoutEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="الايميل"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/black"
+                android:theme="@style/EditTextTest" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:padding="@dimen/common_margin_padding_big"
+            android:text="ارسال كلمة السر للميل"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+</LinearLayout>

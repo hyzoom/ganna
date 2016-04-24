@@ -1,6 +1,8 @@
 package com.ishraq.janna.fragment.main;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -256,7 +259,7 @@ public class SessionDetailsFragment extends MainCommonFragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             View row = convertView;
             if (row == null) {
                 LayoutInflater inflater = LayoutInflater.from(JannaApp.getContext());
@@ -264,6 +267,7 @@ public class SessionDetailsFragment extends MainCommonFragment {
             }
 
             ImageView imageView = (ImageView) row.findViewById(R.id.imageView);
+            final Button playVideoButton = (Button) row.findViewById(R.id.playVideoButton);
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
             TextView lecturerNameTextView = (TextView) row.findViewById(R.id.lecturerNameTextView);
             TextView dateTextView = (TextView) row.findViewById(R.id.dateTextView);
@@ -272,13 +276,47 @@ public class SessionDetailsFragment extends MainCommonFragment {
             lecturerNameTextView.setText(lectures.get(position).getInstructorName());//
             dateTextView.setText(lectures.get(position).getEventsLectureDate());//
 
-            if (lectures.get(position).getImage().equals("http://ganah.zagel1.com/Images/0")) {
-                imageView.setVisibility(View.GONE);
-                lecturerNameTextView.setVisibility(View.GONE);
-            } else {
-                sessionService.displayImage(lectures.get(position).getImage(), imageView);
+            if (lectures.get(position).getEventsLectureCode() == 1
+                    || lectures.get(position).getEventsLectureCode() == 4 || lectures.get(position).getEventsLectureCode() == 14
+                    || lectures.get(position).getEventsLectureCode() == 39) {
+                playVideoButton.setVisibility(View.VISIBLE);
             }
 
+            if (lectures.get(position).getEventsLectureCode() == 35) {
+                playVideoButton.setVisibility(View.GONE);
+            }
+
+            playVideoButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uri = null;
+                    Intent intent;
+                    switch (lectures.get(position).getEventsLectureCode()) {
+
+                        case 1:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=CGfsMofEWlM");
+                            break;
+
+                        case 4:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=n9h_T6qte20");
+                            break;
+
+                        case 14:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=DbnZxwprg0E");
+                            break;
+
+                        case 39:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=9DFm-AgC5y0");
+                            break;
+                    }
+
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                    getMainActivity().startActivity(intent);
+                }
+            });
+
+
+            sessionService.displayImage(lectures.get(position).getImage(), imageView);
             return row;
         }
     }

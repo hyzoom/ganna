@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="@dimen/common_margin_padding_medium"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <Button
                 android:id="@+id/loginButton"
@@ -68,6 +68,15 @@
                 android:layout_weight="1"
                 android:padding="@dimen/common_margin_padding_big"
                 android:text="@string/new_user_button"
+                android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/forgetPassButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/common_margin_padding_big"
+                android:text="نسيت كلمة المرور؟"
                 android:textColor="@android:color/black" />
 
 
