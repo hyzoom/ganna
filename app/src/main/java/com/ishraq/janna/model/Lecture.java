@@ -14,13 +14,13 @@ public class Lecture {
     @DatabaseField(id = true, columnName = "id")
     private Integer EventsLectureCode;
 
-    @DatabaseField
+    @DatabaseField(columnName = "name_ar")
     private String EventsLectureNameAra;
 
-    @DatabaseField
+    @DatabaseField(columnName = "name_lat")
     private String EventsLectureNameLat;
 
-    @DatabaseField
+    @DatabaseField(columnName = "details")
     private String EventsLectureDetails;
 
     // Lecturer

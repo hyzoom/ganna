@@ -34,7 +34,7 @@ public class CommonFragment extends Fragment {
     protected Retrofit getRestAdapter() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://ganah.zagel1.com/pages/JsonData/")
+                    .baseUrl("http://nkamel-001-site1.gtempurl.com/pages/JsonData/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

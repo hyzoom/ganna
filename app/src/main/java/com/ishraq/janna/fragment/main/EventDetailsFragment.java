@@ -133,7 +133,8 @@ public class EventDetailsFragment extends MainCommonFragment {
     private class EventDetailsRequest implements CommonRequest {
         @Override
         public void execute() {
-            eventWebService.getEvent(eventId).enqueue(new RequestCallback<List<Event>>(this) {
+//            eventWebService.getEvent(eventId).enqueue(new RequestCallback<List<Event>>(this) {
+            eventWebService.getAllEvents().enqueue(new RequestCallback<List<Event>>(this) {
                 @Override
                 public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                     try {
