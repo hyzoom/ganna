@@ -204,7 +204,7 @@ public class SessionDetailsFragment extends MainCommonFragment {
 
         private Session session;
 
-        private TextView nameTextView;
+        private TextView nameTextView, chairTextView, lectureTextView;
         private ExpandableHeightListView chairListView, lectureListView;
 
         public ItemViewHolder(View parent, Session session) {
@@ -212,6 +212,8 @@ public class SessionDetailsFragment extends MainCommonFragment {
             this.session = session;
 
             nameTextView = (TextView) parent.findViewById(R.id.nameTextView);
+            chairTextView = (TextView) parent.findViewById(R.id.chairTextView);
+            lectureTextView = (TextView) parent.findViewById(R.id.lectureTextView);
 
             chairListView = (ExpandableHeightListView) parent.findViewById(R.id.chairListView);
             chairListView.setExpanded(true);
@@ -225,6 +227,13 @@ public class SessionDetailsFragment extends MainCommonFragment {
 
             final List<Lecture> lectures = new ArrayList<Lecture>(session.getLect());
             final List<Guest> guests = new ArrayList<Guest>(lectures.get(0).getGst());
+
+            if (guests.size() == 0) {
+                chairTextView.setVisibility(View.GONE);
+            }
+            if (lectures.size() == 0) {
+                lectureTextView.setVisibility(View.GONE);
+            }
 
             GuestListAdapter guestListAdapter = new GuestListAdapter(JannaApp.getContext(), R.layout.row_lecture, guests);
             chairListView.setAdapter(guestListAdapter);

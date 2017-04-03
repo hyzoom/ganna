@@ -24,6 +24,9 @@
     <dimen name="common_dialog_width_min">520dp</dimen>
 
 
+    <!-- Splash -->
+    <dimen name="icon">325dp</dimen>
+
     <!-- common -->
     <dimen name="card_corner_radius">2.6dp</dimen>
 

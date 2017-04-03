@@ -57,6 +57,24 @@ public class SurveyService extends CommonService {
 
 
     /**
+     *
+     * @param surveyId
+     * @return Survey
+     */
+    public Survey getSurvey(Integer surveyId) {
+        Survey survey = null;
+        try {
+            List<Survey> surveys = surveyDao.queryForEq("id", surveyId);
+            if (surveys.size() > 0) {
+                survey = surveys.get(0);
+            }
+        } catch (SQLException e) {
+            Log.e(JannaApp.LOG_TAG, e.getMessage());
+        }
+        return survey;
+    }
+
+    /**
      * save answer to database
      * @param answer
      * @return true if answer is added successfully, false if not
@@ -99,6 +117,10 @@ public class SurveyService extends CommonService {
             if (result == false)
                 return result;
         }
+
+//        if (getSurvey(survey.getSurveyCode()) != null) {
+//            return result;
+//        }
 
         try {
             Dao.CreateOrUpdateStatus status = surveyDao.createOrUpdate(survey);

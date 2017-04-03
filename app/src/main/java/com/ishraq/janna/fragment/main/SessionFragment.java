@@ -235,11 +235,7 @@ public class SessionFragment extends MainCommonFragment {
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
             nameTextView.setText(sessions.get(position).getEventsSessionNameLat() + "");
 
-            if (sessions.get(position).getEventsSessionCode() == 3
-                    || sessions.get(position).getEventsSessionCode() == 6
-                    || sessions.get(position).getEventsSessionCode() == 9
-                    || sessions.get(position).getEventsSessionCode() == 12
-                    || sessions.get(position).getEventsSessionCode() == 15) {
+            if (sessions.get(position).getEventsSessionCode() == 3) {
 
                 cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.light_gray));
 
@@ -251,18 +247,15 @@ public class SessionFragment extends MainCommonFragment {
                             + sessions.get(position).getEventsSessionNameLat()
                             + sessions.get(position).getEventsSessionInformations();
                 }
-
                 nameTextView.setText(text);
+            } else {
+                cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
             }
 
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (sessions.get(position).getEventsSessionCode() != 3
-                            && sessions.get(position).getEventsSessionCode() != 6
-                            && sessions.get(position).getEventsSessionCode() != 9
-                            && sessions.get(position).getEventsSessionCode() != 12
-                            && sessions.get(position).getEventsSessionCode() != 15) {
+                    if (sessions.get(position).getEventsSessionCode() != 3) {
                         Fragment sessionDetailsFragment = new SessionDetailsFragment();
                         Bundle bundle = new Bundle();
                         bundle.putInt("eventId", 1);

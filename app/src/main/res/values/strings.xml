@@ -74,8 +74,8 @@
     <string name="all_survey_questions_not_solved">إملأ كل أسئلة الاستبيان من فضلك</string>
 
 
-    <string name="chair_text">رؤساء الجلسة</string>
-    <string name="lecture_text">المحاضرات</string>
+    <string name="chair_text">Chairman</string>
+    <string name="lecture_text">Lectures</string>
 
     <!-- Create booking -->
     <string name="title_booking">أضف حجز</string>
@@ -86,6 +86,11 @@
     <string name="clinic_spinner_empty">قم باختيار عيادة</string>
     <string name="special_spinner_empty">قم باختيار تخصص</string>
 
+
+    <!-- Managers mobiles -->
+    <string-array name="managers_mobiles">
+        <item>01116409935</item>
+    </string-array>
 
     <string-array name="clinic_array">
         <item>اختر العيادة</item>

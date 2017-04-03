@@ -118,23 +118,24 @@ public class EventDetailsFragment extends MainCommonFragment {
 
     private void initData() {
         event = eventService.getEvent(eventId);
-        if (event == null || refresh) {
-            EventDetailsRequest request = new EventDetailsRequest();
-            request.execute();
-        } else {
-            adapter = new EventItemAdapter(event);
-            recyclerView.setAdapter(adapter);
-            getMainActivity().stopLoadingAnimator();
-            getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
-        }
+        EventDetailsRequest request = new EventDetailsRequest();
+        request.execute();
+//        if (event == null || refresh) {
+//            EventDetailsRequest request = new EventDetailsRequest();
+//            request.execute();
+//        } else {
+//            adapter = new EventItemAdapter(event);
+//            recyclerView.setAdapter(adapter);
+//            getMainActivity().stopLoadingAnimator();
+//            getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+//        }
 
     }
 
     private class EventDetailsRequest implements CommonRequest {
         @Override
         public void execute() {
-//            eventWebService.getEvent(eventId).enqueue(new RequestCallback<List<Event>>(this) {
-            eventWebService.getAllEvents().enqueue(new RequestCallback<List<Event>>(this) {
+            eventWebService.getEvent(eventId).enqueue(new RequestCallback<List<Event>>(this) {
                 @Override
                 public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                     try {

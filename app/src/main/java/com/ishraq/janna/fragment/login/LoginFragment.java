@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
 import com.ishraq.janna.activity.LoginActivity;
 import com.ishraq.janna.activity.MainActivity;
@@ -130,7 +131,7 @@ public class LoginFragment extends LoginCommonFragment implements View.OnClickLi
                 @Override
                 public void onFailure(Call<List<User.ExistUser>> call, Throwable t) {
                     getLoginActivity().stopLoadingAnimator();
-                    Log.w("AhmedLog", t.getMessage() + "\n" + call.request().method() + "\n" + t.getLocalizedMessage());
+                    Log.w(JannaApp.LOG_TAG, t.getMessage() + "\n" + call.request().method() + "\n" + t.getLocalizedMessage());
                 }
             });
         }
@@ -150,11 +151,18 @@ public class LoginFragment extends LoginCommonFragment implements View.OnClickLi
                 public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                     // Save user
                     User usr = response.body().get(0);
-
-                    if (usr.getId() == 3086 || usr.getId() == 4086) {
-                        // To manager user
-                        usr.setIsManager(true);
+//                    if (usr.getId() == 9 || usr.getId() == 4086) {//
+//                        // To manager user
+//                        usr.setIsManager(true);
+//                    }
+                    String managersMobiles[] = JannaApp.getContext().getResources().getStringArray(R.array.managers_mobiles);
+                    for (int i = 0; i < managersMobiles.length; i++) {
+                        if (usr.getMobile().equals(managersMobiles[i])) {
+                            // To manager user
+                            usr.setIsManager(true);
+                        }
                     }
+
 
                     userService.saveUser(usr);
 
