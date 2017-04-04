@@ -23,7 +23,7 @@
                 android:id="@+id/mobileEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/phone_hint"
+                android:hint="@string/mobile_hint"
                 android:inputType="phone"
                 android:textColor="@android:color/black"
                 android:theme="@style/EditTextTest" />

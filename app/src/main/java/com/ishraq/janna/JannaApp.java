@@ -22,7 +22,7 @@ public class JannaApp extends Application{
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
-        forceArabicLocale();
+//        forceArabicLocale();
         forceActionbarOverflow();
     }
 

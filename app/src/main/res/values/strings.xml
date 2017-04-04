@@ -5,30 +5,39 @@
     <string name="login_activity">تسجيل الدخول</string>
 
 
+    <!-- Nav -->
+    <string name="nav_hello">Hello... </string>
+    <string name="nav_detail">تطبيق جنة للاندرويد يهدف الى استخدام التكنولوجيا الحديثة فى مجال المؤتمرات وتسجيل الحجوزات سواء لمؤتمر جنة العلمى او مجموعة مستشفيات جنة</string>
+    <string name="nav_info_title">About Janna Hospital</string>
+    <string name="nav_booking_title">Booking</string>
+    <string name="nav_question_title">Questions</string>
+    <string name="nav_logout_title">Log Out</string>
+
+
     <!-- login fragment-->
-    <string name="name_hint">الاسم</string>
+    <string name="name_hint">Name</string>
     <string name="first_name_hint">الاسم الأول</string>
     <string name="last_name_hint">الاسم الثاني</string>
     <string name="address_hint">جهة العمل</string>
-    <string name="phone_hint">الهاتف</string>
-    <string name="mobile_hint">المحمول</string>
-    <string name="email_hint">البريد الالكتروني</string>
-    <string name="password_hint">كلمة المرور</string>
-    <string name="re_password_hint">أعد كتابة كلمة المرور</string>
-    <string name="login_button">تسجيل الدخول</string>
-    <string name="new_user_button">مستخدم جديد</string>
+    <string name="phone_hint">Telephone</string>
+    <string name="mobile_hint">Mobile</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="re_password_hint">Reenter password</string>
+    <string name="login_button">Login</string>
+    <string name="new_user_button">New User</string>
 
-    <string name="name_empty">من فضلك ادخل الاسم</string>
-    <string name="mobile_empty">من فضلك ادخل  رقم التليفون</string>
-    <string name="password_empty">قم بإدخال كلمة المرور</string>
-    <string name="re_password_empty">قم بإعادة كلمة المرور</string>
-    <string name="repeating_not_right">كلمتا المرور غير متطابقتان</string>
+    <string name="name_empty">Enter your name</string>
+    <string name="mobile_empty">Enter your mobile number</string>
+    <string name="password_empty">Enter password</string>
+    <string name="re_password_empty">Re-Enter password</string>
+    <string name="repeating_not_right">Password must be the same</string>
 
-    <string name="radio_doctor">طبيب</string>
+    <string name="radio_doctor">Doctor</string>
     <string name="radio_patient">مريض</string>
 
     <!-- About -->
-    <string name="hospital_name">مستشفى جنة التخصصي</string>
+    <string name="hospital_name">Janna</string>
 
     <!--error fragment-->
     <string name="button_retry">إعادة المحاولة</string>
@@ -51,13 +60,8 @@
 
     <string name="rule_title">قواعد المؤتمر</string>
     <string name="sponsor_title">رعاة المؤتمر</string>
-    <string name="session_title">جلسات المؤتمر</string>
+    <string name="session_title">Sessions</string>
     <string name="survey_title">الاستبيانات</string>
-
-    <string name="nav_info_title">عن مستشفى جنة</string>
-    <string name="nav_booking_title">حجز</string>
-    <string name="nav_question_title">الأسئلة</string>
-    <string name="nav_logout_title">خروج</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

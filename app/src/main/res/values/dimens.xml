@@ -43,4 +43,10 @@
 
     <dimen name="image_size">120dp</dimen>
 
+
+
+    <!-- More -->
+    <dimen name="recipe_details_image_icon_size">40dp</dimen>
+    <dimen name="label_view_under_line">200dp</dimen>
+
 </resources>

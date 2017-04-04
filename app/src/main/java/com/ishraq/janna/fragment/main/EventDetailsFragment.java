@@ -26,8 +26,11 @@ import com.ishraq.janna.model.Event;
 import com.ishraq.janna.model.EventSponsor;
 import com.ishraq.janna.model.Rule;
 import com.ishraq.janna.model.Session;
+import com.ishraq.janna.model.Settings;
+import com.ishraq.janna.model.User;
 import com.ishraq.janna.service.EventService;
 import com.ishraq.janna.service.SettingsService;
+import com.ishraq.janna.service.UserService;
 import com.ishraq.janna.viewholder.RecyclerHeaderViewHolder;
 import com.ishraq.janna.webservice.CommonRequest;
 import com.ishraq.janna.webservice.EventWebService;
@@ -44,6 +47,8 @@ public class EventDetailsFragment extends MainCommonFragment {
 
     private EventWebService eventWebService;
     private EventService eventService;
+    private SettingsService settingsService;
+    private UserService userService;
     private RecyclerView recyclerView;
 
     private Integer eventId;
@@ -61,6 +66,8 @@ public class EventDetailsFragment extends MainCommonFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         eventService = new EventService(getMainActivity());
+        settingsService = new SettingsService(getMainActivity());
+        userService = new UserService(getMainActivity());
         eventWebService = getWebService(EventWebService.class);
 
         Bundle bundle = this.getArguments();
@@ -118,17 +125,15 @@ public class EventDetailsFragment extends MainCommonFragment {
 
     private void initData() {
         event = eventService.getEvent(eventId);
-        EventDetailsRequest request = new EventDetailsRequest();
-        request.execute();
-//        if (event == null || refresh) {
-//            EventDetailsRequest request = new EventDetailsRequest();
-//            request.execute();
-//        } else {
-//            adapter = new EventItemAdapter(event);
-//            recyclerView.setAdapter(adapter);
-//            getMainActivity().stopLoadingAnimator();
-//            getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
-//        }
+        if (event == null || refresh) {
+            EventDetailsRequest request = new EventDetailsRequest();
+            request.execute();
+        } else {
+            adapter = new EventItemAdapter(event);
+            recyclerView.setAdapter(adapter);
+            getMainActivity().stopLoadingAnimator();
+            getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+        }
 
     }
 
@@ -146,6 +151,22 @@ public class EventDetailsFragment extends MainCommonFragment {
 
                         adapter = new EventItemAdapter(event);
                         recyclerView.setAdapter(adapter);
+
+
+                        // Check Manager
+                        User user = eventService.getSettings().getLoggedInUser();
+
+                        if (user.getMobile().equals(event.getNotes())) {
+                            user.setIsManager(true);
+                        } else {
+                            user.setIsManager(false);
+                        }
+                        userService.saveUser(user);
+
+                        Settings settings = settingsService.getSettings();
+                        settings.setLoggedInUser(user);
+                        settingsService.updateSettings(settings);
+
                     } catch (Exception ex) {
 
                     }

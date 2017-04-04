@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
@@ -235,12 +236,16 @@ public class SessionFragment extends MainCommonFragment {
             TextView nameTextView = (TextView) row.findViewById(R.id.nameTextView);
             nameTextView.setText(sessions.get(position).getEventsSessionNameLat() + "");
 
-            if (sessions.get(position).getEventsSessionCode() == 3) {
+            if (sessions.get(position).getEventsSessionCode() == 3
+                    || sessions.get(position).getEventsSessionCode() == 7) {
 
                 cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.light_gray));
 
-                String text = sessions.get(position).getEventsSessionNameAra() + "\n   "
-                        + sessions.get(position).getEventsSessionNameLat();
+                String text = sessions.get(position).getEventsSessionNameAra();
+
+                if (!sessions.get(position).getEventsSessionNameLat().equals("0")) {
+                    text = text + "\n   " + sessions.get(position).getEventsSessionNameLat();
+                }
 
                 if (!sessions.get(position).getEventsSessionInformations().equals("0")) {
                     text = sessions.get(position).getEventsSessionNameAra() + "\n   "
@@ -252,10 +257,12 @@ public class SessionFragment extends MainCommonFragment {
                 cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
             }
 
+
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (sessions.get(position).getEventsSessionCode() != 3) {
+                    if (sessions.get(position).getEventsSessionCode() != 3
+                            && sessions.get(position).getEventsSessionCode() != 7) {
                         Fragment sessionDetailsFragment = new SessionDetailsFragment();
                         Bundle bundle = new Bundle();
                         bundle.putInt("eventId", 1);

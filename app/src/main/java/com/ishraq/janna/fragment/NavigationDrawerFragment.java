@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.ishraq.janna.R;
 import com.ishraq.janna.activity.MainActivity;
+import com.ishraq.janna.component.ExpandableHeightListView;
 import com.ishraq.janna.model.User;
 import com.ishraq.janna.service.SettingsService;
 
@@ -70,7 +71,7 @@ public class NavigationDrawerFragment extends Fragment {
     private MyActionBarDrawerToggle drawerToggle;
 
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerListView;
+    private ExpandableHeightListView mDrawerListView;
     private View mFragmentContainerView;
 
     private int mCurrentSelectedPosition = 0;
@@ -111,7 +112,10 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View drawerView = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-        mDrawerListView = (ListView) drawerView.findViewById(R.id.navigation_drawer_list);
+
+        mDrawerListView = (ExpandableHeightListView) drawerView.findViewById(R.id.navigation_drawer_list);
+        mDrawerListView.setExpanded(true);
+
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

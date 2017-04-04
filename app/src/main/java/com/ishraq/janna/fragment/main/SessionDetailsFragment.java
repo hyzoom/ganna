@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.ishraq.janna.JannaApp;
 import com.ishraq.janna.R;
+import com.ishraq.janna.component.ExpandableHeightGridView;
 import com.ishraq.janna.component.ExpandableHeightListView;
 import com.ishraq.janna.listner.HidingScrollListener;
 import com.ishraq.janna.model.Guest;
@@ -205,7 +206,10 @@ public class SessionDetailsFragment extends MainCommonFragment {
         private Session session;
 
         private TextView nameTextView, chairTextView, lectureTextView;
-        private ExpandableHeightListView chairListView, lectureListView;
+        private ExpandableHeightListView lectureListView;
+        private ExpandableHeightGridView chairGridView;
+
+        private View chairmanLayout, chairmanLine, lectureLayout, lectureLine;
 
         public ItemViewHolder(View parent, Session session) {
             super(parent);
@@ -215,11 +219,16 @@ public class SessionDetailsFragment extends MainCommonFragment {
             chairTextView = (TextView) parent.findViewById(R.id.chairTextView);
             lectureTextView = (TextView) parent.findViewById(R.id.lectureTextView);
 
-            chairListView = (ExpandableHeightListView) parent.findViewById(R.id.chairListView);
-            chairListView.setExpanded(true);
+            chairGridView = (ExpandableHeightGridView) parent.findViewById(R.id.chairGridView);
+            chairGridView.setExpanded(true);
 
             lectureListView = (ExpandableHeightListView) parent.findViewById(R.id.lectureListView);
             lectureListView.setExpanded(true);
+
+            chairmanLayout = parent.findViewById(R.id.chairmanLayout);
+            chairmanLine = parent.findViewById(R.id.chairmanLine);
+            lectureLayout = parent.findViewById(R.id.lectureLayout);
+            lectureLine = parent.findViewById(R.id.lectureLine);
         }
 
         public void setEventItem() {
@@ -229,14 +238,16 @@ public class SessionDetailsFragment extends MainCommonFragment {
             final List<Guest> guests = new ArrayList<Guest>(lectures.get(0).getGst());
 
             if (guests.size() == 0) {
-                chairTextView.setVisibility(View.GONE);
+                chairmanLayout.setVisibility(View.GONE);
+                chairmanLine.setVisibility(View.GONE);
             }
             if (lectures.size() == 0) {
-                lectureTextView.setVisibility(View.GONE);
+                lectureLayout.setVisibility(View.GONE);
+                lectureLine.setVisibility(View.GONE);
             }
 
-            GuestListAdapter guestListAdapter = new GuestListAdapter(JannaApp.getContext(), R.layout.row_lecture, guests);
-            chairListView.setAdapter(guestListAdapter);
+            GuestListAdapter guestListAdapter = new GuestListAdapter(JannaApp.getContext(), R.layout.row_chairman, guests);
+            chairGridView.setAdapter(guestListAdapter);
 
             LectureListAdapter lectureListAdapter = new LectureListAdapter(JannaApp.getContext(), R.layout.row_lecture, lectures);
             lectureListView.setAdapter(lectureListAdapter);
@@ -282,18 +293,23 @@ public class SessionDetailsFragment extends MainCommonFragment {
             TextView dateTextView = (TextView) row.findViewById(R.id.dateTextView);
 
             nameTextView.setText(lectures.get(position).getEventsLectureNameAra());
-            lecturerNameTextView.setText(lectures.get(position).getInstructorName());//
-            dateTextView.setText(lectures.get(position).getEventsLectureDate());//
+            lecturerNameTextView.setText(lectures.get(position).getInstructorName());
+            dateTextView.setText(lectures.get(position).getEventsLectureDate());
+
+            if ((lectures.get(position).getInstructorName()).equals("0"))
+                lecturerNameTextView.setVisibility(View.GONE);
 
             if (lectures.get(position).getEventsLectureCode() == 1
-                    || lectures.get(position).getEventsLectureCode() == 4 || lectures.get(position).getEventsLectureCode() == 14
-                    || lectures.get(position).getEventsLectureCode() == 39) {
+//                    || lectures.get(position).getEventsLectureCode() == 4
+//                    || lectures.get(position).getEventsLectureCode() == 14
+//                    || lectures.get(position).getEventsLectureCode() == 39
+                    ) {
                 playVideoButton.setVisibility(View.VISIBLE);
             }
 
-            if (lectures.get(position).getEventsLectureCode() == 35) {
-                playVideoButton.setVisibility(View.GONE);
-            }
+//            if (lectures.get(position).getEventsLectureCode() == 35) {
+//                playVideoButton.setVisibility(View.GONE);
+//            }
 
             playVideoButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -324,8 +340,12 @@ public class SessionDetailsFragment extends MainCommonFragment {
                 }
             });
 
+            String url = (lectures.get(position).getImage())
+                    .replace("http://ganah.zagel1.com/", "http://nkamel-001-site1.gtempurl.com/");
 
-            sessionService.displayImage(lectures.get(position).getImage(), imageView);
+            if (!url.endsWith("/0"))
+                sessionService.displayImage(url, imageView);
+
             return row;
         }
     }
@@ -356,7 +376,9 @@ public class SessionDetailsFragment extends MainCommonFragment {
 
             nameTextView.setText(guests.get(position).getGuestsCodeNameAra());
 
-            sessionService.displayImage(guests.get(position).getGuestsImageUrl(), imageView);
+            String url = (guests.get(position).getGuestsImageUrl())
+                    .replace("http://ganah.zagel1.com/", "http://nkamel-001-site1.gtempurl.com/");
+            sessionService.displayImage(url, imageView);
             return row;
         }
     }

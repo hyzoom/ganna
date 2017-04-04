@@ -33,7 +33,8 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/inputLayoutAddress"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/addressEditText"
@@ -101,7 +102,8 @@
             android:layout_margin="10dip"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:padding="@dimen/common_margin_padding_big">
+            android:padding="@dimen/common_margin_padding_big"
+            android:visibility="gone">
 
             <RadioButton
                 android:id="@+id/radioDoctor"

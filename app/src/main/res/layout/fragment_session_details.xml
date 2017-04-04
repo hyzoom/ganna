@@ -25,37 +25,106 @@
             android:background="@color/colorPrimary"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/chairTextView"
+
+        <!-- Chairman -->
+        <LinearLayout
+            android:id="@+id/chairmanLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin_padding_medium"
-            android:gravity="center"
-            android:text="@string/chair_text"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="@dimen/common_text_title_big"
-            android:textStyle="bold" />
+            android:paddingTop="@dimen/common_margin_padding_big"
+            android:orientation="horizontal" >
 
-        <com.ishraq.janna.component.ExpandableHeightListView
-            android:id="@+id/chairListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_width="@dimen/recipe_details_image_icon_size"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/common_margin_padding_medium"
+                android:layout_marginLeft="@dimen/common_margin_padding_medium"
+                android:layout_gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/lectureTextView"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_label_outline_black_24dp"
+                    android:alpha="0.64"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/chairTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:gravity="center_vertical"
+                android:alpha="0.64"
+                android:textSize="@dimen/common_text_title_big"
+                android:text="@string/chair_text" /> 
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/chairmanLine"
+            android:layout_width="@dimen/label_view_under_line"
+            android:layout_height="1dp"
+            android:paddingBottom="@dimen/common_margin_padding_medium"
+            android:background="@color/colorPrimary"/>
+
+        <com.ishraq.janna.component.ExpandableHeightGridView
+            android:id="@+id/chairGridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_margin="@dimen/common_margin_padding_medium"
-            android:text="@string/lecture_text"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="@dimen/common_text_title_big"
-            android:textStyle="bold" />
+            android:numColumns="2"/>
+
+
+        <!-- Lectures -->
+        <LinearLayout
+            android:id="@+id/lectureLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/common_margin_padding_big"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="@dimen/recipe_details_image_icon_size"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/common_margin_padding_medium"
+                android:layout_marginLeft="@dimen/common_margin_padding_medium"
+                android:layout_gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_label_outline_black_24dp"
+                    android:alpha="0.64"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/lectureTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:gravity="center_vertical"
+                android:alpha="0.64"
+                android:textSize="@dimen/common_text_title_big"
+                android:text="@string/lecture_text" /> 
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/lectureLine"
+            android:layout_width="@dimen/label_view_under_line"
+            android:layout_height="1dp"
+            android:paddingBottom="@dimen/common_margin_padding_medium"
+            android:background="@color/colorPrimary"/>
 
         <com.ishraq.janna.component.ExpandableHeightListView
             android:id="@+id/lectureListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:divider="@android:color/transparent"/>
+
     </LinearLayout>
 
 </ScrollView>

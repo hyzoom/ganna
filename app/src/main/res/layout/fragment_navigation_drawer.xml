@@ -1,10 +1,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@android:color/white" >
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/helloLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/side_nav_bar"
+        android:paddingRight="@dimen/common_margin_padding_medium"
+        android:paddingLeft="@dimen/common_margin_padding_medium"
+        android:paddingTop="@dimen/common_margin_padding_medium">
+
+        <TextView
+            android:id="@+id/hello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nav_hello"
+            android:textSize="@dimen/common_text_title_big"
+            android:textStyle="bold|italic"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/userNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/common_margin_padding_big"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/common_text_title_big" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/common_title"
+            android:layout_marginBottom="@dimen/common_margin_padding_big"/>
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/nav_detail"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/common_text_title" />
+    </LinearLayout>
+
+    <!--<RelativeLayout
         android:id="@+id/helloLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/nav_header_height"
@@ -12,50 +55,10 @@
         android:paddingRight="@dimen/common_margin_padding_medium"
         android:paddingLeft="@dimen/common_margin_padding_medium"
         android:paddingTop="@dimen/common_margin_padding_medium">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/hello"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="مرحبا: "
-                android:textSize="@dimen/common_text_title_big"
-                android:textStyle="bold|italic"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/userNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/common_margin_padding_big"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/common_text_title_big" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/common_title"
-                android:layout_marginBottom="@dimen/common_margin_padding_big"/>
-
-            <TextView
-                android:id="@+id/desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="تطبيق جنة للاندرويد يهدف الى استخدام التكنولوجيا الحديثة فى مجال المؤتمرات وتسجيل الحجوزات سواء لمؤتمر جنة العلمى او مجموعة مستشفيات جنة"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/common_text_title" />
-        </LinearLayout>
+    </RelativeLayout>-->
 
 
-    </RelativeLayout>
-
-
-    <ListView
+    <com.ishraq.janna.component.ExpandableHeightListView
         android:id="@+id/navigation_drawer_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

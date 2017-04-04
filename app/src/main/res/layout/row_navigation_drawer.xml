@@ -10,9 +10,9 @@
         android:id="@+id/drawerItemIcon"
         android:layout_width="@dimen/common_icon_size"
         android:layout_height="@dimen/common_icon_size"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/common_margin_padding_big"
+        android:layout_marginRight="@dimen/common_margin_padding_big"
         android:alpha="0.54" />
 
 
@@ -21,8 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/common_margin_padding_big"
-        android:layout_toLeftOf="@+id/drawerItemIcon"
+        android:layout_marginLeft="@dimen/common_margin_padding_big"
+        android:layout_toRightOf="@+id/drawerItemIcon"
         android:alpha="0.87"
         android:textColor="@android:color/black"
         android:textSize="16sp"
