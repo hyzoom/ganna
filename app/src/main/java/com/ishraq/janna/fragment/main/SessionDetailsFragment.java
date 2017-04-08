@@ -299,13 +299,19 @@ public class SessionDetailsFragment extends MainCommonFragment {
             if ((lectures.get(position).getInstructorName()).equals("0"))
                 lecturerNameTextView.setVisibility(View.GONE);
 
-            if (lectures.get(position).getEventsLectureCode() == 1
+            if ((lectures.get(position).getInstructorName()).startsWith("Ezzat"))
+                lecturerNameTextView.setVisibility(View.VISIBLE);
+
+            if ((lectures.get(position).getEventsLectureDate()).equals("0"))
+                dateTextView.setVisibility(View.GONE);
+
+//            if (lectures.get(position).getEventsLectureCode() == 1
 //                    || lectures.get(position).getEventsLectureCode() == 4
 //                    || lectures.get(position).getEventsLectureCode() == 14
 //                    || lectures.get(position).getEventsLectureCode() == 39
-                    ) {
-                playVideoButton.setVisibility(View.VISIBLE);
-            }
+//                    ) {
+//                playVideoButton.setVisibility(View.VISIBLE);
+//            }
 
 //            if (lectures.get(position).getEventsLectureCode() == 35) {
 //                playVideoButton.setVisibility(View.GONE);
