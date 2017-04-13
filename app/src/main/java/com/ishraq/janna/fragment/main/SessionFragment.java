@@ -237,7 +237,8 @@ public class SessionFragment extends MainCommonFragment {
             nameTextView.setText(sessions.get(position).getEventsSessionNameLat() + "");
 
             if (sessions.get(position).getEventsSessionCode() == 3
-                    || sessions.get(position).getEventsSessionCode() == 7) {
+                    || sessions.get(position).getEventsSessionCode() == 6
+                    || sessions.get(position).getEventsSessionCode() == 8) {
 
                 cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.light_gray));
 
@@ -262,7 +263,8 @@ public class SessionFragment extends MainCommonFragment {
                 @Override
                 public void onClick(View v) {
                     if (sessions.get(position).getEventsSessionCode() != 3
-                            && sessions.get(position).getEventsSessionCode() != 7) {
+                            && sessions.get(position).getEventsSessionCode() != 6
+                            && sessions.get(position).getEventsSessionCode() != 8) {
                         Fragment sessionDetailsFragment = new SessionDetailsFragment();
                         Bundle bundle = new Bundle();
                         bundle.putInt("eventId", 1);

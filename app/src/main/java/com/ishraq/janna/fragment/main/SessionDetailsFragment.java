@@ -299,8 +299,11 @@ public class SessionDetailsFragment extends MainCommonFragment {
             if ((lectures.get(position).getInstructorName()).equals("0"))
                 lecturerNameTextView.setVisibility(View.GONE);
 
-            if ((lectures.get(position).getInstructorName()).startsWith("Ezzat"))
+            if ((lectures.get(position).getInstructorName()).startsWith("Ezzat")
+                    || (lectures.get(position).getInstructorName()).startsWith("Aym")
+                    || (lectures.get(position).getInstructorName()).startsWith("Az"))
                 lecturerNameTextView.setVisibility(View.VISIBLE);
+
 
             if ((lectures.get(position).getEventsLectureDate()).equals("0"))
                 dateTextView.setVisibility(View.GONE);
