@@ -124,16 +124,19 @@ public class EventDetailsFragment extends MainCommonFragment {
 
 
     private void initData() {
-        event = eventService.getEvent(eventId);
-        if (event == null || refresh) {
-            EventDetailsRequest request = new EventDetailsRequest();
-            request.execute();
-        } else {
-            adapter = new EventItemAdapter(event);
-            recyclerView.setAdapter(adapter);
-            getMainActivity().stopLoadingAnimator();
-            getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
-        }
+        getMainActivity().startLoadingAnimator();
+        EventDetailsRequest request = new EventDetailsRequest();
+        request.execute();
+//        event = eventService.getEvent(eventId);
+//        if (event == null || refresh) {
+//            EventDetailsRequest request = new EventDetailsRequest();
+//            request.execute();
+//        } else {
+//            adapter = new EventItemAdapter(event);
+//            recyclerView.setAdapter(adapter);
+//            getMainActivity().stopLoadingAnimator();
+//            getMainActivity().getSwipeRefreshLayout().setRefreshing(false);
+//        }
 
     }
 
