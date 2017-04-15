@@ -309,11 +309,13 @@ public class SessionDetailsFragment extends MainCommonFragment {
                 dateTextView.setVisibility(View.GONE);
 
             if (lectures.get(position).getEventsLectureCode() == 1
-//                    || lectures.get(position).getEventsLectureCode() == 4
-//                    || lectures.get(position).getEventsLectureCode() == 14
+                    || lectures.get(position).getEventsLectureCode() == 3
+                    || lectures.get(position).getEventsLectureCode() == 21
 //                    || lectures.get(position).getEventsLectureCode() == 39
                     ) {
                 playVideoButton.setVisibility(View.VISIBLE);
+            } else {
+                playVideoButton.setVisibility(View.GONE);
             }
 
 //            if (lectures.get(position).getEventsLectureCode() == 35) {
@@ -332,12 +334,12 @@ public class SessionDetailsFragment extends MainCommonFragment {
                             uri = Uri.parse("https://www.youtube.com/watch?v=PXm3lUD97Bg");
                             break;
 
-                        case 4:
-                            uri = Uri.parse("https://www.youtube.com/watch?v=n9h_T6qte20");
+                        case 3:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=NfsgYtymzuc");
                             break;
 
-                        case 14:
-                            uri = Uri.parse("https://www.youtube.com/watch?v=DbnZxwprg0E");
+                        case 21:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=yC8Vl4xImb0");
                             break;
 
                         case 39:
