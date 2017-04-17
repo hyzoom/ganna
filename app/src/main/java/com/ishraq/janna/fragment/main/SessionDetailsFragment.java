@@ -310,8 +310,12 @@ public class SessionDetailsFragment extends MainCommonFragment {
 
             if (lectures.get(position).getEventsLectureCode() == 1
                     || lectures.get(position).getEventsLectureCode() == 3
+                    || lectures.get(position).getEventsLectureCode() == 11
+                    || lectures.get(position).getEventsLectureCode() == 15
+                    || lectures.get(position).getEventsLectureCode() == 20
                     || lectures.get(position).getEventsLectureCode() == 21
-//                    || lectures.get(position).getEventsLectureCode() == 39
+                    || lectures.get(position).getEventsLectureCode() == 25
+                    || lectures.get(position).getEventsLectureCode() == 27
                     ) {
                 playVideoButton.setVisibility(View.VISIBLE);
             } else {
@@ -338,12 +342,28 @@ public class SessionDetailsFragment extends MainCommonFragment {
                             uri = Uri.parse("https://www.youtube.com/watch?v=NfsgYtymzuc");
                             break;
 
+                        case 11:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=rZoVCPLmlVc");
+                            break;
+
+                        case 15:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=GRQGJ6_H3J8");
+                            break;
+
+                        case 20:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=neCqvKt_sp0");
+                            break;
+
                         case 21:
                             uri = Uri.parse("https://www.youtube.com/watch?v=yC8Vl4xImb0");
                             break;
 
-                        case 39:
-                            uri = Uri.parse("https://www.youtube.com/watch?v=9DFm-AgC5y0");
+                        case 25:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=yoKmZ_m8YHg");
+                            break;
+
+                        case 27:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=Ec0L8Ik5UWU");
                             break;
                     }
 
