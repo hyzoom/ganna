@@ -33,6 +33,9 @@ public class Lecture {
     @DatabaseField
     private String lecturesImageUrl;
 
+//    @DatabaseField(columnName = "note")
+//    private String Notes;
+
     @ForeignCollectionField(eager = true, columnName = "lecture_instructor")
     private Collection<LectureInstructor> lectureInstructors;
 
@@ -146,4 +149,12 @@ public class Lecture {
     public void setEventsLectureDate(String eventsLectureDate) {
         EventsLectureDate = eventsLectureDate;
     }
+
+//    public String getNotes() {
+//        return Notes;
+//    }
+//
+//    public void setNotes(String notes) {
+//        Notes = notes;
+//    }
 }
