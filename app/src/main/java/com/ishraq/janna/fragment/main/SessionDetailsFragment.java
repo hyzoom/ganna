@@ -315,9 +315,11 @@ public class SessionDetailsFragment extends MainCommonFragment {
 //            }
             if (lectures.get(position).getEventsLectureCode() == 1
                     || lectures.get(position).getEventsLectureCode() == 3
+                    || lectures.get(position).getEventsLectureCode() == 30
                     || lectures.get(position).getEventsLectureCode() == 11
                     || lectures.get(position).getEventsLectureCode() == 13
                     || lectures.get(position).getEventsLectureCode() == 15
+                    || lectures.get(position).getEventsLectureCode() == 19
                     || lectures.get(position).getEventsLectureCode() == 20
                     || lectures.get(position).getEventsLectureCode() == 21
                     || lectures.get(position).getEventsLectureCode() == 25
@@ -348,6 +350,10 @@ public class SessionDetailsFragment extends MainCommonFragment {
                             uri = Uri.parse("https://www.youtube.com/watch?v=NfsgYtymzuc");
                             break;
 
+                        case 30:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=EnG34OaFmZk");
+                            break;
+
                         case 11:
                             uri = Uri.parse("https://www.youtube.com/watch?v=rZoVCPLmlVc");
                             break;
@@ -358,6 +364,10 @@ public class SessionDetailsFragment extends MainCommonFragment {
 
                         case 15:
                             uri = Uri.parse("https://www.youtube.com/watch?v=GRQGJ6_H3J8");
+                            break;
+
+                        case 19:
+                            uri = Uri.parse("https://www.youtube.com/watch?v=3J_zrJ1pelE");
                             break;
 
                         case 20:

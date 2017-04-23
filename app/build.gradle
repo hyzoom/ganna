@@ -11,8 +11,8 @@ android {
         applicationId "com.ishraq.janna"
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 15
-        versionName "2.4"
+        versionCode 17
+        versionName "2.6"
     }
     buildTypes {
         release {
